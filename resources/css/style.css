@@ -1,0 +1,21 @@
+/*Sidebar Link Active*/
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #484d50;
+    color: #ffffff;
+}
+
+/*Sidebar Link Active*/
+[class*="sidebar-dark-"] .nav-treeview>.nav-item>.nav-link:hover,
+[class*="sidebar-dark-"] .nav-treeview>.nav-item>.nav-link:focus {
+    background-color: transparent;
+    color: #fff;
+}
+
+/*Sidebar Link Active*/
+[class*="sidebar-dark-"] .nav-treeview>.nav-item>.nav-link.active,
+[class*="sidebar-dark-"] .nav-treeview>.nav-item>.nav-link.active:hover,
+[class*="sidebar-dark-"] .nav-treeview>.nav-item>.nav-link.active:focus {
+    background-color: #1e282c;
+    color: #fff;
+}
