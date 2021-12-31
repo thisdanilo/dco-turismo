@@ -1,0 +1,13 @@
+{
+    "name": "Bland",
+    "alias": "bland",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Bland\\Providers\\BlandServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
