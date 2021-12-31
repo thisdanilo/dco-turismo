@@ -6,6 +6,7 @@ use App\Traits\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Bland\Presenter\BlandPresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Plane\Entities\Plane;
 
 class Bland extends Model
 {
@@ -45,4 +46,25 @@ class Bland extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /*
+	|--------------------------------------------------------------------------
+	| Relationship
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos das entidades relacionadas.
+	| Estes métodos são responsáveis pelas relações e permitem acessar
+	| os atributos Eloquent obtidas das mesmas.
+	|
+	*/
+
+    /**
+     * Obtêm o avião
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function planes()
+    {
+        return $this->hasMany(Plane::class)->withTrashed();
+    }
 }
