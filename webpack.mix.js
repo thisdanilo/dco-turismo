@@ -69,3 +69,9 @@ mix.scripts(
 	"Modules/Bland/Resources/assets/js/bland.js",
 	"public/js/bland.js"
 );
+
+// Aviões JS
+mix.scripts(
+	"Modules/Plane/Resources/assets/js/plane.js",
+	"public/js/plane.js"
+);
