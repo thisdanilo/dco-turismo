@@ -63,3 +63,9 @@ mix.combine(
     ],
     "public/js/adminlte.js"
 );
+
+// Marcas JS
+mix.scripts(
+	"Modules/Bland/Resources/assets/js/bland.js",
+	"public/js/bland.js"
+);

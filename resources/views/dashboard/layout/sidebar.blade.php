@@ -11,8 +11,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <p>Usuários</p>
+                        <a href="{{ route('bland.index') }}" class="nav-link" {{ Ekko::isActiveRoute('bland*') }}>
+                            <p>Marcas</p>
                         </a>
                     </li>
                 </li>
