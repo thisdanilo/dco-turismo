@@ -1,19 +1,18 @@
 <?php
 
-namespace Modules\City\Database\factories;
+namespace Modules\Bland\Database\factories;
 
-use Modules\City\Entities\City;
-use Modules\State\Entities\State;
+use Modules\Bland\Entities\Bland;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CityFactory extends Factory
+class BlandFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = City::class;
+    protected $model = Bland::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +22,7 @@ class CityFactory extends Factory
     public function definition()
     {
         return [
-            'state_id' => State::factory()->create(),
-            'name' => $this->faker->firstName
+            'name' => $this->faker->name
         ];
     }
 }

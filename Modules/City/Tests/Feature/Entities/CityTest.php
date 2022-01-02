@@ -2,11 +2,9 @@
 
 namespace Modules\City\Tests\Feature\Entities;
 
-use Modules\Address\Entities\Address;
-use Modules\City\Entities\City;
-use Modules\Client\Entities\Client;
-use Modules\State\Entities\State;
 use Tests\TestCase;
+use Modules\City\Entities\City;
+use Modules\State\Entities\State;
 
 class CityTest extends TestCase
 {
@@ -17,19 +15,5 @@ class CityTest extends TestCase
         $city->load('state');
 
         $this->assertInstanceOf(State::class, $city->state);
-    }
-
-    public function test_city_has_address()
-    {
-        $client = Client::factory()->hasAddress(
-            City::factory()->hasAddress(
-                Address::factory()->count(2)
-            )
-        )
-            ->create();
-
-        $client->load('address');
-
-        $this->assertInstanceOf(Address::class, $client->Address->first());
     }
 }

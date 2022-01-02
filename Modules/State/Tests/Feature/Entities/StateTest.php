@@ -2,9 +2,9 @@
 
 namespace Modules\State\Tests\Feature\Entities;
 
+use Tests\TestCase;
 use Modules\City\Entities\City;
 use Modules\State\Entities\State;
-use Tests\TestCase;
 
 class StateTest extends TestCase
 {

@@ -62,16 +62,6 @@ class City extends Model
 		return $this->belongsTo(State::class);
 	}
 
-		/**
-	 * Obtêm os endereços
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
-	 */
-	public function address()
-	{
-		return $this->hasOne(Address::class);
-	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function

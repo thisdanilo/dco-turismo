@@ -3,15 +3,17 @@
 namespace Modules\Bland\Entities;
 
 use App\Traits\Presentable;
+use Modules\Plane\Entities\Plane;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Bland\Presenter\BlandPresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Plane\Entities\Plane;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bland extends Model
 {
     use SoftDeletes,
-        Presentable;
+        Presentable,
+        HasFactory;
 
     /**
      * Presenter
@@ -66,5 +68,25 @@ class Bland extends Model
     public function planes()
     {
         return $this->hasMany(Plane::class)->withTrashed();
+    }
+
+    /*
+	|--------------------------------------------------------------------------
+	| Defining a Function
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos complementares a esta entidade.
+	| Estes métodos permitem definir as regras de negócio ou demais ações desta entidade.
+	|
+	*/
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Bland\Database\factories\BlandFactory::new();
     }
 }

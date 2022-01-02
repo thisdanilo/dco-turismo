@@ -42,8 +42,6 @@ class PlaneService
 		} catch (\Exception $e) {
 			DB::rollBack();
 
-            dd($e);
-
 			abort(500);
 		}
 	}
