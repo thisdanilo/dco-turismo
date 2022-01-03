@@ -1,13 +1,13 @@
 @extends('plane::layouts.master')
 
-@section('title', 'Aviõess')
+@section('page_title', 'Aviões')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
                 <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item">Aviõess</li>
+                    <li class="breadcrumb-item">Aviões</li>
                     <li class="breadcrumb-item active">Ver</li>
                 </ol>
             </div>

@@ -4,5 +4,7 @@
     "/css/adminlte.css": "/css/adminlte.css",
     "/js/adminlte.js": "/js/adminlte.js",
     "/js/bland.js": "/js/bland.js",
-    "/js/plane.js": "/js/plane.js"
+    "/js/plane.js": "/js/plane.js",
+    "/js/airport.js": "/js/airport.js",
+    "/js/flight.js": "/js/flight.js"
 }

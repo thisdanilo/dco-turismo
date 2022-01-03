@@ -28,10 +28,10 @@ class PlaneControllerTest extends TestCase
 
     public function test_route_store()
     {
-        $plane = Bland::factory()->create();
+        $bland = Bland::factory()->create();
 
         $data = [
-            'bland_id' => $plane->id,
+            'bland_id' => $bland->id,
             'total_passengers' => 100,
             'class' => Plane::ECONOMIC
         ];

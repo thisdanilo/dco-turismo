@@ -75,3 +75,15 @@ mix.scripts(
 	"Modules/Plane/Resources/assets/js/plane.js",
 	"public/js/plane.js"
 );
+
+// Aeroportos JS
+mix.scripts(
+    "Modules/Airport/Resources/assets/js/airport.js",
+    "public/js/airport.js"
+);
+
+// Aeroportos JS
+mix.scripts(
+    "Modules/Flight/Resources/assets/js/flight.js",
+    "public/js/flight.js"
+);

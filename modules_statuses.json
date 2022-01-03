@@ -1,4 +1,6 @@
 {
     "Bland": true,
-    "Plane": true
+    "Plane": true,
+    "Flight": true,
+    "Airport": true
 }

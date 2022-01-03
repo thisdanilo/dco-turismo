@@ -1,6 +1,6 @@
 @extends('bland::layouts.master')
 
-@section('title', 'Marcas')
+@section('page_title', 'Marcas')
 
 @section('header-extras')
 @endsection

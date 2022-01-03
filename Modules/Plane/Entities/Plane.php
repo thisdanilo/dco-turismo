@@ -76,6 +76,16 @@ class Plane extends Model
         return $this->belongsTo(Bland::class)->withTrashed();
     }
 
+    /**
+     * Obtêm os voos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function flights()
+    {
+        return $this->hasMany(Flight::class)->withTrashed();
+    }
+
     /*
 	|--------------------------------------------------------------------------
 	| Accessors

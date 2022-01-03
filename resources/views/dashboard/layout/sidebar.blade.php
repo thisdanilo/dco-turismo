@@ -27,6 +27,18 @@
                         <p>Aviões</p>
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a href="{{ route('airport.index') }}" class="nav-link {{ Ekko::isActiveRoute('airport*') }}">
+                        <i class="fas fa-plane-departure"></i>
+                        <p>Aeroportos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('flight.index') }}" class="nav-link {{ Ekko::isActiveRoute('flight*') }}">
+                        <i class="fas fa-business-time"></i>
+                        <p>Voos</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
