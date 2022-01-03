@@ -5,6 +5,7 @@ namespace Modules\Airport\Tests\Feature\Entities;
 use Tests\TestCase;
 use Modules\City\Entities\City;
 use Modules\Airport\Entities\Airport;
+use Modules\Flight\Entities\Flight;
 
 class AirportTest extends TestCase
 {

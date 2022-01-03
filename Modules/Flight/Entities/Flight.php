@@ -196,4 +196,24 @@ class Flight extends Model
     {
         $this->attributes['price'] = str_replace(',', '.', str_replace('.', '', $value));
     }
+
+    /*
+	|--------------------------------------------------------------------------
+	| Defining a Function
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos complementares a esta entidade.
+	| Estes métodos permitem definir as regras de negócio ou demais ações desta entidade.
+	|
+	*/
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Flight\Database\factories\FlightFactory::new();
+    }
 }

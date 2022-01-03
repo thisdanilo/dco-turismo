@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Airport\Presenter\AirportPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Flight\Entities\Flight;
 
 class Airport extends Model
 {
@@ -68,13 +69,23 @@ class Airport extends Model
 	*/
 
     /**
-     * Obtêm a marca
+     * Obtém a marca
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Obtêm os voos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function flights()
+    {
+        return $this->hasMany(Flight::class)->withTrashed();
     }
 
     /*
