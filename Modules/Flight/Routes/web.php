@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Flight\Http\Controllers\FlightController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,40 @@
 |
 */
 
-Route::prefix('flight')->group(function() {
-    Route::get('/', 'FlightController@index');
-});
+Route::group(
+    [
+        'prefix' => 'dashboard/flight',
+        'as' => 'flight.'
+    ],
+    function () {
+
+        Route::get('/', [FlightController::class, 'index'])
+            ->name('index');
+
+        Route::post('/datatable', [FlightController::class, 'dataTable'])
+        ->name('datatable');
+
+        Route::get('/{id}/ver', [FlightController::class, 'show'])
+            ->name('show');
+
+        Route::get('/cadastrar', [FlightController::class, 'create'])
+        ->name('create');
+
+        Route::post('/cadastrar', [FlightController::class, 'store'])
+        ->name('store');
+
+        Route::get('/{id}/editar', [FlightController::class, 'edit'])
+        ->name('edit');
+
+        Route::put('/{id}/editar', [
+            FlightController::class, 'update'
+        ])
+        ->name('update');
+
+        Route::get('/{id}/confirmar-exclusao', [FlightController::class, 'confirmDelete'])
+            ->name('confirm_delete');
+
+        Route::delete('/{id}/excluir', [FlightController::class, 'delete'])
+        ->name('delete');
+    }
+);

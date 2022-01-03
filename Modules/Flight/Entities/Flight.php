@@ -4,8 +4,10 @@ namespace Modules\Flight\Entities;
 
 use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
+use Modules\Airport\Entities\Airport;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Flight\Presenter\FlightPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Flight extends Model
@@ -67,6 +69,7 @@ class Flight extends Model
      *  @var array $casts
      */
     protected $casts = [
+        'active' => 'boolean',
         'old_price' => 'float',
         'price' => 'float'
     ];
@@ -83,13 +86,33 @@ class Flight extends Model
 	*/
 
     /**
-     * Obtêm o avião
+     * Obtém o avião
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function plane()
     {
         return $this->belongsTo(Plane::class)->withTrashed();
+    }
+
+    /**
+     * Obtém a origem
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function origin()
+    {
+        return $this->belongsTo(Airport::class, 'airport_origin_id')->withTrashed();
+    }
+
+    /**
+     * Obtém o destino
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function destination()
+    {
+        return $this->belongsTo(Airport::class, 'airport_destination_id')->withTrashed();
     }
 
     /*
@@ -101,6 +124,16 @@ class Flight extends Model
 	| Estes métodos permitem formatar os atributos Eloquent obtidos do banco de dados.
 	|
 	*/
+
+    /**
+     * Formata o atributo
+     *
+     * @return string
+     */
+    public function getFormattedIsPromotionAttribute()
+    {
+        return $this->is_promotion ? "Sim" : "Não";
+    }
 
     /**
      * Formata o atributo
@@ -121,6 +154,16 @@ class Flight extends Model
     {
         return number_format($this->attributes['price'], 2, ',', '.');
     }
+
+    // /**
+    //  * Formata o atributo
+    //  *
+    //  * @return string
+    //  */
+    // public function getFormattedTimeDurationAttribute()
+    // {
+    //     return $this->time_duration->format('H:i:s');
+    // }
 
     /*
 	|--------------------------------------------------------------------------

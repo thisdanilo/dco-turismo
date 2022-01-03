@@ -16,8 +16,8 @@ class CreateFlightsTable extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('plane_id');
-            $table->integer('airport_origin_id');
-            $table->integer('airport_destination_id');
+            $table->unsignedBigInteger('airport_origin_id');
+            $table->unsignedBigInteger('airport_destination_id');
             $table->date('date');
             $table->time('time_duration');
             $table->time('hour_output');
@@ -25,7 +25,7 @@ class CreateFlightsTable extends Migration
             $table->decimal('old_price', 19, 2);
             $table->decimal('price', 19, 2);
             $table->integer('total_prots');
-            $table->boolean('is_promotion')->default(false);
+            $table->boolean('is_promotion')->default(0);
             $table->integer('qty_stops')->default(0);
             $table->text('description')->nullable();
             $table->string('image')->nullable();
@@ -33,6 +33,8 @@ class CreateFlightsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('plane_id')->references('id')->on('planes');
+            $table->foreign('airport_origin_id')->references('id')->on('airports');
+            $table->foreign('airport_destination_id')->references('id')->on('airports');
         });
     }
 

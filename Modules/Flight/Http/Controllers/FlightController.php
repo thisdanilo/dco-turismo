@@ -2,15 +2,38 @@
 
 namespace Modules\Flight\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
+use Modules\Flight\Entities\Flight;
+use Modules\Airport\Entities\Airport;
+use Modules\Flight\Services\FlightService;
+use Modules\Flight\Http\Requests\FlightRequest;
 
 class FlightController extends Controller
 {
+    protected $flight;
+    protected $flight_service;
+
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Método Construtor
+     *
+     * @param \Modules\Flight\Entities\Flight $flight
+     * @param \Modules\Flight\Services\FlightService $flight_service
+     * @return void
+     */
+    public function __construct(
+        Flight $flight,
+        FlightService $flight_service
+    ) {
+        $this->flight = $flight;
+        $this->flight_service = $flight_service;
+    }
+
+    /**
+     * Exibe a tela inicial com a listagem de dados.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -18,62 +41,153 @@ class FlightController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * Obtêm os dados para a tabela
+     *
+     * @codeCoverageIgnore
+     *
+     * @return string
+     */
+    public function dataTable()
+    {
+        $flights = $this->flight->with(['plane', 'origin', 'destination']);
+
+        return DataTables::of($flights)
+            // ->editColumn("time_duration", function ($flight) {
+            //     return $flight->formatted_time_duration;
+            // })
+            ->editColumn("price", function ($flight) {
+                return $flight->formatted_price;
+            })
+            ->filterColumn(
+                'price',
+                function ($q, $keyword) {
+                    $formatted_price = str_replace(',', '.', str_replace('.', '', $keyword));
+
+                    $q->where('price', 'LIKE', '%' . $formatted_price . '%');
+                }
+            )
+            ->addColumn(
+                "action",
+                function ($flight) {
+                    return $flight->actionView();
+                }
+            )
+            ->rawColumns([
+                'action'
+            ])
+            ->make(true);
+    }
+
+    /**
+     * Exibe a tela de cadastro
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        return view('flight::create');
+        $planes = Plane::all();
+
+        $airports = Airport::orderBy('name', 'Asc')->get();
+
+        return view('flight::create', compact('planes', 'airports'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * Cadastra e retorna para a tela inicial
+     *
+     * @param  \Modules\Flight\Http\Requests\FlightRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(FlightRequest $request)
     {
-        //
+        $this->flight_service->updateOrCreate($request->all());
+
+        return redirect()
+            ->route('flight.index')
+            ->with('message', 'Cadastro realizado com sucesso.');
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        return view('flight::show');
+        $flight = $this->flight->with(['plane', 'origin', 'destination'])->findOrFail($id);
+
+        return view('flight::show', compact('flight'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados para edição
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        return view('flight::edit');
+        $flight = $this->flight->with(['plane', 'origin'])->findOrFail($id);
+
+        $planes = Plane::where('id', '!=', $flight->plane->id ?? '')->get();
+
+        $origins = Airport::orderBy('name', 'ASC')
+            ->where('id', '!=', $flight->origin->id ?? '')
+            ->get();
+
+        $destinations = Airport::orderBy('name', 'ASC')
+        ->where('id', '!=', $flight->destination->id ?? '')
+            ->get();
+
+        return view('flight::edit', compact('flight', 'planes', 'origins', 'destinations'));
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * Atualiza e retorna para a tela de edição
+     *
+     * @param  \Modules\Flight\Http\Requests\FlightRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(FlightRequest $request, $id)
     {
-        //
+        $flight = $this->flight->findOrFail($id);
+
+        $this->flight_service->updateOrCreate($request->all(), $flight->id);
+
+        return redirect()
+            ->route('flight.edit', $flight->id)
+            ->with('message', 'Atualização realizada com sucesso.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * Exibe a tela para exclusão
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
-    public function destroy($id)
+    public function confirmDelete($id)
     {
-        //
+        $flight = $this->flight->with(['plane', 'origin', 'destination'])->findOrFail($id);
+
+        return view('flight::confirm-delete', compact('flight'));
+    }
+
+    /**
+     * Exclui e retorna para a tela inicial
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        $flight = $this->flight->findOrFail($id);
+
+        $this->flight_service->removeData($flight);
+
+        return redirect()
+            ->route('flight.index')
+            ->with('message', 'Exclusão realizada com sucesso.');
     }
 }

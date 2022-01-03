@@ -54,7 +54,7 @@ class City extends Model
 	*/
 
     /**
-     * Obtém os estado
+     * Obtém o estado
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
