@@ -2,15 +2,38 @@
 
 namespace Modules\Airport\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Modules\City\Entities\City;
+use Yajra\DataTables\DataTables;
+use Modules\Bland\Entities\Bland;
 use Illuminate\Routing\Controller;
+use Modules\Airport\Entities\Airport;
+use Modules\Airport\Services\AirportService;
+use Modules\Airport\Http\Requests\AirportRequest;
 
 class AirportController extends Controller
 {
+    protected $airport;
+    protected $airport_service;
+
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Método Construtor
+     *
+     * @param \Modules\Airport\Entities\Airport $airport
+     * @param \Modules\Airport\Services\AirportService $airport_service
+     * @return void
+     */
+    public function __construct(
+        Airport $airport,
+        AirportService $airport_service
+    ) {
+        $this->airport = $airport;
+        $this->airport_service = $airport_service;
+    }
+
+    /**
+     * Exibe a tela inicial com a listagem de dados.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -18,62 +41,134 @@ class AirportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * Obtêm os dados para a tabela
+     *
+     * @codeCoverageIgnore
+     *
+     * @return string
+     */
+    public function dataTable()
+    {
+        $airports = $this->airport->with('city');
+
+        return DataTables::of($airports)
+            ->editColumn("class", function ($airport) {
+                return $airport->formatted_class;
+            })
+            ->addColumn(
+                "action",
+                function ($airport) {
+                    return $airport->actionView();
+                }
+            )
+            ->rawColumns([
+                'action'
+            ])
+            ->make(true);
+    }
+
+    /**
+     * Exibe a tela de cadastro
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        return view('airport::create');
+        $cities = City::orderBy('name', 'Asc')->get();
+
+        return view('airport::create', compact('cities'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * Cadastra e retorna para a tela inicial
+     *
+     * @param  \Modules\Airport\Http\Requests\AirportRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(AirportRequest $request)
     {
-        //
+        $this->airport_service->updateOrCreate($request->all());
+
+        return redirect()
+            ->route('airport.index')
+            ->with('message', 'Cadastro realizado com sucesso.');
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        return view('airport::show');
+        $airport = $this->airport->with('city')->findOrFail($id);
+
+        return view('airport::show', compact('airport'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados para edição
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        return view('airport::edit');
+        $airport = $this->airport->with('city')->findOrFail($id);
+
+        $cities = Bland::orderBy('name', 'ASC')
+            ->where('id', '!=', $airport->city->id ?? '')
+            ->get();
+
+        return view('airport::edit', compact('airport', 'cities'));
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * Atualiza e retorna para a tela de edição
+     *
+     * @param  \Modules\Airport\Http\Requests\AirportRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(AirportRequest $request, $id)
     {
-        //
+        $airport = $this->airport->findOrFail($id);
+
+        $this->airport_service->updateOrCreate($request->all(), $airport->id);
+
+        return redirect()
+            ->route('airport.edit', $airport->id)
+            ->with('message', 'Atualização realizada com sucesso.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * Exibe a tela para exclusão
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
-    public function destroy($id)
+    public function confirmDelete($id)
     {
-        //
+        $airport = $this->airport->with('city')->findOrFail($id);
+
+        return view('airport::confirm-delete', compact('airport'));
+    }
+
+    /**
+     * Exclui e retorna para a tela inicial
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        $airport = $this->airport->findOrFail($id);
+
+        $this->airport_service->removeData($airport);
+
+        return redirect()
+            ->route('airport.index')
+            ->with('message', 'Exclusão realizada com sucesso.');
     }
 }

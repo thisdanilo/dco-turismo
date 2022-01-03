@@ -7,41 +7,42 @@ use Modules\Address\Entities\Address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Airport\Entities\Airport;
 
 class City extends Model
 {
-	use SoftDeletes,
-		HasFactory;
+    use SoftDeletes,
+        HasFactory;
 
-	/**
-	 * Tabela do banco de dados
-	 *
-	 * @var string $table
-	 */
-	protected $table = 'cities';
+    /**
+     * Tabela do banco de dados
+     *
+     * @var string $table
+     */
+    protected $table = 'cities';
 
-	/**
-	 * Atributos da tabela do banco de dados
-	 *
-	 * @var array $fillable
-	 */
-	protected $fillable = [
-		'state_id',
-		'name'
-	];
+    /**
+     * Atributos da tabela do banco de dados
+     *
+     * @var array $fillable
+     */
+    protected $fillable = [
+        'state_id',
+        'name'
+    ];
 
-	/**
-	 * Atributos da tabela do banco de dados
-	 *
-	 * @var array $dates
-	 */
-	protected $dates = [
-		'created_at',
-		'updated_at',
-		'deleted_at'
-	];
+    /**
+     * Atributos da tabela do banco de dados
+     *
+     * @var array $dates
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -52,17 +53,27 @@ class City extends Model
 	|
 	*/
 
-	/**
-	 * Obtém os estado
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function state()
-	{
-		return $this->belongsTo(State::class);
-	}
+    /**
+     * Obtém os estado
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 
-	/*
+    /**
+     * Obtêm os aeroportos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function airports()
+    {
+        return $this->hasMany(Airport::class);
+    }
+
+    /*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -72,13 +83,13 @@ class City extends Model
 	|
 	*/
 
-	/**
-	 * Create a new factory instance for the model.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Factories\Factory
-	 */
-	protected static function newFactory()
-	{
-		return \Modules\City\Database\factories\CityFactory::new();
-	}
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\City\Database\factories\CityFactory::new();
+    }
 }
