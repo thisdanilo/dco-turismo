@@ -49,16 +49,16 @@ class AirportService
 	/**
 	 * Exclui e retorna a tela inicial
 	 *
-	 * @param \Modules\Airport\Entities\Airport $Airport
+	 * @param \Modules\Airport\Entities\Airport $airport
 	 *
 	 * @return void
 	 */
-	public function removeData($Airport)
+	public function removeData($airport)
 	{
 		DB::beginTransaction();
 
 		try {
-			$Airport->delete();
+			$airport->delete();
 
 			DB::commit();
 		} catch (\Exception $e) {
