@@ -1,6 +1,6 @@
 @extends('plane::layouts.master')
 
-@section('title', 'Aviões')
+@section('page_title', 'Aviões')
 
 @section('content_header')
     <div class="container-fluid">

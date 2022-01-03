@@ -1,6 +1,6 @@
 @extends('bland::layouts.master')
 
-@section('title', 'Marcas')
+@section('page_title', 'Marcas')
 
 @section('content_header')
     <div class="container-fluid">

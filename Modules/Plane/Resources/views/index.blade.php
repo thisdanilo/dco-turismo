@@ -1,6 +1,6 @@
 @extends('plane::layouts.master')
 
-@section('title', 'Aviões')
+@section('page_title', 'Aviões')
 
 @section('header-extras')
 @endsection
