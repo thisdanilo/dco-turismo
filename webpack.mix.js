@@ -34,6 +34,16 @@ mix.combine(
     "public/css/adminlte.css"
 );
 
+//Theme CSS
+mix.combine(
+    [
+        "themes/turismo/turismo/public/css/style.css",
+        "themes/turismo/turismo/public/css/responsive.css",
+        "themes/turismo/turismo/public/css/reset.css",
+    ],
+    "public/css/theme.css"
+);
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management JS

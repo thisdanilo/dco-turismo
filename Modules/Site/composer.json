@@ -1,0 +1,24 @@
+{
+    "name": "nwidart/site",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Site\\": "",
+            "files": [
+                "Modules/Site/Helpers/SiteHelper.php"
+            ]
+        }
+    }
+}

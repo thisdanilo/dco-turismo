@@ -227,4 +227,17 @@ class Flight extends Model
     {
         return \Modules\Flight\Database\factories\FlightFactory::new();
     }
+
+    /**
+     * Filtra o voo.
+     *
+     * @return string
+     */
+    public function searchFlights($origin, $destination, $date)
+    {
+        return $this->where('airport_origin_id', $origin)
+            ->where('airport_destination_id', $destination)
+            ->where('date', $date)
+            ->get();
+    }
 }

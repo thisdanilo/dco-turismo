@@ -234,6 +234,7 @@ return [
         'Ekko' => Laravelista\Ekko\Frameworks\Laravel\Facade::class,
         'Plane' => Modules\Plane\Entities\Plane::class,
         'Reserve' => Modules\Reserve\Entities\Reserve::class,
+        'SiteHelper' => Modules\Site\Helpers\SiteHelper::class,
     ],
 
 ];
