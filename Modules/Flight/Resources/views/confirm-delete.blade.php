@@ -42,7 +42,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Escolha o avião:</label>
-                                        <input type="text" class="form-control" readonly value="{{ $flight->plane->bland->name }}">
+                                        <input type="text" class="form-control" readonly value="{{ $flight->plane->bland->name }} - {{ $flight->plane->total_passengers }} Passageiros">
                                     </div>
                                 </div>
 
