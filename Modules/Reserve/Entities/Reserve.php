@@ -139,4 +139,14 @@ class Reserve extends Model
 	| Estes métodos permitem definir as regras de negócio ou demais ações desta entidade.
 	|
 	*/
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Reserve\Database\factories\ReserveFactory::new();
+    }
 }
