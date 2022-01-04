@@ -24,7 +24,7 @@ class City extends Model
     /**
      * Atributos da tabela do banco de dados
      *
-     * @var array $fillable
+     * @var array<string> $fillable
      */
     protected $fillable = [
         'state_id',
@@ -56,7 +56,7 @@ class City extends Model
     /**
      * Obtém o estado
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function state()
     {

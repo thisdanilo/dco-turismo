@@ -8,7 +8,7 @@ use Modules\Plane\Entities\Plane;
 
 class PlaneService
 {
-	/*--------------------------------------------------------------------------
+    /*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -17,14 +17,14 @@ class PlaneService
 	|
 	*/
 
-	/**
-	 * Cadastra ou atualiza o registro
-	 *
-	 * @param array $request
-	 * @param int|null $id
-	 *
-	 * @return void
-	 */
+    /**
+     * Cadastra ou atualiza o registro
+     *
+     * @param array $request
+     * @param int|null $id
+     *
+     * @return \Modules\Plane\Entities\Plane $plane
+     */
 	public function updateOrCreate($request, $id = null)
 	{
 		DB::beginTransaction();

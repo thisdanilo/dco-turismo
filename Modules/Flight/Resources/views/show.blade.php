@@ -37,7 +37,7 @@
                                     <label>Escolha o avião:</label>
                                     <select class="form-control select2" style="width: 100%;" disabled>
 
-                                        <option value="{{ $flight->plane->id }}" selected>{{ $flight->plane->bland->name }}</option>
+                                        <option value="{{ $flight->plane->id }}" selected>{{ $flight->plane->bland->name }} - {{ $flight->plane->total_passengers }} Passageiros</option>
 
                                     </select>
                                 </div>
@@ -110,7 +110,7 @@
                             {{-- Total de Parelas --}}
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Total de Parelas:</label>
+                                    <label>Total de Parcelas:</label>
                                     <input type="number" min="1" class="form-control" readonly value="{{ $flight->total_prots }}">
                                 </div>
                             </div>

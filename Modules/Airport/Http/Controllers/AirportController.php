@@ -55,6 +55,9 @@ class AirportController extends Controller
             ->editColumn("class", function ($airport) {
                 return $airport->formatted_class;
             })
+            ->editColumn("city", function ($airport) {
+                return $airport->city->name;
+            })
             ->addColumn(
                 "action",
                 function ($airport) {

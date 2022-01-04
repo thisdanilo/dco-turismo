@@ -51,7 +51,7 @@
 
                                             @foreach ($planes as $plane)
 
-                                                <option value="{{ $plane->id }}">{{ $plane->bland->name }}</option>
+                                                <option value="{{ $plane->id }}">{{ $plane->bland->name }} - {{ $plane->total_passengers }} Passageiros</option>
 
                                             @endforeach
 
@@ -146,7 +146,7 @@
                                 {{-- Total de Parelas --}}
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Total de Parelas:<span class="text-danger"> *</span></label>
+                                        <label>Total de Parcelas:<span class="text-danger"> *</span></label>
                                         <input type="number" min="1" name="total_prots" class="form-control" required value="{{ $flight->total_prots }}">
                                     </div>
                                 </div>

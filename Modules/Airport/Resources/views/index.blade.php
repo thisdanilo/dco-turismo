@@ -48,6 +48,7 @@
                                     <th>CEP</th>
                                     <th>Endereço</th>
                                     <th>Número</th>
+                                    <th>Cidade</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -58,6 +59,7 @@
                                     <th>CEP</th>
                                     <th>Endereço</th>
                                     <th>Número</th>
+                                    <th>Cidade</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>

@@ -50,7 +50,7 @@ class ReserveController extends Controller
      */
     public function dataTable()
     {
-        $reserves = $this->reserve->with('flight');
+        $reserves = $this->reserve->with(['user', 'flight']);
 
         return DataTables::of($reserves)
             ->editColumn("status", function ($reserve) {
@@ -138,11 +138,11 @@ class ReserveController extends Controller
     /**
      * Atualiza e retorna para a tela de edição
      *
-     * @param  \Modules\reserve\Http\Requests\reserveRequest $request
+     * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(reserveRequest $request, $id)
+    public function update(ReserveRequest $request, $id)
     {
         $reserve = $this->reserve->findOrFail($id);
 

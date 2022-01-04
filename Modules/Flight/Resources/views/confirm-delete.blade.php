@@ -1,13 +1,13 @@
 @extends('flight::layouts.master')
 
-@section('page_title', 'flight')
+@section('page_title', 'Voos')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
                 <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item">flight</li>
+                    <li class="breadcrumb-item">Voos</li>
                     <li class="breadcrumb-item active">Ver</li>
                 </ol>
             </div>
@@ -42,7 +42,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Escolha o avião:</label>
-                                        <input type="text" class="form-control" readonly value="{{ $flight->plane->bland->name }}">
+                                        <input type="text" class="form-control" readonly value="{{ $flight->plane->bland->name }} - {{ $flight->plane->total_passengers }} Passageiros">
                                     </div>
                                 </div>
 

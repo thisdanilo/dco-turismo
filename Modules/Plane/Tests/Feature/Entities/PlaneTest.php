@@ -4,6 +4,7 @@ namespace Modules\Plane\Tests\Feature\Entities;
 
 use Tests\TestCase;
 use Modules\Bland\Entities\Bland;
+use Modules\Flight\Entities\Flight;
 use Modules\Plane\Entities\Plane;
 
 class PlaneTest extends TestCase

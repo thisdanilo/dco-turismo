@@ -36,7 +36,7 @@ class Plane extends Model
     /**
      * Atributos da tabela do banco de dados
      *
-     * @var array $fillable
+     * @var array<string> $fillable
      */
     protected $fillable = [
         'bland_id',
