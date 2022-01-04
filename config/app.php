@@ -233,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Ekko' => Laravelista\Ekko\Frameworks\Laravel\Facade::class,
         'Plane' => Modules\Plane\Entities\Plane::class,
+        'Reserve' => Modules\Reserve\Entities\Reserve::class,
     ],
 
 ];

@@ -82,8 +82,14 @@ mix.scripts(
     "public/js/airport.js"
 );
 
-// Aeroportos JS
+// Voos JS
 mix.scripts(
     "Modules/Flight/Resources/assets/js/flight.js",
     "public/js/flight.js"
+);
+
+// Reservas JS
+mix.scripts(
+    "Modules/Reserve/Resources/assets/js/reserve.js",
+    "public/js/reserve.js"
 );

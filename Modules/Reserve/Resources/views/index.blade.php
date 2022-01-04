@@ -1,6 +1,6 @@
-@extends('plane::layouts.master')
+@extends('reserve::layouts.master')
 
-@section('page_title', 'Aviões')
+@section('page_title', 'Reservas')
 
 @section('header-extras')
 @endsection
@@ -10,12 +10,12 @@
         <div class="row mb-2">
             <div class="col-sm-10">
                 <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item">Aviões</li>
+                    <li class="breadcrumb-item">Reservas</li>
                     <li class="breadcrumb-item active">Painel de Controle</li>
                 </ol>
             </div>
             <div class="col-sm-2 text-right">
-                <a href="{{ route('plane.create') }}" class="btn btn-success">
+                <a href="{{ route('reserve.create') }}" class="btn btn-success">
                     <i class="fa fa-plus fa-fw"></i> Cadastrar
                 </a>
             </div>
@@ -39,21 +39,25 @@
 
                         {{-- Elementos Ocultos --}}
                         @csrf
-                        <input type="hidden" id="route_datatable" value="{{ route('plane.datatable') }}">
+                        <input type="hidden" id="route_datatable" value="{{ route('reserve.datatable') }}">
 
                         <table class="table table-bordered table-striped" id="ajax-datatable">
                             <thead>
                                 <tr>
-                                    <th>Total Passageiros</th>
-                                    <th>Classe</th>
+                                    <th>Data da reserva</th>
+                                    <th>Status</th>
+                                    <th>Cliente</th>
+                                    <th>Data do Voo</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Total Passageiros</th>
-                                    <th>Classe</th>
+                                    <th>Data da reserva</th>
+                                    <th>Status</th>
+                                    <th>Cliente</th>
+                                    <th>Data do Voo</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>
@@ -67,5 +71,5 @@
 @endsection
 
 @section('footer-extras')
-    <script src="{{ mix('js/plane.js') }}"></script>
+    <script src="{{ mix('js/reserve.js') }}"></script>
 @endsection

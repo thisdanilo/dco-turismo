@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Flight\Services;
+namespace Modules\Reserve\Services;
 
 use DB;
-use Modules\Flight\Entities\Flight;
+use Modules\Reserve\Entities\Reserve;
 
-class FlightService
+class ReserveService
 {
     /*--------------------------------------------------------------------------
 	| Main Function
@@ -29,8 +29,7 @@ class FlightService
         DB::beginTransaction();
 
         try {
-
-            Flight::updateOrCreate([
+            Reserve::updateOrCreate([
                 'id' => $id
             ], $request);
 
@@ -45,16 +44,16 @@ class FlightService
     /**
      * Exclui e retorna a tela inicial
      *
-     * @param \Modules\Flight\Entities\Flight $flight
+     * @param \Modules\Reserve\Entities\Reserve $reserve
      *
      * @return void
      */
-    public function removeData($flight)
+    public function removeData($reserve)
     {
         DB::beginTransaction();
 
         try {
-            $flight->delete();
+            $reserve->delete();
 
             DB::commit();
         } catch (\Exception $e) {
