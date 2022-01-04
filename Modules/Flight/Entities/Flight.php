@@ -5,6 +5,7 @@ namespace Modules\Flight\Entities;
 use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
 use Modules\Airport\Entities\Airport;
+use Modules\Reserve\Entities\Reserve;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Flight\Presenter\FlightPresenter;
@@ -113,6 +114,16 @@ class Flight extends Model
     public function destination()
     {
         return $this->belongsTo(Airport::class, 'airport_destination_id')->withTrashed();
+    }
+
+    /**
+     * Obtêm as reservas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class)->where('status', '<>', Reserve::CANCELED)->withTrashed();
     }
 
     /*

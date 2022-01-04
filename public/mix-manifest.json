@@ -6,5 +6,6 @@
     "/js/bland.js": "/js/bland.js",
     "/js/plane.js": "/js/plane.js",
     "/js/airport.js": "/js/airport.js",
-    "/js/flight.js": "/js/flight.js"
+    "/js/flight.js": "/js/flight.js",
+    "/js/reserve.js": "/js/reserve.js"
 }
