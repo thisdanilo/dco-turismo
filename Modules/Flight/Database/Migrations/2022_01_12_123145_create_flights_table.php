@@ -25,7 +25,7 @@ class CreateFlightsTable extends Migration
             $table->decimal('old_price', 19, 2);
             $table->decimal('price', 19, 2);
             $table->integer('total_prots');
-            $table->boolean('is_promotion')->default(0);
+            $table->boolean('is_promotion');
             $table->integer('qty_stops')->default(0);
             $table->text('description')->nullable();
             $table->string('image')->nullable();

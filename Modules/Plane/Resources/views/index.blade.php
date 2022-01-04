@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>Total Passageiros</th>
                                     <th>Classe</th>
+                                    <th>Marca</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -54,6 +55,7 @@
                                 <tr>
                                     <th>Total Passageiros</th>
                                     <th>Classe</th>
+                                    <th>Marca</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>

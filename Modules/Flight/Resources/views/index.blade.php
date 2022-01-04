@@ -47,6 +47,9 @@
                                     <th>Data</th>
                                     <th>Duração</th>
                                     <th>Preço</th>
+                                    <th>Avião</th>
+                                    <th>Origem</th>
+                                    <th>Destino</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -56,6 +59,9 @@
                                     <th>Data</th>
                                     <th>Duração</th>
                                     <th>Preço</th>
+                                    <th>Avião</th>
+                                    <th>Origem</th>
+                                    <th>Destino</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>

@@ -41,7 +41,7 @@ class Reserve extends Model
     /**
      * Atributos da tabela do banco de dados
      *
-     * @var array $fillable
+     * @var array<string> $fillable
      */
     protected $fillable = [
         'flight_id',

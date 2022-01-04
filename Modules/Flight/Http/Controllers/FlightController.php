@@ -52,9 +52,6 @@ class FlightController extends Controller
         $flights = $this->flight->with(['plane', 'origin', 'destination']);
 
         return DataTables::of($flights)
-            // ->editColumn("time_duration", function ($flight) {
-            //     return $flight->formatted_time_duration;
-            // })
             ->editColumn("price", function ($flight) {
                 return $flight->formatted_price;
             })
@@ -66,6 +63,15 @@ class FlightController extends Controller
                     $q->where('price', 'LIKE', '%' . $formatted_price . '%');
                 }
             )
+            ->addColumn("plane", function ($flight) {
+                return $flight->plane->bland->name;
+            })
+            ->addColumn("origin", function ($flight) {
+                return $flight->origin->name;
+            })
+            ->addColumn("destination", function ($flight) {
+                return $flight->destination->name;
+            })
             ->addColumn(
                 "action",
                 function ($flight) {

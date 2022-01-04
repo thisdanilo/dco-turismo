@@ -23,6 +23,7 @@ $(document).ready(function () {
         columns: [
             { data: "total_passengers" },
             { data: "class" },
+            { data: "bland", name: "bland.name" },
             { data: "action", orderable: false, searchable: false },
         ],
         language: {

@@ -29,6 +29,7 @@ $(document).ready(function () {
             { data: "zip_code" },
             { data: "address" },
             { data: "number" },
+            { data: "city", name: "city.name" },
             { data: "action", orderable: false, searchable: false },
         ],
         language: {

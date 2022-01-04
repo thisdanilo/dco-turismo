@@ -55,6 +55,9 @@ class PlaneController extends Controller
             ->editColumn("class", function ($plane) {
                 return $plane->formatted_class;
             })
+            ->addColumn("bland", function ($plane) {
+                return $plane->bland->name;
+            })
             ->addColumn(
                 "action",
                 function ($plane) {
