@@ -4,6 +4,7 @@ namespace Modules\Reserve\Entities;
 
 use App\Models\User;
 use App\Traits\Presentable;
+use Carbon\Carbon;
 use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -127,7 +128,7 @@ class Reserve extends Model
      */
     public function getFormattedDateReservedAttribute()
     {
-        return $this->date_reserved->format('d/m/Y');
+        return Carbon::parse($this->date_reserved)->format('d/m/Y');
     }
 
     /*

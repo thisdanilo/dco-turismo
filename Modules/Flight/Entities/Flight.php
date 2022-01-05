@@ -2,6 +2,7 @@
 
 namespace Modules\Flight\Entities;
 
+use Carbon\Carbon;
 use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
 use Modules\Airport\Entities\Airport;
@@ -164,6 +165,26 @@ class Flight extends Model
     public function getFormattedPriceAttribute()
     {
         return number_format($this->attributes['price'], 2, ',', '.');
+    }
+
+    /**
+     * Formata o atributo
+     *
+     * @return string
+     */
+    public function getFormattedDateAttribute()
+    {
+        return Carbon::parse($this->date)->format('d/m/Y');
+    }
+
+    /**
+     * Formata o atributo
+     *
+     * @return string
+     */
+    public function getFormattedTimeDurationAttribute()
+    {
+        return Carbon::parse($this->time_duration)->format('H:i');
     }
 
     // /**

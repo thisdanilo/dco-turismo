@@ -53,6 +53,9 @@ class ReserveController extends Controller
         $reserves = $this->reserve->with(['user', 'flight']);
 
         return DataTables::of($reserves)
+            ->editColumn("date_reserved", function ($reserve) {
+                return $reserve->formatted_date_reserved;
+            })
             ->editColumn("status", function ($reserve) {
                 return $reserve->formatted_status;
             })
@@ -60,7 +63,7 @@ class ReserveController extends Controller
                 return $reserve->user->name;
             })
             ->editColumn("flight", function ($reserve) {
-                return $reserve->flight->date;
+                return $reserve->flight->formatted_date;
             })
             ->addColumn(
                 "action",
