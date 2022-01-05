@@ -147,7 +147,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Total de Parcelas:<span class="text-danger"> *</span></label>
-                                        <input type="number" min="1" name="total_prots" class="form-control" required value="{{ $flight->total_prots }}">
+                                        <input type="number" min="0" name="total_prots" class="form-control" required value="{{ $flight->total_prots }}">
                                     </div>
                                 </div>
 

@@ -45,6 +45,12 @@
                         <p>Reservas</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link">
+                        <i class="fas fa-arrow-right"></i>
+                        <p>Site</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
