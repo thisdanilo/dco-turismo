@@ -33,7 +33,7 @@
                     <div class="icon">
                        <i class="fas fa-users"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('user.index') }}" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-4 col-6">

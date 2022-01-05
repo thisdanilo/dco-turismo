@@ -21,6 +21,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ Ekko::isActiveRoute('user*') }}">
+                        <i class="fas fa-users"></i>
+                        <p>Clientes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('bland.index') }}" class="nav-link {{ Ekko::isActiveRoute('bland*') }}">
                         <i class="fas fa-bookmark"></i>
                         <p>Marcas</p>

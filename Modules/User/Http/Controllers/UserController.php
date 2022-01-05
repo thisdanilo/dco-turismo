@@ -2,15 +2,37 @@
 
 namespace Modules\User\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Yajra\DataTables\DataTables;
 use Illuminate\Routing\Controller;
+use Modules\User\Services\UserService;
+use Modules\User\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+    protected $user;
+
+    protected $user_service;
+
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Método Construtor
+     *
+     * @param \Modules\User\Entities\User $user
+     * @param \Modules\User\Services\UserService $user_service
+     * @return void
+     */
+    public function __construct(
+        User $user,
+        UserService $user_service
+    ) {
+        $this->user = $user;
+        $this->user_service = $user_service;
+    }
+
+    /**
+     * Exibe a tela inicial com a listagem de dados.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -18,62 +40,100 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * Obtêm os dados para a tabela
+     *
+     * @codeCoverageIgnore
+     *
+     * @return string
      */
-    public function create()
+    public function dataTable()
     {
-        return view('user::create');
+        $users = $this->user->query();
+
+        return DataTables::of($users)
+            ->addColumn(
+                "action",
+                function ($user) {
+                    return $user->actionView();
+                }
+            )
+            ->rawColumns([
+                'action'
+            ])
+            ->make(true);
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        return view('user::show');
+        $user = $this->user->findOrFail($id);
+
+        return view('user::show', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Exibe os dados para edição
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        return view('user::edit');
+        $user = $this->user->findOrFail($id);
+
+        return view('user::edit', compact('user'));
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * Atualiza e retorna para a tela de edição
+     *
+     * @param  \Modules\User\Http\Requests\UserRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = $this->user->findOrFail($id);
+
+        $this->user_service->update($request->all(), $user->id);
+
+        return redirect()
+            ->route('user.edit', $user->id)
+            ->with('message', 'Atualização realizada com sucesso.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * Exibe a tela para exclusão
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
      */
-    public function destroy($id)
+    public function confirmDelete($id)
     {
-        //
+        $user = $this->user->findOrFail($id);
+
+        return view('user::confirm-delete', compact('user'));
+    }
+
+    /**
+     * Exclui e retorna para a tela inicial
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        $this->user_service->removeData($user);
+
+        return redirect()
+            ->route('user.index')
+            ->with('message', 'Exclusão realizada com sucesso.');
     }
 }
