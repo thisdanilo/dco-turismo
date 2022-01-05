@@ -2,78 +2,32 @@
 
 namespace Modules\Dashboard\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
+use Modules\Flight\Entities\Flight;
+use Modules\Airport\Entities\Airport;
+use Modules\Reserve\Entities\Reserve;
 
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Exibe a tela inicial com a listagem de dados.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        return view('dashboard::index');
-    }
+        $users = User::count();
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('dashboard::create');
-    }
+        $planes = Plane::count();
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $airports = Airport::count();
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('dashboard::show');
-    }
+        $flights = Flight::count();
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('dashboard::edit');
-    }
+        $reserves = Reserve::count();
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return view('dashboard::index', compact('users', 'planes', 'airports', 'flights', 'reserves'));
     }
 }
