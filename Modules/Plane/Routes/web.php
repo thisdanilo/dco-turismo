@@ -15,6 +15,7 @@ use Modules\Plane\Http\Controllers\PlaneController;
 
 Route::group(
     [
+        'middleware' => ['auth', 'admin'],
         'prefix' => 'dashboard/plane',
         'as' => 'plane.'
     ],
@@ -24,7 +25,7 @@ Route::group(
             ->name('index');
 
         Route::post('/datatable', [PlaneController::class, 'dataTable'])
-        ->name('datatable');
+            ->name('datatable');
 
         Route::get('/{id}/ver', [PlaneController::class, 'show'])
             ->name('show');
@@ -33,19 +34,18 @@ Route::group(
             ->name('create');
 
         Route::post('/cadastrar', [PlaneController::class, 'store'])
-        ->name('store');
+            ->name('store');
 
         Route::get('/{id}/editar', [PlaneController::class, 'edit'])
-        ->name('edit');
+            ->name('edit');
 
-        Route::put('/{id}/editar', [PlaneController::class, 'update'
-        ])
-        ->name('update');
+        Route::put('/{id}/editar', [PlaneController::class, 'update'])
+            ->name('update');
 
         Route::get('/{id}/confirmar-exclusao', [PlaneController::class, 'confirmDelete'])
-        ->name('confirm_delete');
+            ->name('confirm_delete');
 
         Route::delete('/{id}/excluir', [PlaneController::class, 'delete'])
-        ->name('delete');
+            ->name('delete');
     }
 );

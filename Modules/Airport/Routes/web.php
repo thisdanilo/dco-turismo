@@ -15,6 +15,7 @@ use Modules\Airport\Http\Controllers\AirportController;
 
 Route::group(
     [
+        'middleware' => ['auth', 'admin'],
         'prefix' => 'dashboard/airport',
         'as' => 'airport.'
     ],

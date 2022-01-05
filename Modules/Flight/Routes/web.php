@@ -15,6 +15,7 @@ use Modules\Flight\Http\Controllers\FlightController;
 
 Route::group(
     [
+        'middleware' => ['auth', 'admin'],
         'prefix' => 'dashboard/flight',
         'as' => 'flight.'
     ],
@@ -24,29 +25,27 @@ Route::group(
             ->name('index');
 
         Route::post('/datatable', [FlightController::class, 'dataTable'])
-        ->name('datatable');
+            ->name('datatable');
 
         Route::get('/{id}/ver', [FlightController::class, 'show'])
             ->name('show');
 
         Route::get('/cadastrar', [FlightController::class, 'create'])
-        ->name('create');
+            ->name('create');
 
         Route::post('/cadastrar', [FlightController::class, 'store'])
-        ->name('store');
+            ->name('store');
 
         Route::get('/{id}/editar', [FlightController::class, 'edit'])
-        ->name('edit');
+            ->name('edit');
 
-        Route::put('/{id}/editar', [
-            FlightController::class, 'update'
-        ])
-        ->name('update');
+        Route::put('/{id}/editar', [FlightController::class, 'update'])
+            ->name('update');
 
         Route::get('/{id}/confirmar-exclusao', [FlightController::class, 'confirmDelete'])
             ->name('confirm_delete');
 
         Route::delete('/{id}/excluir', [FlightController::class, 'delete'])
-        ->name('delete');
+            ->name('delete');
     }
 );
