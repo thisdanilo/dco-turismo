@@ -9,6 +9,7 @@ use Modules\Flight\Entities\Flight;
 use Modules\Airport\Entities\Airport;
 use Modules\Flight\Services\FlightService;
 use Modules\Flight\Http\Requests\FlightRequest;
+use Modules\Site\Helpers\SiteHelper;
 
 class FlightController extends Controller
 {
@@ -52,8 +53,14 @@ class FlightController extends Controller
         $flights = $this->flight->with(['plane', 'origin', 'destination']);
 
         return DataTables::of($flights)
+            ->editColumn("date", function ($flight) {
+                return $flight->formatted_date;
+            })
+            ->editColumn("time_duration", function ($flight) {
+                return $flight->formatted_time_duration;
+            })
             ->editColumn("price", function ($flight) {
-                return $flight->formatted_price;
+                return 'R$ ' . $flight->formatted_price;
             })
             ->filterColumn(
                 'price',

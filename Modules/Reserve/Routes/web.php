@@ -15,6 +15,7 @@ use Modules\Reserve\Http\Controllers\ReserveController;
 
 Route::group(
     [
+        'middleware' => ['auth', 'admin'],
         'prefix' => 'dashboard/reserve',
         'as' => 'reserve.'
     ],

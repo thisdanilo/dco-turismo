@@ -4,5 +4,7 @@
     "Flight": true,
     "Airport": true,
     "Reserve": true,
-    "Site": true
+    "Site": true,
+    "Dashboard": true,
+    "User": true
 }
