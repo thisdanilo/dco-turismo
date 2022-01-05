@@ -10,7 +10,7 @@
         <form action="{{ route('search.flights') }}" class="form-home text-center" method="post">
             @csrf
             <div class="form-group">
-                <input type="text" name="origin" list="cities_origin" class="form-control" placeholder="Cidade Origem">
+                <input type="text" name="origin" list="cities_origin" class="form-control" placeholder="Cidade Origem" required>
                 <datalist id="cities_origin">
 
                     @forelse ($airports as $airport)
@@ -21,7 +21,7 @@
                 </datalist>
             </div>
             <div class="form-group">
-                <input type="text" name="destination" list="cities_destination" class="form-control" placeholder="Cidade Destino">
+                <input type="text" name="destination" list="cities_destination" class="form-control" placeholder="Cidade Destino" required>
                 <datalist id="cities_destination">
 
                     @forelse ($airports as $airport)
@@ -32,7 +32,7 @@
                 </datalist>
             </div>
             <div class="form-group">
-                <input type="date" name="date" class="form-control" placeholder="Data">
+                <input type="date" name="date" class="form-control" placeholder="Data" required>
             </div>
             <!--
                     <button class="btn" type="submit">

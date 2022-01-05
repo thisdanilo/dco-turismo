@@ -24,29 +24,27 @@ Route::group(
             ->name('index');
 
         Route::post('/datatable', [ReserveController::class, 'dataTable'])
-        ->name('datatable');
+            ->name('datatable');
 
         Route::get('/{id}/ver', [ReserveController::class, 'show'])
             ->name('show');
 
         Route::get('/cadastrar', [ReserveController::class, 'create'])
-        ->name('create');
+            ->name('create');
 
         Route::post('/cadastrar', [ReserveController::class, 'store'])
-        ->name('store');
+            ->name('store');
 
         Route::get('/{id}/editar', [ReserveController::class, 'edit'])
-        ->name('edit');
+            ->name('edit');
 
-        Route::put('/{id}/editar', [
-            ReserveController::class, 'update'
-        ])
-        ->name('update');
+        Route::put('/{id}/editar', [ReserveController::class, 'update'])
+            ->name('update');
 
         Route::get('/{id}/confirmar-exclusao', [ReserveController::class, 'confirmDelete'])
             ->name('confirm_delete');
 
         Route::delete('/{id}/excluir', [ReserveController::class, 'delete'])
-        ->name('delete');
+            ->name('delete');
     }
 );

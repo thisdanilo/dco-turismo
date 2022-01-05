@@ -149,4 +149,19 @@ class Reserve extends Model
     {
         return \Modules\Reserve\Database\factories\ReserveFactory::new();
     }
+
+    /**
+     * Reserva
+     *
+     * @return string
+     */
+    public function newReserve($flightId)
+    {
+        $this->user_id = auth()->user()->id;
+        $this->flight_id = $flightId;
+        $this->date_reserved = date('Y-m-d');
+        $this->status = self::RESERVED;
+
+        return $this->save();
+    }
 }

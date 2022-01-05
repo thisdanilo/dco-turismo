@@ -15,6 +15,7 @@ use Modules\Bland\Http\Controllers\BlandController;
 
 Route::group(
     [
+        'middleware' => ['auth', 'admin'],
         'prefix' => 'dashboard/bland',
         'as' => 'bland.'
     ],

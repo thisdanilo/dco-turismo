@@ -214,13 +214,24 @@ a.btn-buy:hover{
 }
 .result-search a{
     float: right;
-    background: #b28d36;
+    background: #8C4A69;
     color: #FFF;
     padding: 10px 30px;
 }
 .result-search a:hover{
-    background: #8d7130;
+    background: #401A2F;
 }
+.btn-reserve {
+    float: right;
+    background: #8C4A69;
+    color: #FFF;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+.btn-reserve:hover {
+    background: #401A2F;
+}
+
 img.img-header-user{
     width: 46px;
     float: left;
@@ -236,7 +247,7 @@ img.img-header-user{
 }
 .main-auth a{color: #FFF;float: left;margin: 0 12px;font-size: .8em;}
 .btn-form{
-    background: #f7921e;
+    background: #8C4A69;
     color: #FFF;
     border: 0;
     width: 100%;
@@ -245,4 +256,7 @@ img.img-header-user{
     text-transform: uppercase;
     border-radius: 2px;
     cursor: pointer;
+}
+.btn-form:hover {
+    background: #BC5F83;
 }

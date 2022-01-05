@@ -9,7 +9,7 @@ a:hover{text-decoration: none;}
 }
 .input-group-addon {
     margin: 10px 0 0 0;
-    background: #1b0088;
+    background: #401A2F;
     color: #FFF;
 }
 form.form-eti input {
@@ -23,7 +23,7 @@ form.form-eti input {
     height: 50px;
 }
 .dropdown-menu{
-    background: #1b0088;
+    background: #8C4A69;
     border-radius: 0;
     box-shadow: none;
 }

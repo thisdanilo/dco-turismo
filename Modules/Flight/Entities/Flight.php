@@ -70,7 +70,7 @@ class Flight extends Model
      *  @var array $casts
      */
     protected $casts = [
-        'active' => 'boolean',
+        'is_promotion' => 'boolean',
         'old_price' => 'float',
         'price' => 'float'
     ];
@@ -238,6 +238,19 @@ class Flight extends Model
         return $this->where('airport_origin_id', $origin)
             ->where('airport_destination_id', $destination)
             ->where('date', $date)
+            ->get();
+    }
+
+    /**
+     * Filtra a promoção.
+     *
+     * @return string
+     */
+    public function promotions()
+    {
+        return $this->where('is_promotion', true)
+            ->where('date', '>=', date('Y-m-d'))
+            ->with(['origin.city', 'destination.city'])
             ->get();
     }
 }
