@@ -25,7 +25,7 @@ class SiteController extends Controller
     /**
      * Tela home
      *
-     * @return void
+     * @return \Illuminate\View\View
      */
     public function home()
     {
@@ -38,7 +38,7 @@ class SiteController extends Controller
      * Tela de promoções
      *
      * @param Flight $flight
-     * @return void
+     * @return \Illuminate\View\View
      */
     public function promotions(Flight $flight)
     {
@@ -52,7 +52,7 @@ class SiteController extends Controller
      *
      * @param Request $request
      * @param Flight $flight
-     * @return void
+     * @return array
      */
     public function searchFlights(Request $request, Flight $flight)
     {
@@ -105,7 +105,6 @@ class SiteController extends Controller
     /**
      * Exibe os dados
      *
-     * @param  string
      * @return \Illuminate\View\View
      */
     public function purchases()
@@ -167,7 +166,7 @@ class SiteController extends Controller
     /**
      * Sai da sessão
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout()
     {

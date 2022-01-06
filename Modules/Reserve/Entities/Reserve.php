@@ -152,8 +152,9 @@ class Reserve extends Model
     }
 
     /**
-     * Reserva
+     * Faz uma reserva
      *
+     * @param int $flightId
      * @return string
      */
     public function newReserve($flightId)

@@ -25,4 +25,11 @@ class FlightTest extends TestCase
 
         $this->assertInstanceOf(Airport::class, $flight->destination);
     }
+
+    public function test_it_search_flights()
+    {
+        $flights = Flight::factory()->create();
+
+        $this->assertEquals(1, $flights->count());
+    }
 }

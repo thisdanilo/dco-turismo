@@ -17,7 +17,7 @@ class UserController extends Controller
     /**
      * Método Construtor
      *
-     * @param \Modules\User\Entities\User $user
+     * @param \App\Models\User $user
      * @param \Modules\User\Services\UserService $user_service
      * @return void
      */

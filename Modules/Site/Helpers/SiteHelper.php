@@ -9,9 +9,9 @@ class SiteHelper
     /**
      * Formata a data
      *
-     * @param [string] $value
+     * @param string $value
      * @param string $format
-     * @return void
+     * @return string
      */
     public static function formatDateAndTime($value, $format = 'd/m/Y')
     {
@@ -21,8 +21,8 @@ class SiteHelper
     /**
      * Filtra por aeroporto
      *
-     * @param [string] $city
-     * @return void
+     * @param string $city
+     * @return array
      */
     public static function getInfoAirport($city)
     {

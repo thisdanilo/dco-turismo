@@ -19,7 +19,6 @@ class SiteService
      * Atualiza o registro
      *
      * @param array $request
-     * @param int|null $id
      *
      * @return void
      */
@@ -37,28 +36,6 @@ class SiteService
                 $user->password = bcrypt($request['password']);
 
             $user->save();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500);
-        }
-    }
-
-    /**
-     * Exclui e retorna a tela inicial
-     *
-     * @param \Modules\User\Entities\User $user
-     *
-     * @return void
-     */
-    public function removeData($user)
-    {
-        DB::beginTransaction();
-
-        try {
-            $user->delete();
 
             DB::commit();
         } catch (\Exception $e) {

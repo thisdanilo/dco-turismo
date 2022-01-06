@@ -2,8 +2,8 @@
 
 namespace Modules\User\Services;
 
-use App\Models\User;
 use DB;
+use App\Models\User;
 
 class UserService
 {
@@ -54,7 +54,7 @@ class UserService
     /**
      * Exclui e retorna a tela inicial
      *
-     * @param \Modules\User\Entities\User $user
+     * @param \App\Models\User $user
      *
      * @return void
      */
