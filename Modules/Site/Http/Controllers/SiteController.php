@@ -5,11 +5,12 @@ namespace Modules\Site\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Flight\Entities\Flight;
+use Illuminate\Support\Facades\Auth;
 use Modules\Site\Helpers\SiteHelper;
 use Modules\Airport\Entities\Airport;
 use Modules\Reserve\Entities\Reserve;
+use Modules\Site\Services\SiteService;
 use Hexadog\ThemesManager\Facades\ThemesManager;
-use Illuminate\Support\Facades\Auth;
 use Modules\Reserve\Http\Requests\ReserveRequest;
 
 class SiteController extends Controller
@@ -21,7 +22,11 @@ class SiteController extends Controller
         ThemesManager::set($theme);
     }
 
-    /* Tela home */
+    /**
+     * Tela home
+     *
+     * @return void
+     */
     public function home()
     {
         $airports = Airport::with('city')->get();
@@ -29,7 +34,12 @@ class SiteController extends Controller
         return view('pages.home', compact('airports'));
     }
 
-    /* Tela de promoções */
+    /**
+     * Tela de promoções
+     *
+     * @param Flight $flight
+     * @return void
+     */
     public function promotions(Flight $flight)
     {
         $promotions = $flight->promotions();
@@ -37,7 +47,13 @@ class SiteController extends Controller
         return view('pages.promotions', compact('promotions'));
     }
 
-    /* Pesquisa por cidades */
+    /**
+     * Pesquisa por cidades
+     *
+     * @param Request $request
+     * @param Flight $flight
+     * @return void
+     */
     public function searchFlights(Request $request, Flight $flight)
     {
         $origin = SiteHelper::getInfoAirport($request->origin);
@@ -54,7 +70,12 @@ class SiteController extends Controller
         ]);
     }
 
-    /* Tela detalhes do voo */
+    /**
+     * Exibe os dados
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
+     */
     public function flightDetails($id)
     {
         $flight = Flight::with(['origin', 'destination'])->findOrFail($id);
@@ -62,7 +83,13 @@ class SiteController extends Controller
         return view('pages.flight-details', compact('flight'));
     }
 
-    /* Tela reserva */
+    /**
+     * Atualiza e retorna para a tela de edição
+     *
+     * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reserveFlight(ReserveRequest $request, Reserve $reserve)
     {
         if ($reserve->newReserve($request->flight_id))
@@ -75,7 +102,12 @@ class SiteController extends Controller
             ->with('alert', 'Falha ao reservar.');
     }
 
-    /* Tela de compras */
+    /**
+     * Exibe os dados
+     *
+     * @param  string
+     * @return \Illuminate\View\View
+     */
     public function purchases()
     {
         $purchases = auth()
@@ -87,7 +119,12 @@ class SiteController extends Controller
         return view('pages.purchases', compact('purchases'));
     }
 
-    /* Tela detalhes da compra */
+    /**
+     * Exibe os dados
+     *
+     * @param  int $id
+     * @return \Illuminate\View\View
+     */
     public function purchaseDetails($id)
     {
         $reserve = Reserve::where('user_id', auth()->user()->id)
@@ -100,30 +137,38 @@ class SiteController extends Controller
         return view('pages.purchase-details', compact('purchase'));
     }
 
-    /* Tela do perfil */
+    /**
+     * Exibe a tela do perfil.
+     *
+     * @return \Illuminate\View\View
+     */
     public function myProfile()
     {
         return view('pages.my-profile');
     }
 
-    /* Atualizar perfil */
-    public function updateProfile(Request $request)
+    /**
+     * Atualiza e retorna para a tela de edição
+     *
+     * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
+     * @param  \Modules\Site\Services\SiteService $site_service
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProfile(Request $request, SiteService $site_service)
     {
-        $user = auth()->user();
-
-        $user->name = $request->name;
-
-        if ($request->password)
-            $user->password = bcrypt($request->password);
-
-        $user->save();
+        $site_service->update($request->all());
 
         return redirect()
             ->route('my.profile')
             ->with('message', 'Atualização realizada com sucesso.');
     }
 
-    /* Sair da sessão */
+    /**
+     * Sai da sessão
+     *
+     * @return \Illuminate\View\View
+     */
     public function logout()
     {
         Auth::logout();

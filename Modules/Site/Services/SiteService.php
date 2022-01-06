@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\User\Services;
+namespace Modules\Site\Services;
 
-use App\Models\User;
 use DB;
 
-class UserService
+class SiteService
 {
     /*--------------------------------------------------------------------------
 	| Main Function
@@ -24,24 +23,20 @@ class UserService
      *
      * @return void
      */
-    public function update($request, $id = null)
+    public function update($request)
     {
         DB::beginTransaction();
 
         try {
 
-            $data = [
-                'name' => $request['name'],
-                'email' => $request['email']
-            ];
+            $user = auth()->user();
 
-            if (isset($request['password'])) {
-                $data += ['password' => bcrypt($request['password'])];
-            }
+            $user->name = $request['name'];
 
-            User::updateOrCreate([
-                'id' => $id
-            ], $data);
+            if ($request['password'])
+                $user->password = bcrypt($request['password']);
+
+            $user->save();
 
             DB::commit();
         } catch (\Exception $e) {

@@ -2,13 +2,14 @@
 
 @section('content')
 
-    {{-- Respostas --}}
-    @include('dashboard.partials.errors')
-    @include('dashboard.partials.success')
-
     <div class="content">
 
         <section class="container">
+
+            {{-- Respostas --}}
+            @include('dashboard.partials.errors')
+            @include('dashboard.partials.success')
+
             <h1 class="title">Minhas Compras</h1>
 
 
@@ -19,7 +20,6 @@
                         <th>Vôo</th>
                         <th>Data</th>
                         <th width="100">Status</th>
-                        <th width="130">Cancelar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,16 +38,12 @@
                             <td>
                                 <span class="badge badge-secondary">{{ $purchase->formatted_status }}</span>
                             </td>
-                            <td>
-                                <a href="" class="btn btn-danger">
-                                    Cancelar? <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
-                            </td>
+
                         </tr>
 
                     @empty
 
-                    <p>Nenhuma compra realizada!</p>
+                        <p>Nenhuma compra realizada!</p>
 
                     @endforelse
 
