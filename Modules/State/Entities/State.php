@@ -19,11 +19,11 @@ class State extends Model
 	 */
 	protected $table = 'states';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
 	protected $fillable = [
 		'name',
 		'abbr'

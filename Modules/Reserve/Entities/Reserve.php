@@ -11,48 +11,48 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reserve extends Model
 {
-    use SoftDeletes,
-        HasFactory;
+	use SoftDeletes,
+		HasFactory;
 
-    const RESERVED = "RE";
+	const RESERVED = "RE";
 
-    const CANCELED = "CA";
+	const CANCELED = "CA";
 
-    const PAID = "PA";
+	const PAID = "PA";
 
-    const CONCLUDED = "CO";
+	const CONCLUDED = "CO";
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'reservations';
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'reservations';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'flight_id',
-        'user_id',
-        'date_reserved',
-        'status'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'flight_id',
+		'user_id',
+		'date_reserved',
+		'status'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Accessors
 	|--------------------------------------------------------------------------
@@ -62,34 +62,34 @@ class Reserve extends Model
 	|
 	*/
 
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedStatusAttribute()
-    {
-        $data = [
-            self::RESERVED => 'Reservado',
-            self::CANCELED => 'Cancelado',
-            self::PAID => 'Pago',
-            self::CONCLUDED => 'Concluído'
-        ];
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedStatusAttribute()
+	{
+		$data = [
+			self::RESERVED => 'Reservado',
+			self::CANCELED => 'Cancelado',
+			self::PAID => 'Pago',
+			self::CONCLUDED => 'Concluído'
+		];
 
-        return $data[$this->status];
-    }
+		return $data[$this->status];
+	}
 
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedDateReservedAttribute()
-    {
-        return Carbon::parse($this->date_reserved)->format('d/m/Y');
-    }
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedDateReservedAttribute()
+	{
+		return Carbon::parse($this->date_reserved)->format('d/m/Y');
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -100,27 +100,27 @@ class Reserve extends Model
 	|
 	*/
 
-    /**
-     * Obtém a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    /**
-     * Obtém os voos
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function flight()
-    {
-        return $this->belongsTo(Flight::class)->withTrashed();
-    }
+	/**
+	 * Obtém os voos
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function flight()
+	{
+		return $this->belongsTo(Flight::class)->withTrashed();
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -130,29 +130,29 @@ class Reserve extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Reserve\Database\factories\ReserveFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Reserve\Database\factories\ReserveFactory::new();
+	}
 
-    /**
-     * Faz uma reserva
-     *
-     * @param int $flightId
-     * @return boolean
-     */
-    public function newReserve($flightId)
-    {
-        $this->user_id = auth()->user()->id;
-        $this->flight_id = $flightId;
-        $this->date_reserved = date('Y-m-d');
-        $this->status = self::RESERVED;
+	/**
+	 * Faz uma reserva
+	 *
+	 * @param int $flightId
+	 * @return boolean
+	 */
+	public function newReserve($flightId)
+	{
+		$this->user_id = auth()->user()->id;
+		$this->flight_id = $flightId;
+		$this->date_reserved = date('Y-m-d');
+		$this->status = self::RESERVED;
 
-        return $this->save();
-    }
+		return $this->save();
+	}
 }

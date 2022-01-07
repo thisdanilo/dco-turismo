@@ -9,43 +9,43 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Plane extends Model
 {
-    use SoftDeletes,
-        HasFactory;
+	use SoftDeletes,
+		HasFactory;
 
-    const ECONOMIC = "EC";
+	const ECONOMIC = "EC";
 
-    const LUXURY = "LU";
+	const LUXURY = "LU";
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'planes';
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'planes';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'bland_id',
-        'total_passengers',
-        'class'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'bland_id',
+		'total_passengers',
+		'class'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Accessors
 	|--------------------------------------------------------------------------
@@ -55,17 +55,17 @@ class Plane extends Model
 	|
 	*/
 
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedClassAttribute()
-    {
-        return $this->class == 'EC' ? 'Econômico' : 'Luxo';
-    }
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedClassAttribute()
+	{
+		return $this->class == 'EC' ? 'Econômico' : 'Luxo';
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -76,17 +76,17 @@ class Plane extends Model
 	|
 	*/
 
-    /**
-     * Obtém a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function bland()
-    {
-        return $this->belongsTo(Bland::class)->withTrashed();
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function bland()
+	{
+		return $this->belongsTo(Bland::class)->withTrashed();
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -96,13 +96,13 @@ class Plane extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Plane\Database\factories\PlaneFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Plane\Database\factories\PlaneFactory::new();
+	}
 }

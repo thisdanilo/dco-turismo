@@ -15,13 +15,13 @@ class ReserveRequest extends FormRequest
 	public function rules()
 	{
 		return [
-            'flight_id' => [
-                'required',
-                new CheckAvailableFlight
-            ],
-            'user_id' => 'required',
-            'date_reserved' => 'required', 'date',
-            'status' => 'required', 'enum'
+			'flight_id' => [
+				'required',
+				new CheckAvailableFlight
+			],
+			'user_id' => 'required',
+			'date_reserved' => 'required', 'date',
+			'status' => 'required', 'enum'
 		];
 	}
 

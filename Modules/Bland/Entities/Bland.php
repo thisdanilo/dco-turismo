@@ -9,37 +9,37 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bland extends Model
 {
-    use SoftDeletes,
-        HasFactory;
+	use SoftDeletes,
+		HasFactory;
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'blands';
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'blands';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'name'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'name'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -50,17 +50,17 @@ class Bland extends Model
 	|
 	*/
 
-    /**
-     * Obtêm o avião
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function planes()
-    {
-        return $this->hasMany(Plane::class)->withTrashed();
-    }
+	/**
+	 * Obtêm o avião
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function planes()
+	{
+		return $this->hasMany(Plane::class)->withTrashed();
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -70,13 +70,13 @@ class Bland extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Bland\Database\factories\BlandFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Bland\Database\factories\BlandFactory::new();
+	}
 }

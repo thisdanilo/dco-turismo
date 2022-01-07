@@ -6,7 +6,7 @@ use DB;
 
 class SiteService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -15,33 +15,33 @@ class SiteService
 	|
 	*/
 
-    /**
-     * Atualiza o registro
-     *
-     * @param array $request
-     *
-     * @return void
-     */
-    public function update($request)
-    {
-        DB::beginTransaction();
+	/**
+	 * Atualiza o registro
+	 *
+	 * @param array $request
+	 *
+	 * @return void
+	 */
+	public function update($request)
+	{
+		DB::beginTransaction();
 
-        try {
+		try {
+			$user = auth()->user();
 
-            $user = auth()->user();
+			$user->name = $request['name'];
 
-            $user->name = $request['name'];
+			if ($request['password']) {
+				$user->password = bcrypt($request['password']);
+			}
 
-            if ($request['password'])
-                $user->password = bcrypt($request['password']);
+			$user->save();
 
-            $user->save();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 }

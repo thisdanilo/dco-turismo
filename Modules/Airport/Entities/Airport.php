@@ -9,44 +9,44 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Airport extends Model
 {
-    use SoftDeletes,
-        HasFactory;
+	use SoftDeletes,
+		HasFactory;
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'airports';
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'airports';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'city_id',
-        'name',
-        'latitude',
-        'longitude',
-        'address',
-        'number',
-        'zip_code',
-        'complement'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'city_id',
+		'name',
+		'latitude',
+		'longitude',
+		'address',
+		'number',
+		'zip_code',
+		'complement'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -57,17 +57,17 @@ class Airport extends Model
 	|
 	*/
 
-    /**
-     * Obtém a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function city()
+	{
+		return $this->belongsTo(City::class);
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -77,13 +77,13 @@ class Airport extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Airport\Database\factories\AirportFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Airport\Database\factories\AirportFactory::new();
+	}
 }

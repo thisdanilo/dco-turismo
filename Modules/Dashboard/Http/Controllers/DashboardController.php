@@ -11,23 +11,23 @@ use Modules\Reserve\Entities\Reserve;
 
 class DashboardController extends Controller
 {
-    /**
-     * Exibe a tela inicial com a listagem de dados.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        $users = User::count();
+	/**
+	 * Exibe a tela inicial com a listagem de dados.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function index()
+	{
+		$users = User::count();
 
-        $planes = Plane::count();
+		$planes = Plane::count();
 
-        $airports = Airport::count();
+		$airports = Airport::count();
 
-        $flights = Flight::count();
+		$flights = Flight::count();
 
-        $reserves = Reserve::count();
+		$reserves = Reserve::count();
 
-        return view('dashboard::index', compact('users', 'planes', 'airports', 'flights', 'reserves'));
-    }
+		return view('dashboard::index', compact('users', 'planes', 'airports', 'flights', 'reserves'));
+	}
 }

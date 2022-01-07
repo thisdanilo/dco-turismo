@@ -8,7 +8,7 @@ use Modules\Plane\Entities\Plane;
 
 class PlaneService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -17,14 +17,14 @@ class PlaneService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return \Modules\Plane\Entities\Plane $plane
-     */
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return \Modules\Plane\Entities\Plane $plane
+	 */
 	public function updateOrCreate($request, $id = null)
 	{
 		DB::beginTransaction();
@@ -34,11 +34,11 @@ class PlaneService
 				'id' => $id
 			], $request);
 
-            (new Bland)->updateOrCreate(['id' => $plane->bland->id ?? null]);
+			(new Bland)->updateOrCreate(['id' => $plane->bland->id ?? null]);
 
 			DB::commit();
 
-            return $plane;
+			return $plane;
 		} catch (\Exception $e) {
 			DB::rollBack();
 

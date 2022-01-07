@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UserService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -16,60 +16,59 @@ class UserService
 	|
 	*/
 
-    /**
-     * Atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return void
-     */
-    public function update($request, $id = null)
-    {
-        DB::beginTransaction();
+	/**
+	 * Atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
+	public function update($request, $id = null)
+	{
+		DB::beginTransaction();
 
-        try {
+		try {
+			$data = [
+				'name' => $request['name'],
+				'email' => $request['email']
+			];
 
-            $data = [
-                'name' => $request['name'],
-                'email' => $request['email']
-            ];
+			if (isset($request['password'])) {
+				$data += ['password' => bcrypt($request['password'])];
+			}
 
-            if (isset($request['password'])) {
-                $data += ['password' => bcrypt($request['password'])];
-            }
+			User::updateOrCreate([
+				'id' => $id
+			], $data);
 
-            User::updateOrCreate([
-                'id' => $id
-            ], $data);
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			abort(500);
+		}
+	}
 
-            abort(500);
-        }
-    }
+	/**
+	 * Exclui e retorna a tela inicial
+	 *
+	 * @param \App\Models\User $user
+	 *
+	 * @return void
+	 */
+	public function removeData($user)
+	{
+		DB::beginTransaction();
 
-    /**
-     * Exclui e retorna a tela inicial
-     *
-     * @param \App\Models\User $user
-     *
-     * @return void
-     */
-    public function removeData($user)
-    {
-        DB::beginTransaction();
+		try {
+			$user->delete();
 
-        try {
-            $user->delete();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 }
