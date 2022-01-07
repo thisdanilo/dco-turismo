@@ -52,6 +52,10 @@ $(document).ready(function () {
         },
     });
 
+    //-----------------------------------------------------
+    // Defining a function
+    //-----------------------------------------------------
+
     /* Pesquisa por cep */
     function searchZipCode() {
         var zipcode = $("#cep").val().replace("-", "");
