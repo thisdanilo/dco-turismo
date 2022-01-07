@@ -20,7 +20,7 @@ class BlandRequestTest extends TestCase
     public function test_it_has_rules()
     {
         $rules = [
-            'name' => 'required', 'string'
+            'name' => 'required|string'
         ];
 
         $this->assertEquals($rules,  $this->form_request->rules());
