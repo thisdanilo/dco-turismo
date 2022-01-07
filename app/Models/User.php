@@ -10,58 +10,58 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,
-        HasFactory,
-        Notifiable;
+	use HasApiTokens,
+		HasFactory,
+		Notifiable;
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'users';
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'users';
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at'
+	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = [
+		'password',
+		'remember_token',
+	];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -72,17 +72,17 @@ class User extends Authenticatable
 	|
 	*/
 
-    /**
-     * Obtêm as reservas
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reserves()
-    {
-        return $this->hasMany(Reserve::class);
-    }
+	/**
+	 * Obtêm as reservas
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function reserves()
+	{
+		return $this->hasMany(Reserve::class);
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -92,13 +92,13 @@ class User extends Authenticatable
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\User\Database\factories\UserFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\User\Database\factories\UserFactory::new();
+	}
 }
