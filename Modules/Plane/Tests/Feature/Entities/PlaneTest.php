@@ -4,12 +4,11 @@ namespace Modules\Plane\Tests\Feature\Entities;
 
 use Tests\TestCase;
 use Modules\Bland\Entities\Bland;
-use Modules\Flight\Entities\Flight;
 use Modules\Plane\Entities\Plane;
 
 class PlaneTest extends TestCase
 {
-    public function test_a_plane_belongs_to_bland()
+    public function test_a_plane_has_bland()
     {
         $plane = Plane::factory()->hasBland()->create();
 

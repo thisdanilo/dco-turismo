@@ -7,7 +7,7 @@ use Modules\Bland\Entities\Bland;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
 use Modules\Plane\Services\PlaneService;
-use Modules\Plane\Http\Requests\PlaneRequest;
+use Modules\Plane\Http\Requests;
 
 class PlaneController extends Controller
 {
@@ -85,10 +85,10 @@ class PlaneController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param  \Modules\Plane\Http\Requests\PlaneRequest $request
+	 * @param \Requests\PlaneRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(PlaneRequest $request)
+	public function store(Requests\PlaneRequest $request)
 	{
 		$this->plane_service->updateOrCreate($request->all());
 
@@ -130,11 +130,11 @@ class PlaneController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param  \Modules\Plane\Http\Requests\PlaneRequest $request
+	 * @param \Requests\PlaneRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update(PlaneRequest $request, $id)
+	public function update(Requests\PlaneRequest $request, $id)
 	{
 		$plane = $this->plane->findOrFail($id);
 

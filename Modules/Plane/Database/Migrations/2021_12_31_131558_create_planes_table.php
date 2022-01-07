@@ -18,11 +18,10 @@ class CreatePlanesTable extends Migration
             $table->id();
             $table->integer('total_passengers');
             $table->unsignedBigInteger('bland_id');
+            $table->foreign('bland_id')->references('id')->on('blands');
             $table->enum('class', [Plane::ECONOMIC, Plane::LUXURY]);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('bland_id')->references('id')->on('blands');
         });
     }
 

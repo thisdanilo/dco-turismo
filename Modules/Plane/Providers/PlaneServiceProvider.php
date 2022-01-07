@@ -3,7 +3,6 @@
 namespace Modules\Plane\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class PlaneServiceProvider extends ServiceProvider
 {

@@ -3,12 +3,11 @@
 namespace Modules\Plane\Services;
 
 use DB;
-use Modules\Bland\Entities\Bland;
 use Modules\Plane\Entities\Plane;
 
 class PlaneService
 {
-	/*--------------------------------------------------------------------------
+    /*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -17,54 +16,50 @@ class PlaneService
 	|
 	*/
 
-	/**
-	 * Cadastra ou atualiza o registro
-	 *
-	 * @param array $request
-	 * @param int|null $id
-	 *
-	 * @return \Modules\Plane\Entities\Plane $plane
-	 */
-	public function updateOrCreate($request, $id = null)
-	{
-		DB::beginTransaction();
+    /**
+     * Cadastra ou atualiza o registro
+     *
+     * @param array $request
+     * @param int|null $id
+     *
+     * @return void
+     */
+    public function updateOrCreate($request, $id = null)
+    {
+        DB::beginTransaction();
 
-		try {
-			$plane = Plane::updateOrCreate([
-				'id' => $id
-			], $request);
+        try {
+            Plane::updateOrCreate([
+                'id' => $id
+            ], $request);
 
-			(new Bland)->updateOrCreate(['id' => $plane->bland->id ?? null]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-			DB::commit();
+            abort(500);
+        }
+    }
 
-			return $plane;
-		} catch (\Exception $e) {
-			DB::rollBack();
+    /**
+     * Exclui e retorna a tela inicial
+     *
+     * @param \Modules\Plane\Entities\Plane $plane
+     *
+     * @return void
+     */
+    public function removeData($plane)
+    {
+        DB::beginTransaction();
 
-			abort(500);
-		}
-	}
+        try {
+            $plane->delete();
 
-	/**
-	 * Exclui e retorna a tela inicial
-	 *
-	 * @param \Modules\Plane\Entities\Plane $plane
-	 *
-	 * @return void
-	 */
-	public function removeData($plane)
-	{
-		DB::beginTransaction();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-		try {
-			$plane->delete();
-
-			DB::commit();
-		} catch (\Exception $e) {
-			DB::rollBack();
-
-			abort(500);
-		}
-	}
+            abort(500);
+        }
+    }
 }

@@ -14,38 +14,38 @@ use Modules\Plane\Http\Controllers\PlaneController;
 */
 
 Route::group(
-	[
-		'middleware' => ['auth', 'admin'],
-		'prefix' => 'dashboard/plane',
-		'as' => 'plane.'
-	],
-	function () {
+    [
+        'middleware' => ['auth', 'admin'],
+        'prefix' => 'dashboard/plane',
+        'as' => 'plane.'
+    ],
+    function () {
 
-		Route::get('/', [PlaneController::class, 'index'])
-			->name('index');
+        Route::get('/', [PlaneController::class, 'index'])
+            ->name('index');
 
-		Route::post('/datatable', [PlaneController::class, 'dataTable'])
-			->name('datatable');
+        Route::post('/datatable', [PlaneController::class, 'dataTable'])
+            ->name('datatable');
 
-		Route::get('/{id}/ver', [PlaneController::class, 'show'])
-			->name('show');
+        Route::get('/{id}/ver', [PlaneController::class, 'show'])
+            ->name('show');
 
-		Route::get('/cadastrar', [PlaneController::class, 'create'])
-			->name('create');
+        Route::get('/cadastrar', [PlaneController::class, 'create'])
+            ->name('create');
 
-		Route::post('/cadastrar', [PlaneController::class, 'store'])
-			->name('store');
+        Route::post('/cadastrar', [PlaneController::class, 'store'])
+            ->name('store');
 
-		Route::get('/{id}/editar', [PlaneController::class, 'edit'])
-			->name('edit');
+        Route::get('/{id}/editar', [PlaneController::class, 'edit'])
+            ->name('edit');
 
-		Route::put('/{id}/editar', [PlaneController::class, 'update'])
-			->name('update');
+        Route::put('/{id}/editar', [PlaneController::class, 'update'])
+            ->name('update');
 
-		Route::get('/{id}/confirmar-exclusao', [PlaneController::class, 'confirmDelete'])
-			->name('confirm_delete');
+        Route::get('/{id}/confirmar-exclusao', [PlaneController::class, 'confirmDelete'])
+            ->name('confirm_delete');
 
-		Route::delete('/{id}/excluir', [PlaneController::class, 'delete'])
-			->name('delete');
-	}
+        Route::delete('/{id}/excluir', [PlaneController::class, 'delete'])
+            ->name('delete');
+    }
 );

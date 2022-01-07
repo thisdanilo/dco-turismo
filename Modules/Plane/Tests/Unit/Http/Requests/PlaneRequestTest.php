@@ -9,20 +9,24 @@ use Modules\Plane\Http\Controllers\PlaneController;
 class PlaneRequestTest extends TestCase
 {
     protected $form_request;
+
     protected function setup(): void
     {
         parent::setUp();
+
         $this->form_request = new PlaneRequest();
     }
+
     public function test_it_has_rules()
     {
         $rules = [
-            'total_passengers' => 'required', 'integer',
+            'total_passengers' => 'required|integer',
             'class' => 'required'
         ];
 
         $this->assertEquals($rules,  $this->form_request->rules());
     }
+
     public function test_it_has_authorize()
     {
         $this->assertTrue($this->form_request->authorize());
@@ -35,6 +39,7 @@ class PlaneRequestTest extends TestCase
     {
         $this->assertActionUsesFormRequest(PlaneController::class, $method, PlaneRequest::class);
     }
+
     public function methodsDataProvider()
     {
         yield [
