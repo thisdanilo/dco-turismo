@@ -65,8 +65,7 @@
                                     <div class="form-group">
                                         <label>Origem:<span class="text-danger">*</span></label>
                                         <select name="airport_origin_id" class="form-control select2" style="width: 100%;" required>
-
-                                            <option value="{{ $flight->origin->id }}" selected>{{ $flight->origin->name }}</option> --}}
+                                            <option value="{{ $flight->origin->id }}" selected>{{ $flight->origin->name }}</option>
 
                                             @foreach ($origins as $origin)
 
@@ -83,8 +82,7 @@
                                     <div class="form-group">
                                         <label>Destino:<span class="text-danger">*</span></label>
                                         <select name="airport_destination_id" class="form-control select2" style="width: 100%;" required>
-
-                                            <option value="{{ $flight->destination->id }}" selected>{{ $flight->destination->name }}</option> --}}
+                                            <option value="{{ $flight->destination->id }}" selected>{{ $flight->destination->name }}</option>
 
                                             @foreach ($destinations as $destination)
 
@@ -157,11 +155,9 @@
                                     <div class="form-group">
                                         <label>Promoção:<span class="text-danger">*</span></label>
                                         <select name="is_promotion" class="form-control" style="width: 100%;" required>
-
                                             <option value="">Selecione</option>
                                             <option value="1" @if ($flight->is_promotion) selected @endif>Sim</option>
-                                            <option value="0" @if ($flight->is_promotion) selected @endif>Não</option>
-
+                                            <option value="0" @if (!$flight->is_promotion) selected @endif>Não</option>
                                         </select>
                                     </div>
                                 </div>
@@ -174,10 +170,8 @@
                                     </div>
                                 </div>
 
-
                             </div>
                         </div>
-
                         <div class="card-footer"></div>
                     </div>
 
@@ -197,9 +191,7 @@
                                         <textarea name="description" id="summernote" cols="50" rows="5" class="form-control">{!! $flight->description !!}</textarea>
                                     </div>
                                 </div>
-
                                 <div class="card-footer"></div>
-
                             </div>
 
                         </div>

@@ -56,6 +56,7 @@ class FlightRequestTest extends TestCase
         yield [
             'store'
         ];
+
         yield [
             'update'
         ];

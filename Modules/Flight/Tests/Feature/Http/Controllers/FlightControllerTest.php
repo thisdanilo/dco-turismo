@@ -130,8 +130,7 @@ class FlightControllerTest extends TestCase
             'qty_stops' => '1',
         ];
 
-
-        $response = $this->actingAs($this->user)->put(route('flight.update', $flight->id), $data);
+        $response = $this->actingAs($this->user)->put(route('flight.update', ['id' => $flight->id]), $data);
 
         $response->assertRedirect(route('flight.edit', $flight->id));
 

@@ -20,7 +20,6 @@ Route::group(
         'as' => 'plane.'
     ],
     function () {
-
         Route::get('/', [PlaneController::class, 'index'])
             ->name('index');
 

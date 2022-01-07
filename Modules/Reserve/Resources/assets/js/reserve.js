@@ -4,41 +4,42 @@ $(document).ready(function () {
     //-----------------------------------------------------
 
     var token = $("input[name='_token']").val(),
-        datatable_url = window.location.origin + "/datatable/traductionBR.json";
+        datatable_url = window.location.origin + "/datatable/traductionBR.json",
+        route_datatable = $("#route_datatable").val();
 
     //-----------------------------------------------------
     // Instance of plugins
     //-----------------------------------------------------
 
-    // DataTable Ajax
+    // Inicializa DataTable
     $("#ajax-datatable").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: $("#route_datatable").val(),
+            url: route_datatable,
             type: "POST",
             beforeSend: function (request) {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
         columns: [{
-                data: "date_reserved"
+                data: "date_reserved",
             },
             {
-                data: "status"
+                data: "status",
             },
             {
                 data: "user",
-                name: "user.name"
+                name: "user.name",
             },
             {
                 data: "flight",
-                name: "flight.date"
+                name: "flight.date",
             },
             {
                 data: "action",
                 orderable: false,
-                searchable: false
+                searchable: false,
             },
         ],
         language: {

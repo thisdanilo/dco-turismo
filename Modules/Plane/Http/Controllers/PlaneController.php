@@ -2,12 +2,11 @@
 
 namespace Modules\Plane\Http\Controllers;
 
-use Yajra\DataTables\DataTables;
+use Modules\Plane\Http\Requests;
 use Modules\Bland\Entities\Bland;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
 use Modules\Plane\Services\PlaneService;
-use Modules\Plane\Http\Requests;
 
 class PlaneController extends Controller
 {
@@ -51,7 +50,7 @@ class PlaneController extends Controller
 	{
 		$planes = $this->plane->with('bland');
 
-		return DataTables::of($planes)
+		return dataTables($planes)
 			->editColumn("class", function ($plane) {
 				return $plane->formatted_class;
 			})

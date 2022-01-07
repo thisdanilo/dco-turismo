@@ -112,7 +112,7 @@ class ReserveControllerTest extends TestCase
         ];
 
 
-        $response = $this->actingAs($this->user)->put(route('reserve.update', $reserve->id), $data);
+        $response = $this->actingAs($this->user)->put(route('reserve.update', ['id' => $reserve->id]), $data);
 
         $response->assertRedirect(route('reserve.edit', $reserve->id));
 

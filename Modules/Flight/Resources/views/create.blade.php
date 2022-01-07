@@ -156,11 +156,9 @@
                                     <div class="form-group">
                                         <label>Promoção:<span class="text-danger">*</span></label>
                                         <select name="is_promotion" class="form-control" style="width: 100%;" required>
-
                                             <option value="">Selecione</option>
                                             <option value="1">Sim</option>
                                             <option value="0">Não</option>
-
                                         </select>
                                     </div>
                                 </div>
@@ -194,9 +192,7 @@
                                         <textarea name="description" id="summernote" cols="50" rows="5" class="form-control"></textarea>
                                     </div>
                                 </div>
-
                                 <div class="card-footer"></div>
-
                             </div>
 
                         </div>

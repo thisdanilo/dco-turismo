@@ -88,7 +88,7 @@ class BlandControllerTest extends TestCase
             "name" => "Marca. 02"
         ];
 
-        $response = $this->actingAs($this->user)->put(route('bland.update', $bland->id), $data);
+        $response = $this->actingAs($this->user)->put(route('bland.update', ['id' => $bland->id]), $data);
 
         $response->assertRedirect(route('bland.edit', $bland->id));
 

@@ -6,6 +6,7 @@
 @endsection
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -16,6 +17,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -26,6 +28,7 @@
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
+
                         <h3>{{ $users }}</h3>
 
                         <p>Clientes</p>
@@ -40,6 +43,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
+
                         <h3>{{ $planes }}</h3>
 
                         <p>Aviões</p>
@@ -55,6 +59,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
+
                         <h3>{{ $airports }}</h3>
 
                         <p>Aeroportos</p>
@@ -69,6 +74,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
+
                         <h3>{{ $flights }}</h3>
 
                         <p>Voos</p>
@@ -84,6 +90,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
+                        
                         <h3>{{ $reserves }}</h3>
 
                         <p>Reservas</p>

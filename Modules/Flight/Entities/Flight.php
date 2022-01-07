@@ -206,7 +206,7 @@ class Flight extends Model
 	 */
 	public function reserves()
 	{
-		return $this->hasMany(Reserve::class)->where('status', '!=', Reserve::CANCELED)->withTrashed();
+		return $this->hasMany(Reserve::class)->where('status', '!=', Reserve::CANCELED);
 	}
 
 	/*

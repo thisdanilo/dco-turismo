@@ -3,10 +3,9 @@
 namespace Modules\User\Http\Controllers;
 
 use App\Models\User;
-use Yajra\DataTables\DataTables;
+use Modules\User\Http\Requests;
 use Illuminate\Routing\Controller;
 use Modules\User\Services\UserService;
-use Modules\User\Http\Requests;
 
 class UserController extends Controller
 {
@@ -50,7 +49,7 @@ class UserController extends Controller
 	{
 		$users = $this->user->query();
 
-		return DataTables::of($users)
+		return dataTables($users)
 			->addColumn('action', function ($user) {
 				return view('user::partials.action', [
 					'user' => $user

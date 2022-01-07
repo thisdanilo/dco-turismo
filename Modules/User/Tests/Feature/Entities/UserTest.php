@@ -10,10 +10,7 @@ class UserTest extends TestCase
 {
     public function test_user_has_reserves()
     {
-        $user = User::factory()->hasReserves(
-            Reserve::factory()->count(2)
-        )
-            ->create();
+        $user = User::factory()->hasReserves(2)->create();
 
         $user->load('reserves');
 

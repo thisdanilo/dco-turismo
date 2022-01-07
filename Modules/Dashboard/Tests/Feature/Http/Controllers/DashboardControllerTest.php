@@ -17,6 +17,4 @@ class DashboardControllerTest extends TestCase
 
         $response->assertSee('Home');
     }
-
-
 }

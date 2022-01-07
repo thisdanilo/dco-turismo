@@ -57,7 +57,7 @@ class Bland extends Model
 	 */
 	public function planes()
 	{
-		return $this->hasMany(Plane::class)->withTrashed();
+		return $this->hasMany(Plane::class);
 	}
 
 	/*

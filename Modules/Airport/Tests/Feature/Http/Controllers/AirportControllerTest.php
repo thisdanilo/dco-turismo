@@ -105,7 +105,7 @@ class AirportControllerTest extends TestCase
             'zip_code' => '99999-999'
         ];
 
-        $response = $this->actingAs($this->user)->put(route('airport.update', $airport->id), $data);
+        $response = $this->actingAs($this->user)->put(route('airport.update', ['id' => $airport->id]), $data);
 
         $response->assertRedirect(route('airport.edit', $airport->id));
 

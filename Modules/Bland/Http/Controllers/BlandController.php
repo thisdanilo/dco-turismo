@@ -2,11 +2,10 @@
 
 namespace Modules\Bland\Http\Controllers;
 
-use Yajra\DataTables\DataTables;
+use Modules\Bland\Http\Requests;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Routing\Controller;
 use Modules\Bland\Services\BlandService;
-use Modules\Bland\Http\Requests;
 
 class BlandController extends Controller
 {
@@ -50,7 +49,7 @@ class BlandController extends Controller
 	{
 		$blands = $this->bland->query();
 
-		return DataTables::of($blands)
+		return datatables($blands)
 			->addColumn('action', function ($bland) {
 				return view('bland::partials.action', [
 					'bland' => $bland

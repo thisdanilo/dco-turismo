@@ -20,7 +20,6 @@ Route::group(
         'as' => 'bland.'
     ],
     function () {
-
         Route::get('/', [BlandController::class, 'index'])
             ->name('index');
 

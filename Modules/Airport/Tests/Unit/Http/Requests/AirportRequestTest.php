@@ -49,6 +49,7 @@ class AirportRequestTest extends TestCase
         yield [
             'store'
         ];
+
         yield [
             'update'
         ];

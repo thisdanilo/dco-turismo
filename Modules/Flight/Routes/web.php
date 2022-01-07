@@ -20,7 +20,6 @@ Route::group(
         'as' => 'flight.'
     ],
     function () {
-
         Route::get('/', [FlightController::class, 'index'])
             ->name('index');
 

@@ -55,7 +55,7 @@ class UserControllerTest extends TestCase
             "password" => bcrypt('123456789')
         ];
 
-        $response = $this->actingAs($this->user)->put(route('user.update', $this->user->id), $data);
+        $response = $this->actingAs($this->user)->put(route('user.update', ['id' => $this->user->id]), $data);
 
         $response->assertRedirect(route('user.edit', $this->user->id));
 

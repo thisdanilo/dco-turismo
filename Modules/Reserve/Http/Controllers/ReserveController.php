@@ -3,12 +3,11 @@
 namespace Modules\Reserve\Http\Controllers;
 
 use App\Models\User;
-use Yajra\DataTables\DataTables;
 use Illuminate\Routing\Controller;
+use Modules\Reserve\Http\Requests;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
 use Modules\Reserve\Services\ReserveService;
-use Modules\Reserve\Http\Requests;
 
 class ReserveController extends Controller
 {
@@ -52,7 +51,7 @@ class ReserveController extends Controller
 	{
 		$reserves = $this->reserve->with(['user', 'flight']);
 
-		return DataTables::of($reserves)
+		return dataTables($reserves)
 			->editColumn("date_reserved", function ($reserve) {
 				return $reserve->formatted_date_reserved;
 			})

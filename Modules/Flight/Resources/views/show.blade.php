@@ -132,7 +132,6 @@
                                 </div>
                             </div>
 
-
                         </div>
                     </div>
                     <div class="card-footer"></div>
@@ -153,11 +152,8 @@
                                     <textarea name="description" id="summernote-disable" cols="50" rows="5" class="form-control">{!! $flight->description !!}</textarea>
                                 </div>
                             </div>
-
                             <div class="card-footer"></div>
-
                         </div>
-
                     </div>
                 </div>
 

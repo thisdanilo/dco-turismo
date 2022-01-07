@@ -51,6 +51,7 @@ class ReserveRequestTest extends TestCase
         yield [
             'store'
         ];
+
         yield [
             'update'
         ];

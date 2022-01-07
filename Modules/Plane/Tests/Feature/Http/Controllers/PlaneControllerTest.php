@@ -97,7 +97,7 @@ class PlaneControllerTest extends TestCase
             'class' => Plane::ECONOMIC
         ];
 
-        $response = $this->actingAs($this->user)->put(route('plane.update', $plane->id), $data);
+        $response = $this->actingAs($this->user)->put(route('plane.update', ['id' => $plane->id]), $data);
 
         $response->assertRedirect(route('plane.edit', $plane->id));
 

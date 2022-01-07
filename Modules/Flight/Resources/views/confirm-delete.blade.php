@@ -22,7 +22,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-
                 <form action="{{ route('flight.delete', $flight->id) }}" method="post">
 
                     {{-- Elementos Ocultos --}}
@@ -38,7 +37,6 @@
 
                         <div class="card-body">
                             <div class="row">
-
 
                                 {{-- Avião --}}
                                 <div class="col-md-3">

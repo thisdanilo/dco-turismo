@@ -2,13 +2,12 @@
 
 namespace Modules\Flight\Http\Controllers;
 
-use Yajra\DataTables\DataTables;
+use Modules\Flight\Http\Requests;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
 use Modules\Flight\Entities\Flight;
 use Modules\Airport\Entities\Airport;
 use Modules\Flight\Services\FlightService;
-use Modules\Flight\Http\Requests;
 
 class FlightController extends Controller
 {
@@ -52,7 +51,7 @@ class FlightController extends Controller
 	{
 		$flights = $this->flight->with(['plane', 'origin', 'destination']);
 
-		return DataTables::of($flights)
+		return dataTables($flights)
 			->editColumn("date", function ($flight) {
 				return $flight->formatted_date;
 			})
@@ -153,7 +152,12 @@ class FlightController extends Controller
 			->where('id', '!=', $flight->destination->id ?? '')
 			->get();
 
-		return view('flight::edit', compact('flight', 'planes', 'origins', 'destinations'));
+		return view('flight::edit', compact(
+            'flight',
+            'planes',
+            'origins',
+            'destinations'
+        ));
 	}
 
 	/**

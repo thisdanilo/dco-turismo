@@ -44,6 +44,7 @@ class BlandRequestTest extends TestCase
         yield [
             'store'
         ];
+
         yield [
             'update'
         ];

@@ -20,7 +20,6 @@ Route::group(
         'as' => 'reserve.'
     ],
     function () {
-
         Route::get('/', [ReserveController::class, 'index'])
             ->name('index');
 
