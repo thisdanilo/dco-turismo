@@ -10,10 +10,13 @@ $(document).ready(function () {
     // Instance of plugins
     //-----------------------------------------------------
 
+    //Inicializa o select2
     $(".select2").select2();
 
+    // Mascara CEP
     $(".mask-zipcode").mask("00000-000", { reverse: true });
 
+    // DataTable Ajax
     $("#ajax-datatable").DataTable({
         processing: true,
         serverSide: true,
@@ -56,7 +59,9 @@ $(document).ready(function () {
     // Defining a function
     //-----------------------------------------------------
 
-    /* Pesquisa por cep */
+    /*
+    /* Pesquisa por CEP
+     */
     function searchZipCode() {
         var zipcode = $("#cep").val().replace("-", "");
 

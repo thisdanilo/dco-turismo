@@ -3,6 +3,7 @@
 @section('page_title', 'Aeroportos')
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -13,6 +14,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -20,7 +22,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-
                 <form action="{{ route('airport.delete', $airport->id) }}" method="post">
 
                     {{-- Elementos Ocultos --}}
@@ -55,9 +56,7 @@
 
                             </div>
                         </div>
-
                         <div class="card-footer"></div>
-
                     </div>
 
                     {{-- Botão --}}
@@ -70,7 +69,6 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

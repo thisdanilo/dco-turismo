@@ -9,9 +9,11 @@ use Modules\Airport\Http\Controllers\AirportController;
 class AirportRequestTest extends TestCase
 {
     protected $form_request;
+
     protected function setup(): void
     {
         parent::setUp();
+
         $this->form_request = new AirportRequest();
     }
     public function test_it_has_rules()
@@ -40,6 +42,7 @@ class AirportRequestTest extends TestCase
     {
         $this->assertActionUsesFormRequest(AirportController::class, $method, AirportRequest::class);
     }
+
     public function methodsDataProvider()
     {
         yield [

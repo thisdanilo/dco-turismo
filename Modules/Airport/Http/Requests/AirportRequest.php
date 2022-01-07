@@ -15,12 +15,12 @@ class AirportRequest extends FormRequest
 	{
 		return [
 			'city_id' => 'required',
-			'name' => 'required', 'string',
-			'latitude' => 'required', 'string',
-			'longitude' => 'required', 'string',
-			'address' => 'required', 'string',
-			'number' => 'required', 'string',
-			'zip_code' => 'required', 'string'
+			'name' => 'required|string',
+			'latitude' => 'required|string',
+			'longitude' => 'required|string',
+			'address' => 'required|string',
+			'number' => 'required|string',
+			'zip_code' => 'required|string'
 		];
 	}
 

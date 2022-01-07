@@ -51,7 +51,7 @@ class Bland extends Model
 	*/
 
 	/**
-	 * Obtêm o avião
+	 * Obtêm os aviões
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */

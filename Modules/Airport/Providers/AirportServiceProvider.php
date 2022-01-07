@@ -3,7 +3,6 @@
 namespace Modules\Airport\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class AirportServiceProvider extends ServiceProvider
 {

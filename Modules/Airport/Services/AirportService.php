@@ -7,7 +7,7 @@ use Modules\Airport\Entities\Airport;
 
 class AirportService
 {
-	/*--------------------------------------------------------------------------
+    /*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -16,50 +16,50 @@ class AirportService
 	|
 	*/
 
-	/**
-	 * Cadastra ou atualiza o registro
-	 *
-	 * @param array $request
-	 * @param int|null $id
-	 *
-	 * @return void
-	 */
-	public function updateOrCreate($request, $id = null)
-	{
-		DB::beginTransaction();
+    /**
+     * Cadastra ou atualiza o registro
+     *
+     * @param array $request
+     * @param int|null $id
+     *
+     * @return void
+     */
+    public function updateOrCreate($request, $id = null)
+    {
+        DB::beginTransaction();
 
-		try {
-			$airport = Airport::updateOrCreate([
-				'id' => $id
-			], $request);
+        try {
+            Airport::updateOrCreate([
+                'id' => $id
+            ], $request);
 
-			DB::commit();
-		} catch (\Exception $e) {
-			DB::rollBack();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-			abort(500);
-		}
-	}
+            abort(500);
+        }
+    }
 
-	/**
-	 * Exclui e retorna a tela inicial
-	 *
-	 * @param \Modules\Airport\Entities\Airport $airport
-	 *
-	 * @return void
-	 */
-	public function removeData($airport)
-	{
-		DB::beginTransaction();
+    /**
+     * Exclui e retorna a tela inicial
+     *
+     * @param \Modules\Airport\Entities\Airport $airport
+     *
+     * @return void
+     */
+    public function removeData($airport)
+    {
+        DB::beginTransaction();
 
-		try {
-			$airport->delete();
+        try {
+            $airport->delete();
 
-			DB::commit();
-		} catch (\Exception $e) {
-			DB::rollBack();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-			abort(500);
-		}
-	}
+            abort(500);
+        }
+    }
 }

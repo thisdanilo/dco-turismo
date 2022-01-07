@@ -3,7 +3,6 @@
 namespace Modules\Airport\Http\Controllers;
 
 use Modules\City\Entities\City;
-use Yajra\DataTables\DataTables;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Routing\Controller;
 use Modules\Airport\Http\Requests;
@@ -52,7 +51,7 @@ class AirportController extends Controller
 	{
 		$airports = $this->airport->with('city');
 
-		return DataTables::of($airports)
+		return datatables($airports)
 			->editColumn("class", function ($airport) {
 				return $airport->formatted_class;
 			})
@@ -68,7 +67,7 @@ class AirportController extends Controller
 			->rawColumns([
 				'action'
 			])
-			->make(true);
+			->make();
 	}
 
 	/**

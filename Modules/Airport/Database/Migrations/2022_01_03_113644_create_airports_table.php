@@ -16,6 +16,7 @@ class CreateAirportsTable extends Migration
         Schema::create('airports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->string('name');
             $table->string('latitude');
             $table->string('longitude');
@@ -25,8 +26,6 @@ class CreateAirportsTable extends Migration
             $table->string('complement')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 
