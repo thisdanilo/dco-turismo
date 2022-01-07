@@ -6,7 +6,7 @@ use Yajra\DataTables\DataTables;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Routing\Controller;
 use Modules\Bland\Services\BlandService;
-use Modules\Bland\Http\Requests\BlandRequest;
+use Modules\Bland\Http\Requests;
 
 class BlandController extends Controller
 {
@@ -76,10 +76,10 @@ class BlandController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param  \Modules\Bland\Http\Requests\BlandRequest $request
+	 * @param \Requests\BlandRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(BlandRequest $request)
+	public function store(Requests\BlandRequest $request)
 	{
 		$this->bland_service->updateOrCreate($request->all());
 
@@ -117,11 +117,11 @@ class BlandController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param  \Modules\Bland\Http\Requests\BlandRequest $request
+	 * @param \Requests\BlandRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update(BlandRequest $request, $id)
+	public function update(Requests\BlandRequest $request, $id)
 	{
 		$bland = $this->bland->findOrFail($id);
 

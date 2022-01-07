@@ -5,11 +5,10 @@ namespace Modules\Airport\Tests\Feature\Entities;
 use Tests\TestCase;
 use Modules\City\Entities\City;
 use Modules\Airport\Entities\Airport;
-use Modules\Flight\Entities\Flight;
 
 class AirportTest extends TestCase
 {
-    public function test_a_airport_belongs_to_city()
+    public function test_it_airport_has_city()
     {
         $airport = Airport::factory()->hasCity()->create();
 

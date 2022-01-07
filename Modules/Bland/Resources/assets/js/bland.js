@@ -10,6 +10,7 @@ $(document).ready(function () {
     // Instance of plugins
     //-----------------------------------------------------
 
+    // DataTable Ajax
     $("#ajax-datatable").DataTable({
         processing: true,
         serverSide: true,
@@ -20,13 +21,14 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [{
-                data: "name"
+        columns: [
+            {
+                data: "name",
             },
             {
                 data: "action",
                 orderable: false,
-                searchable: false
+                searchable: false,
             },
         ],
         language: {

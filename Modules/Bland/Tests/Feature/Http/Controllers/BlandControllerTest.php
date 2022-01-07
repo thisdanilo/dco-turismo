@@ -14,14 +14,12 @@ class BlandControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = new User();
+        $this->user = User::factory()->create();
     }
 
     public function test_route_index()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('bland.index'));
+        $response = $this->actingAs($this->user)->get(route('bland.index'));
 
         $response->assertSuccessful();
 
@@ -30,9 +28,7 @@ class BlandControllerTest extends TestCase
 
     public function test_route_create()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('bland.create'));
+        $response = $this->actingAs($this->user)->get(route('bland.create'));
 
         $response->assertSuccessful();
 
@@ -41,13 +37,11 @@ class BlandControllerTest extends TestCase
 
     public function test_route_store()
     {
-        $user = $this->user->factory()->create();
-
         $data = [
             "name" => "Marca 01"
         ];
 
-        $response = $this->actingAs($user)->post(route('bland.store'), $data);
+        $response = $this->actingAs($this->user)->post(route('bland.store'), $data);
 
         $response->assertRedirect(route('bland.index'));
 
@@ -62,11 +56,9 @@ class BlandControllerTest extends TestCase
 
     public function test_route_show()
     {
-        $user = $this->user->factory()->create();
-
         $bland = Bland::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('bland.show', [
+        $response = $this->actingAs($this->user)->get(route('bland.show', [
             'id' => $bland->id
         ]));
 
@@ -77,11 +69,9 @@ class BlandControllerTest extends TestCase
 
     public function test_route_edit()
     {
-        $user = $this->user->factory()->create();
+        $bland = Bland::factory()->create();
 
-        $bland = bland::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('bland.edit', [
+        $response = $this->actingAs($this->user)->get(route('bland.edit', [
             'id' => $bland->id
         ]));
 
@@ -92,15 +82,13 @@ class BlandControllerTest extends TestCase
 
     public function test_route_update()
     {
-        $user = $this->user->factory()->create();
-
-        $bland = bland::factory()->create();
+        $bland = Bland::factory()->create();
 
         $data = [
             "name" => "Marca. 02"
         ];
 
-        $response = $this->actingAs($user)->put(route('bland.update', $bland->id), $data);
+        $response = $this->actingAs($this->user)->put(route('bland.update', $bland->id), $data);
 
         $response->assertRedirect(route('bland.edit', $bland->id));
 
@@ -113,11 +101,9 @@ class BlandControllerTest extends TestCase
 
     public function test_route_confirm_delete()
     {
-        $user = $this->user->factory()->create();
+        $bland = Bland::factory()->create();
 
-        $bland = bland::factory()->create();
-
-        $response = $this->actingAs($user)->get(route('bland.confirm_delete', [
+        $response = $this->actingAs($this->user)->get(route('bland.confirm_delete', [
             'id' => $bland->id
         ]));
 
@@ -128,11 +114,9 @@ class BlandControllerTest extends TestCase
 
     public function test_route_delete()
     {
-        $user = $this->user->factory()->create();
+        $bland = Bland::factory()->create();
 
-        $bland = bland::factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('bland.delete', [
+        $response = $this->actingAs($this->user)->delete(route('bland.delete', [
             'id' =>  $bland->id
         ]));
 

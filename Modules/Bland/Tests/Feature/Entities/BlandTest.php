@@ -10,10 +10,7 @@ class BlandTest extends TestCase
 {
     public function test_bland_has_planes()
     {
-        $bland = Bland::factory()->hasPlanes(
-            Plane::factory()->count(2)
-        )
-            ->create();
+        $bland = Bland::factory()->hasPlanes(2)->create();
 
         $bland->load('planes');
 
