@@ -6,13 +6,14 @@ use Modules\City\Entities\City;
 use Yajra\DataTables\DataTables;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Routing\Controller;
+use Modules\Airport\Http\Requests;
 use Modules\Airport\Entities\Airport;
 use Modules\Airport\Services\AirportService;
-use Modules\Airport\Http\Requests\AirportRequest;
 
 class AirportController extends Controller
 {
     protected $airport;
+
     protected $airport_service;
 
     /**
@@ -58,12 +59,12 @@ class AirportController extends Controller
             ->editColumn("city", function ($airport) {
                 return $airport->city->name;
             })
-            ->addColumn(
-                "action",
-                function ($airport) {
-                    return $airport->actionView();
-                }
-            )
+            ->addColumn('action', function ($airport) {
+                return view('airport::partials.action', [
+                    'airport' => $airport
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])
@@ -85,10 +86,10 @@ class AirportController extends Controller
     /**
      * Cadastra e retorna para a tela inicial
      *
-     * @param  \Modules\Airport\Http\Requests\AirportRequest $request
+     * @param  Requests\AirportRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AirportRequest $request)
+    public function store(Requests\AirportRequest $request)
     {
         $this->airport_service->updateOrCreate($request->all());
 
@@ -130,11 +131,11 @@ class AirportController extends Controller
     /**
      * Atualiza e retorna para a tela de edição
      *
-     * @param  \Modules\Airport\Http\Requests\AirportRequest $request
+     * @param  Requests\AirportRequest $request
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AirportRequest $request, $id)
+    public function update(Requests\AirportRequest $request, $id)
     {
         $airport = $this->airport->findOrFail($id);
 

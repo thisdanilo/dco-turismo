@@ -17,12 +17,12 @@ class UserServiceTest extends TestCase
         $this->user_service = new UserService();
     }
 
-    /* public function test_route_update_or_create_exception()
+    public function test_route_update_exception()
     {
         $this->expectException(\Exception::class);
 
-        $this->user_service->updateOrCreate([]);
-    } */
+        $this->user_service->update([]);
+    }
 
     public function test_route_delete_exception()
     {

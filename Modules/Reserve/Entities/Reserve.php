@@ -2,9 +2,9 @@
 
 namespace Modules\Reserve\Entities;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Traits\Presentable;
-use Carbon\Carbon;
 use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -64,37 +64,6 @@ class Reserve extends Model
 
     /*
 	|--------------------------------------------------------------------------
-	| Relationship
-	|--------------------------------------------------------------------------
-	|
-	| Definição dos métodos das entidades relacionadas.
-	| Estes métodos são responsáveis pelas relações e permitem acessar
-	| os atributos Eloquent obtidas das mesmas.
-	|
-	*/
-
-    /**
-     * Obtêm a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Obtêm os voos
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function flight()
-    {
-        return $this->belongsTo(Flight::class)->withTrashed();
-    }
-
-    /*
-	|--------------------------------------------------------------------------
 	| Accessors
 	|--------------------------------------------------------------------------
 	|
@@ -110,15 +79,14 @@ class Reserve extends Model
      */
     public function getFormattedStatusAttribute()
     {
-        if ($this->status == self::RESERVED) {
-            return 'Reservado';
-        } elseif ($this->status == self::CANCELED) {
-            return 'Cancelado';
-        } elseif ($this->status == self::PAID) {
-            return 'Pago';
-        } elseif ($this->status == self::CONCLUDED) {
-            return 'Concluído';
-        }
+        $data = [
+            self::RESERVED => 'Reservado',
+            self::CANCELED => 'Cancelado',
+            self::PAID => 'Pago',
+            self::CONCLUDED => 'Concluído'
+        ];
+
+        return $data[$this->status];
     }
 
     /**
@@ -129,6 +97,37 @@ class Reserve extends Model
     public function getFormattedDateReservedAttribute()
     {
         return Carbon::parse($this->date_reserved)->format('d/m/Y');
+    }
+
+    /*
+	|--------------------------------------------------------------------------
+	| Relationship
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos das entidades relacionadas.
+	| Estes métodos são responsáveis pelas relações e permitem acessar
+	| os atributos Eloquent obtidas das mesmas.
+	|
+	*/
+
+    /**
+     * Obtém a marca
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Obtém os voos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class)->withTrashed();
     }
 
     /*
@@ -155,7 +154,7 @@ class Reserve extends Model
      * Faz uma reserva
      *
      * @param int $flightId
-     * @return string
+     * @return boolean
      */
     public function newReserve($flightId)
     {

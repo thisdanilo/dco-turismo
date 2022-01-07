@@ -9,11 +9,11 @@ use Modules\Flight\Entities\Flight;
 use Modules\Airport\Entities\Airport;
 use Modules\Flight\Services\FlightService;
 use Modules\Flight\Http\Requests\FlightRequest;
-use Modules\Site\Helpers\SiteHelper;
 
 class FlightController extends Controller
 {
     protected $flight;
+
     protected $flight_service;
 
     /**

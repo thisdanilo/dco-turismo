@@ -20,35 +20,31 @@ Route::group(
         'as' => 'airport.'
     ],
     function () {
-
         Route::get('/', [AirportController::class, 'index'])
             ->name('index');
 
         Route::post('/datatable', [AirportController::class, 'dataTable'])
-        ->name('datatable');
+            ->name('datatable');
 
         Route::get('/{id}/ver', [AirportController::class, 'show'])
             ->name('show');
 
         Route::get('/cadastrar', [AirportController::class, 'create'])
-        ->name('create');
+            ->name('create');
 
         Route::post('/cadastrar', [AirportController::class, 'store'])
-        ->name('store');
+            ->name('store');
 
         Route::get('/{id}/editar', [AirportController::class, 'edit'])
-        ->name('edit');
+            ->name('edit');
 
-        Route::put('/{id}/editar', [
-            AirportController::class, 'update'
-        ])
-        ->name('update');
+        Route::put('/{id}/editar', [AirportController::class, 'update'])
+            ->name('update');
 
         Route::get('/{id}/confirmar-exclusao', [AirportController::class, 'confirmDelete'])
             ->name('confirm_delete');
 
         Route::delete('/{id}/excluir', [AirportController::class, 'delete'])
-        ->name('delete');
-
+            ->name('delete');
     }
 );

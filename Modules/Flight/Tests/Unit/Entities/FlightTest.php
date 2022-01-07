@@ -16,12 +16,12 @@ class FlightTest extends TestCase
         $this->assertEquals('10/01/2022', $flight->formatted_date);
     }
 
-    /* public function test_it_formats_time_duration_attribute()
+    public function test_it_formats_time_duration_attribute()
     {
         $flight = new Flight();
 
-        $flight->datetime_duration = '02:00:00';
+        $flight->datetime_duration = now()->format('H:i');
 
-        $this->assertEquals('14:00', $flight->formatted_time_duration);
-    } */
+        $this->assertEquals(now()->format('H:i'), $flight->formatted_time_duration);
+    }
 }

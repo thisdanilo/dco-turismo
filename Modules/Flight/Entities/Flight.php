@@ -78,57 +78,6 @@ class Flight extends Model
 
     /*
 	|--------------------------------------------------------------------------
-	| Relationship
-	|--------------------------------------------------------------------------
-	|
-	| Definição dos métodos das entidades relacionadas.
-	| Estes métodos são responsáveis pelas relações e permitem acessar
-	| os atributos Eloquent obtidas das mesmas.
-	|
-	*/
-
-    /**
-     * Obtém o avião
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function plane()
-    {
-        return $this->belongsTo(Plane::class)->withTrashed();
-    }
-
-    /**
-     * Obtém a origem
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function origin()
-    {
-        return $this->belongsTo(Airport::class, 'airport_origin_id')->withTrashed();
-    }
-
-    /**
-     * Obtém o destino
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function destination()
-    {
-        return $this->belongsTo(Airport::class, 'airport_destination_id')->withTrashed();
-    }
-
-    /**
-     * Obtêm as reservas
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function reserves()
-    {
-        return $this->hasMany(Reserve::class)->where('status', '<>', Reserve::CANCELED)->withTrashed();
-    }
-
-    /*
-	|--------------------------------------------------------------------------
 	| Accessors
 	|--------------------------------------------------------------------------
 	|
@@ -187,16 +136,6 @@ class Flight extends Model
         return Carbon::parse($this->time_duration)->format('H:i');
     }
 
-    // /**
-    //  * Formata o atributo
-    //  *
-    //  * @return string
-    //  */
-    // public function getFormattedTimeDurationAttribute()
-    // {
-    //     return $this->time_duration->format('H:i:s');
-    // }
-
     /*
 	|--------------------------------------------------------------------------
 	| Mutators
@@ -231,6 +170,57 @@ class Flight extends Model
 
     /*
 	|--------------------------------------------------------------------------
+	| Relationship
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos das entidades relacionadas.
+	| Estes métodos são responsáveis pelas relações e permitem acessar
+	| os atributos Eloquent obtidas das mesmas.
+	|
+	*/
+
+    /**
+     * Obtém o avião
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function plane()
+    {
+        return $this->belongsTo(Plane::class)->withTrashed();
+    }
+
+    /**
+     * Obtém a origem
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function origin()
+    {
+        return $this->belongsTo(Airport::class, 'airport_origin_id', 'id')->withTrashed();
+    }
+
+    /**
+     * Obtém o destino
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function destination()
+    {
+        return $this->belongsTo(Airport::class, 'airport_destination_id', 'id')->withTrashed();
+    }
+
+    /**
+     * Obtêm as reservas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class)->where('status', '!=', Reserve::CANCELED)->withTrashed();
+    }
+
+    /*
+	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
 	|
@@ -250,9 +240,12 @@ class Flight extends Model
     }
 
     /**
-     * Filtra o voo.
+     * Obtêm os voos
      *
-     * @return string
+     * @param int $origin
+     * @param int $destination
+     * @param string $date
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function searchFlights($origin, $destination, $date)
     {
@@ -263,9 +256,9 @@ class Flight extends Model
     }
 
     /**
-     * Filtra a promoção.
+     * Promoção
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function promotions()
     {

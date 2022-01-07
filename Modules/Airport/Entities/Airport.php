@@ -77,7 +77,6 @@ class Airport extends Model
         return $this->belongsTo(City::class);
     }
 
-
     /*
 	|--------------------------------------------------------------------------
 	| Defining a Function

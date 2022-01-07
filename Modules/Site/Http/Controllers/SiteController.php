@@ -23,7 +23,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Tela home
+     * Tela exibição dados
      *
      * @return \Illuminate\View\View
      */
@@ -52,7 +52,7 @@ class SiteController extends Controller
      *
      * @param Request $request
      * @param Flight $flight
-     * @return array
+     * @return \Illuminate\View\View
      */
     public function searchFlights(Request $request, Flight $flight)
     {
@@ -73,7 +73,7 @@ class SiteController extends Controller
     /**
      * Exibe os dados
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function flightDetails($id)
@@ -121,14 +121,13 @@ class SiteController extends Controller
     /**
      * Exibe os dados
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\View\View
      */
     public function purchaseDetails($id)
     {
         $reserve = Reserve::where('user_id', auth()->user()->id)
             ->where('id', $id)
-            ->get()
             ->first();
 
         $purchase = Flight::with(['origin', 'destination'])->find($reserve->flight_id);

@@ -4,7 +4,6 @@ namespace Modules\Plane\Entities;
 
 use App\Traits\Presentable;
 use Modules\Bland\Entities\Bland;
-use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Plane\Presenter\PlanePresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -58,27 +57,6 @@ class Plane extends Model
 
     /*
 	|--------------------------------------------------------------------------
-	| Relationship
-	|--------------------------------------------------------------------------
-	|
-	| Definição dos métodos das entidades relacionadas.
-	| Estes métodos são responsáveis pelas relações e permitem acessar
-	| os atributos Eloquent obtidas das mesmas.
-	|
-	*/
-
-    /**
-     * Obtêm a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function bland()
-    {
-        return $this->belongsTo(Bland::class)->withTrashed();
-    }
-
-    /*
-	|--------------------------------------------------------------------------
 	| Accessors
 	|--------------------------------------------------------------------------
 	|
@@ -95,6 +73,27 @@ class Plane extends Model
     public function getFormattedClassAttribute()
     {
         return $this->class == 'EC' ? 'Econômico' : 'Luxo';
+    }
+
+    /*
+	|--------------------------------------------------------------------------
+	| Relationship
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos das entidades relacionadas.
+	| Estes métodos são responsáveis pelas relações e permitem acessar
+	| os atributos Eloquent obtidas das mesmas.
+	|
+	*/
+
+    /**
+     * Obtém a marca
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bland()
+    {
+        return $this->belongsTo(Bland::class)->withTrashed();
     }
 
     /*

@@ -26,4 +26,20 @@ class ReserveTest extends TestCase
 
         $this->assertInstanceOf(Flight::class, $reserve->flight);
     }
+
+    public function test_it_new_reserve()
+    {
+        $reserves = Reserve::factory()->hasUser()->hasFlight()->create([
+            'date_reserved' => now()->format('d/m/Y'),
+            'status' => Reserve::RESERVED
+        ]);
+
+        $reserves->load(['user', 'flight']);
+
+        $this->actingAs($reserves->user);
+
+        $new_reserve = $reserves->newReserve($reserves->flight->id);
+
+        $this->assertTrue($new_reserve);
+    }
 }
