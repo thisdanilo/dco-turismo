@@ -3,6 +3,7 @@
 @section('page_title', 'Voos')
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -13,6 +14,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -72,9 +74,7 @@
 
                             </div>
                         </div>
-
                         <div class="card-footer"></div>
-
                     </div>
 
                     {{-- Botão --}}

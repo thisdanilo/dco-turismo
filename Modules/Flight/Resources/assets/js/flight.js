@@ -10,15 +10,19 @@ $(document).ready(function () {
     // Instance of plugins
     //-----------------------------------------------------
 
+    // Mascara dinheiro
     $(".money").mask("0.000.000.000,00", {
         reverse: true,
         placeholder: "R$ 0,00",
     });
 
+    // Inicializa o summernote
     $("#summernote").summernote();
 
+    // Desativa o summernote
     $("#summernote-disable").summernote("disable");
 
+    // DataTable Ajax
     $("#ajax-datatable").DataTable({
         processing: true,
         serverSide: true,
@@ -29,31 +33,32 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [{
-                data: "date"
+        columns: [
+            {
+                data: "date",
             },
             {
-                data: "time_duration"
+                data: "time_duration",
             },
             {
-                data: "price"
+                data: "price",
             },
             {
                 data: "plane",
-                name: "plane.bland.name"
+                name: "plane.bland.name",
             },
             {
                 data: "origin",
-                name: "plane.origin.name"
+                name: "plane.origin.name",
             },
             {
                 data: "destination",
-                name: "plane.destination.name"
+                name: "plane.destination.name",
             },
             {
                 data: "action",
                 orderable: false,
-                searchable: false
+                searchable: false,
             },
         ],
         language: {

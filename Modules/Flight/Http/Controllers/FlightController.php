@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Flight\Entities\Flight;
 use Modules\Airport\Entities\Airport;
 use Modules\Flight\Services\FlightService;
-use Modules\Flight\Http\Requests\FlightRequest;
+use Modules\Flight\Http\Requests;
 
 class FlightController extends Controller
 {
@@ -108,10 +108,10 @@ class FlightController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param  \Modules\Flight\Http\Requests\FlightRequest $request
+	 * @param \Requests\FlightRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(FlightRequest $request)
+	public function store(Requests\FlightRequest $request)
 	{
 		$this->flight_service->updateOrCreate($request->all());
 
@@ -159,11 +159,11 @@ class FlightController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param  \Modules\Flight\Http\Requests\FlightRequest $request
+	 * @param \Requests\FlightRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update(FlightRequest $request, $id)
+	public function update(Requests\FlightRequest $request, $id)
 	{
 		$flight = $this->flight->findOrFail($id);
 

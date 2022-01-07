@@ -16,14 +16,12 @@ class FlightControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = new User();
+        $this->user = User::factory()->create();
     }
 
     public function test_route_index()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('flight.index'));
+        $response = $this->actingAs($this->user)->get(route('flight.index'));
 
         $response->assertSuccessful();
 
@@ -32,9 +30,7 @@ class FlightControllerTest extends TestCase
 
     public function test_route_create()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('flight.create'));
+        $response = $this->actingAs($this->user)->get(route('flight.create'));
 
         $response->assertSuccessful();
 
@@ -43,8 +39,6 @@ class FlightControllerTest extends TestCase
 
     public function test_route_store()
     {
-        $user = $this->user->factory()->create();
-
         $plane = Plane::factory()->create();
 
         $airport = Airport::factory()->create();
@@ -64,7 +58,7 @@ class FlightControllerTest extends TestCase
             'qty_stops' => '1',
         ];
 
-        $response = $this->actingAs($user)->post(route('flight.store'), $data);
+        $response = $this->actingAs($this->user)->post(route('flight.store'), $data);
 
         $response->assertRedirect(route('flight.index'));
 
@@ -79,8 +73,6 @@ class FlightControllerTest extends TestCase
 
     public function test_route_show()
     {
-        $user = $this->user->factory()->create();
-
         $flight = Flight::factory()->hasOrigin()->hasDestination()->create();
 
         $flight->load([
@@ -88,7 +80,7 @@ class FlightControllerTest extends TestCase
             'destination'
         ]);
 
-        $response = $this->actingAs($user)->get(route('flight.show', [
+        $response = $this->actingAs($this->user)->get(route('flight.show', [
             'id' => $flight->id
         ]));
 
@@ -99,11 +91,9 @@ class FlightControllerTest extends TestCase
 
     public function test_route_edit()
     {
-        $user = $this->user->factory()->create();
-
         $flight = Flight::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('flight.edit', [
+        $response = $this->actingAs($this->user)->get(route('flight.edit', [
             'id' => $flight->id
         ]));
 
@@ -114,8 +104,6 @@ class FlightControllerTest extends TestCase
 
     public function test_route_update()
     {
-        $user = $this->user->factory()->create();
-
         $flight = Flight::factory()->hasOrigin()->hasDestination()->create();
 
         $plane = Plane::factory()->create();
@@ -143,7 +131,7 @@ class FlightControllerTest extends TestCase
         ];
 
 
-        $response = $this->actingAs($user)->put(route('flight.update', $flight->id), $data);
+        $response = $this->actingAs($this->user)->put(route('flight.update', $flight->id), $data);
 
         $response->assertRedirect(route('flight.edit', $flight->id));
 
@@ -156,8 +144,6 @@ class FlightControllerTest extends TestCase
 
     public function test_route_confirm_delete()
     {
-        $user = $this->user->factory()->create();
-
         $flight = Flight::factory()->hasOrigin()->hasDestination()->create();
 
         $flight->load([
@@ -165,7 +151,7 @@ class FlightControllerTest extends TestCase
             'destination'
         ]);
 
-        $response = $this->actingAs($user)->get(route('flight.confirm_delete', [
+        $response = $this->actingAs($this->user)->get(route('flight.confirm_delete', [
             'id' => $flight->id
         ]));
 
@@ -176,11 +162,9 @@ class FlightControllerTest extends TestCase
 
     public function test_route_delete()
     {
-        $user = $this->user->factory()->create();
-
         $flight = Flight::factory()->create();
 
-        $response = $this->actingAs($user)->delete(route('flight.delete', [
+        $response = $this->actingAs($this->user)->delete(route('flight.delete', [
             'id' =>  $flight->id
         ]));
 

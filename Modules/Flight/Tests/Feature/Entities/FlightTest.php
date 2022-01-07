@@ -8,7 +8,7 @@ use Modules\Airport\Entities\Airport;
 
 class FlightTest extends TestCase
 {
-    public function test_a_plane_belongs_to_origin()
+    public function test_a_plane_has_origin()
     {
         $flight = Flight::factory()->hasOrigin()->create();
 
@@ -17,7 +17,7 @@ class FlightTest extends TestCase
         $this->assertInstanceOf(Airport::class, $flight->origin);
     }
 
-    public function test_a_plane_belongs_to_destination()
+    public function test_a_plane_has_destination()
     {
         $flight = Flight::factory()->hasDestination()->create();
 
