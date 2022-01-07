@@ -20,9 +20,14 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [
-            { data: "name" },
-            { data: "action", orderable: false, searchable: false },
+        columns: [{
+                data: "name"
+            },
+            {
+                data: "action",
+                orderable: false,
+                searchable: false
+            },
         ],
         language: {
             url: datatable_url,

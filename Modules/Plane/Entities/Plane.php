@@ -2,29 +2,19 @@
 
 namespace Modules\Plane\Entities;
 
-use App\Traits\Presentable;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Plane\Presenter\PlanePresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Plane extends Model
 {
     use SoftDeletes,
-        HasFactory,
-        Presentable;
+        HasFactory;
 
     const ECONOMIC = "EC";
 
     const LUXURY = "LU";
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = PlanePresenter::class;
 
     /**
      * Tabela do banco de dados

@@ -65,12 +65,12 @@ class ReserveController extends Controller
             ->editColumn("flight", function ($reserve) {
                 return $reserve->flight->formatted_date;
             })
-            ->addColumn(
-                "action",
-                function ($reserve) {
-                    return $reserve->actionView();
-                }
-            )
+            ->addColumn('action', function ($reserve) {
+                return view('reserve::partials.action', [
+                    'reserve' => $reserve
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])

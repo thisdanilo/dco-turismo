@@ -20,11 +20,21 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [
-            { data: "total_passengers" },
-            { data: "class" },
-            { data: "bland", name: "bland.name" },
-            { data: "action", orderable: false, searchable: false },
+        columns: [{
+                data: "total_passengers"
+            },
+            {
+                data: "class"
+            },
+            {
+                data: "bland",
+                name: "bland.name"
+            },
+            {
+                data: "action",
+                orderable: false,
+                searchable: false
+            },
         ],
         language: {
             url: datatable_url,

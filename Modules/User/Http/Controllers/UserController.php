@@ -51,12 +51,12 @@ class UserController extends Controller
         $users = $this->user->query();
 
         return DataTables::of($users)
-            ->addColumn(
-                "action",
-                function ($user) {
-                    return $user->actionView();
-                }
-            )
+            ->addColumn('action', function ($user) {
+                return view('user::partials.action', [
+                    'user' => $user
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])

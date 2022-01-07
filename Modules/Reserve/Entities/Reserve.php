@@ -4,18 +4,15 @@ namespace Modules\Reserve\Entities;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Traits\Presentable;
 use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Reserve\Presenter\ReservePresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reserve extends Model
 {
     use SoftDeletes,
-        HasFactory,
-        Presentable;
+        HasFactory;
 
     const RESERVED = "RE";
 
@@ -24,13 +21,6 @@ class Reserve extends Model
     const PAID = "PA";
 
     const CONCLUDED = "CO";
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = ReservePresenter::class;
 
     /**
      * Tabela do banco de dados

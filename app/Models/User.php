@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\Traits\Presentable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Reserve\Entities\Reserve;
 use Illuminate\Notifications\Notifiable;
-use Modules\User\Presenter\UserPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,15 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens,
         HasFactory,
-        Notifiable,
-        Presentable;
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = UserPresenter::class;
+        Notifiable;
 
     /**
      * Tabela do banco de dados

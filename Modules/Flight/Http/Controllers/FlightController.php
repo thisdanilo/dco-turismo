@@ -79,12 +79,12 @@ class FlightController extends Controller
             ->addColumn("destination", function ($flight) {
                 return $flight->destination->name;
             })
-            ->addColumn(
-                "action",
-                function ($flight) {
-                    return $flight->actionView();
-                }
-            )
+            ->addColumn('action', function ($flight) {
+                return view('flight::partials.action', [
+                    'flight' => $flight
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])
@@ -150,7 +150,7 @@ class FlightController extends Controller
             ->get();
 
         $destinations = Airport::orderBy('name', 'ASC')
-        ->where('id', '!=', $flight->destination->id ?? '')
+            ->where('id', '!=', $flight->destination->id ?? '')
             ->get();
 
         return view('flight::edit', compact('flight', 'planes', 'origins', 'destinations'));

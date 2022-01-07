@@ -3,27 +3,17 @@
 namespace Modules\Flight\Entities;
 
 use Carbon\Carbon;
-use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
 use Modules\Airport\Entities\Airport;
 use Modules\Reserve\Entities\Reserve;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Flight\Presenter\FlightPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Flight extends Model
 {
     use SoftDeletes,
-        HasFactory,
-        Presentable;
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = FlightPresenter::class;
+        HasFactory;
 
     /**
      * Tabela do banco de dados

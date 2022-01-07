@@ -58,12 +58,12 @@ class PlaneController extends Controller
             ->addColumn("bland", function ($plane) {
                 return $plane->bland->name;
             })
-            ->addColumn(
-                "action",
-                function ($plane) {
-                    return $plane->actionView();
-                }
-            )
+            ->addColumn('action', function ($plane) {
+                return view('plane::partials.action', [
+                    'plane' => $plane
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])
@@ -124,7 +124,7 @@ class PlaneController extends Controller
             ->where('id', '!=', $plane->bland->id ?? '')
             ->get();
 
-        return view('plane::edit', compact('plane','blands'));
+        return view('plane::edit', compact('plane', 'blands'));
     }
 
     /**

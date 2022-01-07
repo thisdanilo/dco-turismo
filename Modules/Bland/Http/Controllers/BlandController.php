@@ -51,12 +51,12 @@ class BlandController extends Controller
         $blands = $this->bland->query();
 
         return DataTables::of($blands)
-            ->addColumn(
-                "action",
-                function ($bland) {
-                    return $bland->actionView();
-                }
-            )
+            ->addColumn('action', function ($bland) {
+                return view('bland::partials.action', [
+                    'bland' => $bland
+                ])
+                    ->render();
+            })
             ->rawColumns([
                 'action'
             ])

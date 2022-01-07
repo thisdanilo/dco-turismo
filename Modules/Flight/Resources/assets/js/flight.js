@@ -29,14 +29,32 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [
-            { data: "date" },
-            { data: "time_duration" },
-            { data: "price" },
-            { data: "plane", name: "plane.bland.name" },
-            { data: "origin", name: "plane.origin.name" },
-            { data: "destination", name: "plane.destination.name" },
-            { data: "action", orderable: false, searchable: false },
+        columns: [{
+                data: "date"
+            },
+            {
+                data: "time_duration"
+            },
+            {
+                data: "price"
+            },
+            {
+                data: "plane",
+                name: "plane.bland.name"
+            },
+            {
+                data: "origin",
+                name: "plane.origin.name"
+            },
+            {
+                data: "destination",
+                name: "plane.destination.name"
+            },
+            {
+                data: "action",
+                orderable: false,
+                searchable: false
+            },
         ],
         language: {
             url: datatable_url,

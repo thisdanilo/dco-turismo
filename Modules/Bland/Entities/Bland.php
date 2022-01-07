@@ -2,25 +2,15 @@
 
 namespace Modules\Bland\Entities;
 
-use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Bland\Presenter\BlandPresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bland extends Model
 {
     use SoftDeletes,
-        Presentable,
         HasFactory;
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = BlandPresenter::class;
 
     /**
      * Tabela do banco de dados

@@ -25,18 +25,34 @@ $(document).ready(function () {
             },
         },
         columns: [
-            { data: "name" },
-            { data: "zip_code" },
-            { data: "address" },
-            { data: "number" },
-            { data: "city", name: "city.name" },
-            { data: "action", orderable: false, searchable: false },
+            {
+                data: "name",
+            },
+            {
+                data: "zip_code",
+            },
+            {
+                data: "address",
+            },
+            {
+                data: "number",
+            },
+            {
+                data: "city",
+                name: "city.name",
+            },
+            {
+                data: "action",
+                orderable: false,
+                searchable: false,
+            },
         ],
         language: {
             url: datatable_url,
         },
     });
 
+    /* Pesquisa por cep */
     function searchZipCode() {
         var zipcode = $("#cep").val().replace("-", "");
 

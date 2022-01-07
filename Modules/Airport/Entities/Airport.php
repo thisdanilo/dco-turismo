@@ -2,25 +2,15 @@
 
 namespace Modules\Airport\Entities;
 
-use App\Traits\Presentable;
 use Modules\City\Entities\City;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Airport\Presenter\AirportPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Airport extends Model
 {
     use SoftDeletes,
-        HasFactory,
-        Presentable;
-
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = AirportPresenter::class;
+        HasFactory;
 
     /**
      * Tabela do banco de dados
