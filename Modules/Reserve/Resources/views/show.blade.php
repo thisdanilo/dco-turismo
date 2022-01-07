@@ -3,6 +3,7 @@
 @section('page_title', 'Reservas')
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -13,6 +14,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -21,7 +23,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-outline card-secondary">
-
                     <div class="card-header">
                         <h3 class="card-title">
                             Dados da Reserva
@@ -65,9 +66,7 @@
 
                         </div>
                     </div>
-
                     <div class="card-footer"></div>
-
                 </div>
 
                 <div class="row">

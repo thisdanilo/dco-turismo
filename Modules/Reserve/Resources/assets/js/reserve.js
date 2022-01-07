@@ -10,6 +10,7 @@ $(document).ready(function () {
     // Instance of plugins
     //-----------------------------------------------------
 
+    // DataTable Ajax
     $("#ajax-datatable").DataTable({
         processing: true,
         serverSide: true,

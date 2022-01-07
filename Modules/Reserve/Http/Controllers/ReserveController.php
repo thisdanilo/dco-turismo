@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
 use Modules\Reserve\Services\ReserveService;
-use Modules\Reserve\Http\Requests\ReserveRequest;
+use Modules\Reserve\Http\Requests;
 
 class ReserveController extends Controller
 {
@@ -94,10 +94,10 @@ class ReserveController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
+	 * @param \Requests\ReserveRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(ReserveRequest $request)
+	public function store(Requests\ReserveRequest $request)
 	{
 		$this->reserve_service->updateOrCreate($request->all());
 
@@ -141,11 +141,11 @@ class ReserveController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
+	 * @param \Requests\ReserveRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update(ReserveRequest $request, $id)
+	public function update(Requests\ReserveRequest $request, $id)
 	{
 		$reserve = $this->reserve->findOrFail($id);
 

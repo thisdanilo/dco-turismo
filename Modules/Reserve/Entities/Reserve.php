@@ -111,7 +111,7 @@ class Reserve extends Model
 	}
 
 	/**
-	 * Obtém os voos
+	 * Obtém o voo
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */

@@ -3,7 +3,6 @@
 namespace Modules\Reserve\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class ReserveServiceProvider extends ServiceProvider
 {

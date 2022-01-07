@@ -20,8 +20,8 @@ class ReserveRequest extends FormRequest
 				new CheckAvailableFlight
 			],
 			'user_id' => 'required',
-			'date_reserved' => 'required', 'date',
-			'status' => 'required', 'enum'
+			'date_reserved' => 'required|date',
+			'status' => 'required|enum'
 		];
 	}
 

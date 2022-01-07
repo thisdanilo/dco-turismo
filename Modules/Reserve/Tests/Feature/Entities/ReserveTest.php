@@ -9,7 +9,7 @@ use Modules\Reserve\Entities\Reserve;
 
 class ReserveTest extends TestCase
 {
-    public function test_a_reserve_belongs_to_user()
+    public function test_a_reserve_has_user()
     {
         $reserve = Reserve::factory()->hasUser()->create();
 
@@ -18,7 +18,7 @@ class ReserveTest extends TestCase
         $this->assertInstanceOf(User::class, $reserve->user);
     }
 
-    public function test_a_reserve_belongs_to_flight()
+    public function test_a_reserve_has_flight()
     {
         $reserve = Reserve::factory()->hasFlight()->create();
 
