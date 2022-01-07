@@ -7,10 +7,6 @@
     <arg name="tab-width" value="4"/>
     <!-- Rules -->
     <rule ref="PSR2"/>
-    <rule ref="ImportDetection"/>
-    <rule ref="ImportDetection.Imports.RequireImports.Symbol">
-        <severity>0</severity>
-    </rule>
     <rule ref="PSR2">
         <exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
         <exclude name="Generic.Files.LineEndings"/>
