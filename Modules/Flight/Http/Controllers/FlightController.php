@@ -107,7 +107,7 @@ class FlightController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param \Requests\FlightRequest $request
+	 * @param Requests\FlightRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(Requests\FlightRequest $request)
@@ -153,17 +153,17 @@ class FlightController extends Controller
 			->get();
 
 		return view('flight::edit', compact(
-            'flight',
-            'planes',
-            'origins',
-            'destinations'
-        ));
+			'flight',
+			'planes',
+			'origins',
+			'destinations'
+		));
 	}
 
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param \Requests\FlightRequest $request
+	 * @param Requests\FlightRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

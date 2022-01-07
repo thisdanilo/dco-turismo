@@ -14,13 +14,13 @@ use Modules\Dashboard\Http\Controllers\DashboardController;
 */
 
 Route::group(
-    [
-        'middleware' => ['auth', 'admin'],
-        'prefix' => 'dashboard',
-        'as' => 'dashboard.'
-    ],
-    function () {
-        Route::get('/', [DashboardController::class, 'index'])
-            ->name('index');
-    }
+	[
+		'middleware' => ['auth', 'admin'],
+		'prefix' => 'dashboard',
+		'as' => 'dashboard.'
+	],
+	function () {
+		Route::get('/', [DashboardController::class, 'index'])
+			->name('index');
+	}
 );

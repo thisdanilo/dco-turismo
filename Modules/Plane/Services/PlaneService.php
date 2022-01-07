@@ -7,7 +7,7 @@ use Modules\Plane\Entities\Plane;
 
 class PlaneService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -16,50 +16,50 @@ class PlaneService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return void
-     */
-    public function updateOrCreate($request, $id = null)
-    {
-        DB::beginTransaction();
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
+	public function updateOrCreate($request, $id = null)
+	{
+		DB::beginTransaction();
 
-        try {
-            Plane::updateOrCreate([
-                'id' => $id
-            ], $request);
+		try {
+			Plane::updateOrCreate([
+				'id' => $id
+			], $request);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 
-    /**
-     * Exclui e retorna a tela inicial
-     *
-     * @param \Modules\Plane\Entities\Plane $plane
-     *
-     * @return void
-     */
-    public function removeData($plane)
-    {
-        DB::beginTransaction();
+	/**
+	 * Exclui e retorna a tela inicial
+	 *
+	 * @param \Modules\Plane\Entities\Plane $plane
+	 *
+	 * @return void
+	 */
+	public function removeData($plane)
+	{
+		DB::beginTransaction();
 
-        try {
-            $plane->delete();
+		try {
+			$plane->delete();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 }

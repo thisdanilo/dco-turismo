@@ -75,7 +75,7 @@ class BlandController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param \Requests\BlandRequest $request
+	 * @param Requests\BlandRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(Requests\BlandRequest $request)
@@ -116,7 +116,7 @@ class BlandController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param \Requests\BlandRequest $request
+	 * @param Requests\BlandRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

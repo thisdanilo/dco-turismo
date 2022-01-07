@@ -79,7 +79,7 @@ class ReserveController extends Controller
 	/**
 	 * Exibe a tela de cadastro
 	 *
-	 * @return \Illuminate\View\View
+	 * @return Illuminate\View\View
 	 */
 	public function create()
 	{
@@ -93,7 +93,7 @@ class ReserveController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param \Requests\ReserveRequest $request
+	 * @param Requests\ReserveRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(Requests\ReserveRequest $request)
@@ -140,7 +140,7 @@ class ReserveController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param \Requests\ReserveRequest $request
+	 * @param Requests\ReserveRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

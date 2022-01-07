@@ -7,7 +7,7 @@ use Modules\Bland\Entities\Bland;
 
 class BlandService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -16,50 +16,50 @@ class BlandService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return void
-     */
-    public function updateOrCreate($request, $id = null)
-    {
-        DB::beginTransaction();
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
+	public function updateOrCreate($request, $id = null)
+	{
+		DB::beginTransaction();
 
-        try {
-            Bland::updateOrCreate([
-                'id' => $id
-            ], $request);
+		try {
+			Bland::updateOrCreate([
+				'id' => $id
+			], $request);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 
-    /**
-     * Exclui e retorna a tela inicial
-     *
-     * @param \Modules\Bland\Entities\Bland $bland
-     *
-     * @return void
-     */
-    public function removeData($bland)
-    {
-        DB::beginTransaction();
+	/**
+	 * Exclui e retorna a tela inicial
+	 *
+	 * @param \Modules\Bland\Entities\Bland $bland
+	 *
+	 * @return void
+	 */
+	public function removeData($bland)
+	{
+		DB::beginTransaction();
 
-        try {
-            $bland->delete();
+		try {
+			$bland->delete();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 }

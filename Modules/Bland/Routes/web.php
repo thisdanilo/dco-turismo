@@ -14,37 +14,37 @@ use Modules\Bland\Http\Controllers\BlandController;
 */
 
 Route::group(
-    [
-        'middleware' => ['auth', 'admin'],
-        'prefix' => 'dashboard/bland',
-        'as' => 'bland.'
-    ],
-    function () {
-        Route::get('/', [BlandController::class, 'index'])
-            ->name('index');
+	[
+		'middleware' => ['auth', 'admin'],
+		'prefix' => 'dashboard/bland',
+		'as' => 'bland.'
+	],
+	function () {
+		Route::get('/', [BlandController::class, 'index'])
+			->name('index');
 
-        Route::post('/datatable', [BlandController::class, 'dataTable'])
-            ->name('datatable');
+		Route::post('/datatable', [BlandController::class, 'dataTable'])
+			->name('datatable');
 
-        Route::get('/{id}/ver', [BlandController::class, 'show'])
-            ->name('show');
+		Route::get('/{id}/ver', [BlandController::class, 'show'])
+			->name('show');
 
-        Route::get('/cadastrar', [BlandController::class, 'create'])
-            ->name('create');
+		Route::get('/cadastrar', [BlandController::class, 'create'])
+			->name('create');
 
-        Route::post('/cadastrar', [BlandController::class, 'store'])
-            ->name('store');
+		Route::post('/cadastrar', [BlandController::class, 'store'])
+			->name('store');
 
-        Route::get('/{id}/editar', [BlandController::class, 'edit'])
-            ->name('edit');
+		Route::get('/{id}/editar', [BlandController::class, 'edit'])
+			->name('edit');
 
-        Route::put('/{id}/editar', [BlandController::class, 'update'])
-            ->name('update');
+		Route::put('/{id}/editar', [BlandController::class, 'update'])
+			->name('update');
 
-        Route::get('/{id}/confirmar-exclusao', [BlandController::class, 'confirmDelete'])
-            ->name('confirm_delete');
+		Route::get('/{id}/confirmar-exclusao', [BlandController::class, 'confirmDelete'])
+			->name('confirm_delete');
 
-        Route::delete('/{id}/excluir', [BlandController::class, 'delete'])
-            ->name('delete');
-    }
+		Route::delete('/{id}/excluir', [BlandController::class, 'delete'])
+			->name('delete');
+	}
 );

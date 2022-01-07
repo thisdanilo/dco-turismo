@@ -91,7 +91,7 @@ class UserController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param \Requests\UserRequest $request
+	 * @param Requests\UserRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

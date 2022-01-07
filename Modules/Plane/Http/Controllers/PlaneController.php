@@ -84,7 +84,7 @@ class PlaneController extends Controller
 	/**
 	 * Cadastra e retorna para a tela inicial
 	 *
-	 * @param \Requests\PlaneRequest $request
+	 * @param Requests\PlaneRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(Requests\PlaneRequest $request)
@@ -113,7 +113,7 @@ class PlaneController extends Controller
 	 * Exibe os dados para edição
 	 *
 	 * @param  int $id
-	 * @return \Illuminate\View\View
+	 * @return Illuminate\View\View
 	 */
 	public function edit($id)
 	{
@@ -129,7 +129,7 @@ class PlaneController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param \Requests\PlaneRequest $request
+	 * @param Requests\PlaneRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
