@@ -13,14 +13,12 @@ class UserControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = new User();
+        $this->user = User::factory()->create();
     }
 
     public function test_route_index()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('user.index'));
+        $response = $this->actingAs($this->user)->get(route('user.index'));
 
         $response->assertSuccessful();
 
@@ -29,43 +27,37 @@ class UserControllerTest extends TestCase
 
     public function test_route_show()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('user.show', [
-            'id' => $user->id
+        $response = $this->actingAs($this->user)->get(route('user.show', [
+            'id' => $this->user->id
         ]));
 
         $response->assertSuccessful();
 
-        $response->assertSee($user->name);
+        $response->assertSee($this->user->name);
     }
 
     public function test_route_edit()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('user.edit', [
-            'id' => $user->id
+        $response = $this->actingAs($this->user)->get(route('user.edit', [
+            'id' => $this->user->id
         ]));
 
         $response->assertSuccessful();
 
-        $response->assertSee($user->name);
+        $response->assertSee($this->user->name);
     }
 
     public function test_route_update()
     {
-        $user = $this->user->factory()->create();
-
         $data = [
             "name" => "João Silva",
             "email" => "Joao@joao.com",
             "password" => bcrypt('123456789')
         ];
 
-        $response = $this->actingAs($user)->put(route('user.update', $user->id), $data);
+        $response = $this->actingAs($this->user)->put(route('user.update', $this->user->id), $data);
 
-        $response->assertRedirect(route('user.edit', $user->id));
+        $response->assertRedirect(route('user.edit', $this->user->id));
 
         $response->assertSessionHas('message', 'Atualização realizada com sucesso.');
 
@@ -76,29 +68,25 @@ class UserControllerTest extends TestCase
 
     public function test_route_confirm_delete()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->get(route('user.confirm_delete', [
-            'id' => $user->id
+        $response = $this->actingAs($this->user)->get(route('user.confirm_delete', [
+            'id' => $this->user->id
         ]));
 
         $response->assertSuccessful();
 
-        $response->assertSee($user->name);
+        $response->assertSee($this->user->name);
     }
 
     public function test_route_delete()
     {
-        $user = $this->user->factory()->create();
-
-        $response = $this->actingAs($user)->delete(route('user.delete', [
-            'id' =>  $user->id
+        $response = $this->actingAs($this->user)->delete(route('user.delete', [
+            'id' =>  $this->user->id
         ]));
 
         $response->assertRedirect(route('user.index'));
 
         $response->assertSessionHas('message', 'Exclusão realizada com sucesso.');
 
-        $this->assertDeleted('users', $user->toArray());
+        $this->assertDeleted('users', $this->user->toArray());
     }
 }

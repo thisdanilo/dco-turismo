@@ -4,7 +4,6 @@ namespace Modules\User\Database\factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Flight\Entities\Flight;
 
 class UserFactory extends Factory
 {

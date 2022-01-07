@@ -3,6 +3,7 @@
 @section('page_title', 'Clientes')
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -13,6 +14,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -31,7 +33,6 @@
                     @method('PUT')
 
                     <div class="card card-outline card-secondary">
-
                         <div class="card-header">
                             <h3 class="card-title">
                                 Dados do Cliente
@@ -67,9 +68,7 @@
 
                             </div>
                         </div>
-
                         <div class="card-footer"></div>
-
                     </div>
 
                     {{-- Botão --}}

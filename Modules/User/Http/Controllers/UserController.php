@@ -6,7 +6,7 @@ use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Routing\Controller;
 use Modules\User\Services\UserService;
-use Modules\User\Http\Requests\UserRequest;
+use Modules\User\Http\Requests;
 
 class UserController extends Controller
 {
@@ -92,11 +92,11 @@ class UserController extends Controller
 	/**
 	 * Atualiza e retorna para a tela de edição
 	 *
-	 * @param  \Modules\User\Http\Requests\UserRequest $request
+	 * @param \Requests\UserRequest $request
 	 * @param  int $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update(UserRequest $request, $id)
+	public function update(Requests\UserRequest $request, $id)
 	{
 		$user = $this->user->findOrFail($id);
 
