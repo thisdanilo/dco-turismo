@@ -16,16 +16,17 @@ class AirportRequestTest extends TestCase
 
         $this->form_request = new AirportRequest();
     }
+
     public function test_it_has_rules()
     {
         $rules = [
             'city_id' => 'required',
-            'name' => 'required', 'string',
-            'latitude' => 'required', 'string',
-            'longitude' => 'required', 'string',
-            'address' => 'required', 'string',
-            'number' => 'required', 'string',
-            'zip_code' => 'required', 'string'
+            'name' => 'required|string',
+            'latitude' => 'required|string',
+            'longitude' => 'required|string',
+            'address' => 'required|string',
+            'number' => 'required|string',
+            'zip_code' => 'required|string'
         ];
 
         $this->assertEquals($rules,  $this->form_request->rules());
