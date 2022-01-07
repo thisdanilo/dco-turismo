@@ -27,7 +27,7 @@ class ReserveRequestTest extends TestCase
             ],
             'user_id' => 'required',
             'date_reserved' => 'required|date',
-            'status' => 'required|enum'
+            'status' => 'required'
         ];
 
         $this->assertEquals($rules,  $this->form_request->rules());

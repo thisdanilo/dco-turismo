@@ -24,15 +24,15 @@ class FlightRequestTest extends TestCase
             'airport_origin_id' => 'required',
             'airport_destination_id' => 'required',
             'date' => 'required|date',
-            'time_duration' => 'required|time',
-            'hour_output' => 'required|time',
-            'arrival_time' => 'required|time',
-            'old_price' => 'required|decimal',
-            'price' => 'required|decimal',
-            'total_prots' => 'required|integer',
-            'is_promotion' => 'required|boolean',
-            'qty_stops' => 'required|integer',
-            'description' => 'nullable|text'
+            'time_duration' => 'required',
+            'hour_output' => 'required',
+            'arrival_time' => 'required',
+            'old_price' => 'required',
+            'price' => 'required',
+            'total_prots' => 'required',
+            'is_promotion' => 'required',
+            'qty_stops' => 'required',
+            'description' => 'nullable'
         ];
 
         $this->assertEquals($rules,  $this->form_request->rules());

@@ -69,7 +69,7 @@
 
                                              @foreach ($flights as $flight)
 
-                                                <option value="{{ $flight->id }}">{{ $flight->date }}</option>
+                                                <option value="{{ $flight->id }}">{{ $flight->formatted_date }}</option>
 
                                             @endforeach
 

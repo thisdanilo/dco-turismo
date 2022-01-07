@@ -21,7 +21,7 @@ class ReserveRequest extends FormRequest
 			],
 			'user_id' => 'required',
 			'date_reserved' => 'required|date',
-			'status' => 'required|enum'
+			'status' => 'required'
 		];
 	}
 
