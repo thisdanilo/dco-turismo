@@ -258,13 +258,13 @@ class Flight extends Model
 			->get();
 	}
 
-    /**
-     * Data miníma
-     *
-     * @return string
-     */
-    public function minDate()
-    {
-        return now()->format('Y-m-d');
-    }
+	/**
+	 * Data miníma
+	 *
+	 * @return string
+	 */
+	public function minDate()
+	{
+		return now()->format('Y-m-d');
+	}
 }

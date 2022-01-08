@@ -101,7 +101,7 @@ class FlightController extends Controller
 
 		$airports = Airport::orderBy('name', 'Asc')->get();
 
-        $min_date = $this->flight->minDate();
+		$min_date = $this->flight->minDate();
 
 		return view('flight::create', compact('planes', 'airports', 'min_date'));
 	}
@@ -153,14 +153,14 @@ class FlightController extends Controller
 		$destinations = Airport::orderBy('name', 'ASC')
 			->where('id', '!=', $flight->destination->id ?? '')
 			->get();
-        $min_date = $this->flight->minDate();
+		$min_date = $this->flight->minDate();
 
 		return view('flight::edit', compact(
 			'flight',
 			'planes',
 			'origins',
 			'destinations',
-            'min_date'
+			'min_date'
 		));
 	}
 
