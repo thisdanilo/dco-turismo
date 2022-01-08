@@ -55,4 +55,11 @@ class ReserveTest extends TestCase
 
         $this->assertEquals('10/01/2022', $this->reserve->formatted_date_reserved);
     }
+
+    public function test_it_min_date()
+    {
+        $min_date = now()->format('Y-m-d');
+
+        $this->assertEquals($min_date, $this->reserve->minDate());
+    }
 }

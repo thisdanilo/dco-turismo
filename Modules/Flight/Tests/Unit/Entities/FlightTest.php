@@ -24,4 +24,11 @@ class FlightTest extends TestCase
 
         $this->assertEquals(now()->format('H:i'), $flight->formatted_time_duration);
     }
+
+    public function test_it_min_date()
+    {
+        $min_date = now()->format('Y-m-d');
+
+        $this->assertEquals($min_date, (new Flight)->minDate());
+    }
 }
