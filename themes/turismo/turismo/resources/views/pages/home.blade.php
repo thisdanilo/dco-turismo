@@ -40,7 +40,7 @@
 
             {{-- Data --}}
             <div class="form-group">
-                <input type="date" name="date" class="form-control" placeholder="Data" min="<?php echo date('Y-m-d'); ?>" required>
+                <input type="date" name="date" class="form-control" placeholder="Data" min="{{ SiteHelper::minDate() }}" required>
             </div>
 
             {{-- Botão pesquisa --}}
