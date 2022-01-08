@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="content">
-
         <section class="container">
 
             {{-- Respostas --}}
@@ -11,8 +10,6 @@
             @include('dashboard.partials.success')
 
             <h1 class="title">Minhas Compras</h1>
-
-
             <table class="table">
                 <thead>
                     <tr>
@@ -38,7 +35,6 @@
                             <td>
                                 <span class="badge badge-secondary">{{ $purchase->formatted_status }}</span>
                             </td>
-
                         </tr>
 
                     @empty
@@ -50,7 +46,6 @@
                 </tbody>
             </table>
         </section>
-        <!--Container-->
-
     </div>
+
 @endsection

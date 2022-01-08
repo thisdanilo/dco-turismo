@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="content">
 
+    <div class="content">
         <section class="container">
             <h1 class="title">Resultados Pesquisa:</h1>
             <div class="key-search row">
@@ -15,8 +15,6 @@
                     <p>Data: <span>{{ $date }}</span></p>
                 </div>
             </div>
-
-
             <div class="row results-search">
 
                 @forelse ($flights as $flight)
@@ -35,12 +33,9 @@
                     <p>Nenhum Registro encontrado</p>
 
                 @endforelse
-                <!--result-search-->
 
             </div>
-            <!--Row-->
         </section>
-        <!--Container-->
-
     </div>
+
 @endsection

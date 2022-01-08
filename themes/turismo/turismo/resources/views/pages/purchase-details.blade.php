@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="content">
-
         <section class="container">
             <h1 class="title">Detalhes do voô {{ $purchase->id }}</h1>
 
@@ -29,11 +28,8 @@
                 <li class="list-group-item">
                     Parcelas: <strong> {{ $purchase->total_prots }}</strong>
                 </li>
-
             </ul>
-
         </section>
-        <!--Container-->
-
     </div>
+
 @endsection

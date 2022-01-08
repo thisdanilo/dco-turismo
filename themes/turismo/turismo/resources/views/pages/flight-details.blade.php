@@ -7,7 +7,6 @@
     @include('dashboard.partials.success')
 
     <div class="content">
-
         <section class="container">
             <h1 class="title">Detalhes do voô {{ $flight->id }}</h1>
 
@@ -49,6 +48,6 @@
             </form>
         </section>
         <!--Container-->
-
     </div>
+
 @endsection
