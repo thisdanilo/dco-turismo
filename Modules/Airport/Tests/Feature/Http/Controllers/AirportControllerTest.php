@@ -3,15 +3,26 @@
 namespace Modules\Airport\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use Modules\Bland\Entities\Bland;
-use Modules\Airport\Entities\Airport;
+use Modules\User\Entities\User;
 use Modules\City\Entities\City;
+use Modules\Airport\Entities\Airport;
 
 class AirportControllerTest extends TestCase
 {
+    protected $user;
+
+    protected function setup(): void
+    {
+        parent::setUp();
+
+        City::factory()->create();
+
+        $this->user = User::factory()->create();
+    }
+
     public function test_route_index()
     {
-        $response = $this->get(route('airport.index'));
+        $response = $this->actingAs($this->user)->get(route('airport.index'));
 
         $response->assertSuccessful();
 
@@ -20,7 +31,7 @@ class AirportControllerTest extends TestCase
 
     public function test_route_create()
     {
-        $response = $this->get(route('airport.create'));
+        $response = $this->actingAs($this->user)->get(route('airport.create'));
 
         $response->assertSuccessful();
 
@@ -29,10 +40,8 @@ class AirportControllerTest extends TestCase
 
     public function test_route_store()
     {
-        $city = City::factory()->create();
-
         $data = [
-            'city_id' => $city->id,
+            'city_id' => 1,
             'name' => 'Aeroporto 01',
             'latitude' => '102544',
             'longitude' => '2665977',
@@ -41,7 +50,7 @@ class AirportControllerTest extends TestCase
             'zip_code' => '99999-999'
         ];
 
-        $response = $this->post(route('airport.store'), $data);
+        $response = $this->actingAs($this->user)->post(route('airport.store'), $data);
 
         $response->assertRedirect(route('airport.index'));
 
@@ -58,7 +67,7 @@ class AirportControllerTest extends TestCase
     {
         $airport = Airport::factory()->create();
 
-        $response = $this->get(route('airport.show', [
+        $response = $this->actingAs($this->user)->get(route('airport.show', [
             'id' => $airport->id
         ]));
 
@@ -71,7 +80,7 @@ class AirportControllerTest extends TestCase
     {
         $airport = Airport::factory()->create();
 
-        $response = $this->get(route('airport.edit', [
+        $response = $this->actingAs($this->user)->get(route('airport.edit', [
             'id' => $airport->id
         ]));
 
@@ -87,7 +96,7 @@ class AirportControllerTest extends TestCase
         $airport->load('city');
 
         $data = [
-            'city_id' => $airport->id,
+            'city_id' => $airport->city->id,
             'name' => 'Aeroporto 01',
             'latitude' => '102544',
             'longitude' => '2665977',
@@ -96,7 +105,7 @@ class AirportControllerTest extends TestCase
             'zip_code' => '99999-999'
         ];
 
-        $response = $this->put(route('airport.update', $airport->id), $data);
+        $response = $this->actingAs($this->user)->put(route('airport.update', ['id' => $airport->id]), $data);
 
         $response->assertRedirect(route('airport.edit', $airport->id));
 
@@ -111,7 +120,7 @@ class AirportControllerTest extends TestCase
     {
         $airport = Airport::factory()->create();
 
-        $response = $this->get(route('airport.confirm_delete', [
+        $response = $this->actingAs($this->user)->get(route('airport.confirm_delete', [
             'id' => $airport->id
         ]));
 
@@ -124,7 +133,7 @@ class AirportControllerTest extends TestCase
     {
         $airport = Airport::factory()->create();
 
-        $response = $this->delete(route('airport.delete', [
+        $response = $this->actingAs($this->user)->delete(route('airport.delete', [
             'id' =>  $airport->id
         ]));
 

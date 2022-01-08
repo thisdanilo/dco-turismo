@@ -4,11 +4,10 @@ namespace Modules\Airport\Services;
 
 use DB;
 use Modules\Airport\Entities\Airport;
-use Modules\City\Entities\City;
 
 class AirportService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -17,28 +16,24 @@ class AirportService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return \Modules\Airport\Entities\Airport $airport
-     */
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
 	public function updateOrCreate($request, $id = null)
 	{
 		DB::beginTransaction();
 
 		try {
-			$airport = Airport::updateOrCreate([
+			Airport::updateOrCreate([
 				'id' => $id
 			], $request);
 
-            (new City)->updateOrCreate(['id' => $airport->city->id ?? null]);
-
 			DB::commit();
-
-            return $airport;
 		} catch (\Exception $e) {
 			DB::rollBack();
 

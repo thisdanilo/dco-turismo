@@ -18,6 +18,9 @@ class CreateFlightsTable extends Migration
             $table->unsignedBigInteger('plane_id');
             $table->unsignedBigInteger('airport_origin_id');
             $table->unsignedBigInteger('airport_destination_id');
+            $table->foreign('plane_id')->references('id')->on('planes');
+            $table->foreign('airport_origin_id')->references('id')->on('airports');
+            $table->foreign('airport_destination_id')->references('id')->on('airports');
             $table->date('date');
             $table->time('time_duration');
             $table->time('hour_output');
@@ -31,10 +34,6 @@ class CreateFlightsTable extends Migration
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('plane_id')->references('id')->on('planes');
-            $table->foreign('airport_origin_id')->references('id')->on('airports');
-            $table->foreign('airport_destination_id')->references('id')->on('airports');
         });
     }
 

@@ -2,10 +2,10 @@
 
 namespace Modules\Reserve\Database\factories;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\User\Entities\User;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReserveFactory extends Factory
 {

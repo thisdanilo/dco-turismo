@@ -2,54 +2,44 @@
 
 namespace Modules\Bland\Entities;
 
-use App\Traits\Presentable;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Bland\Presenter\BlandPresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bland extends Model
 {
-    use SoftDeletes,
-        Presentable,
-        HasFactory;
+	use SoftDeletes,
+		HasFactory;
 
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = BlandPresenter::class;
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'blands';
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'blands';
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'name'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'name'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
-
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -60,17 +50,17 @@ class Bland extends Model
 	|
 	*/
 
-    /**
-     * Obtêm o avião
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function planes()
-    {
-        return $this->hasMany(Plane::class)->withTrashed();
-    }
+	/**
+	 * Obtêm os aviões
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function planes()
+	{
+		return $this->hasMany(Plane::class);
+	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -80,13 +70,13 @@ class Bland extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Bland\Database\factories\BlandFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Bland\Database\factories\BlandFactory::new();
+	}
 }

@@ -7,7 +7,7 @@ use Modules\Flight\Entities\Flight;
 
 class FlightService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -16,51 +16,50 @@ class FlightService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return void
-     */
-    public function updateOrCreate($request, $id = null)
-    {
-        DB::beginTransaction();
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
+	public function updateOrCreate($request, $id = null)
+	{
+		DB::beginTransaction();
 
-        try {
+		try {
+			Flight::updateOrCreate([
+				'id' => $id
+			], $request);
 
-            Flight::updateOrCreate([
-                'id' => $id
-            ], $request);
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
+			abort(500);
+		}
+	}
 
-            abort(500);
-        }
-    }
+	/**
+	 * Exclui e retorna a tela inicial
+	 *
+	 * @param \Modules\Flight\Entities\Flight $flight
+	 *
+	 * @return void
+	 */
+	public function removeData($flight)
+	{
+		DB::beginTransaction();
 
-    /**
-     * Exclui e retorna a tela inicial
-     *
-     * @param \Modules\Flight\Entities\Flight $flight
-     *
-     * @return void
-     */
-    public function removeData($flight)
-    {
-        DB::beginTransaction();
+		try {
+			$flight->delete();
 
-        try {
-            $flight->delete();
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500);
-        }
-    }
+			abort(500);
+		}
+	}
 }

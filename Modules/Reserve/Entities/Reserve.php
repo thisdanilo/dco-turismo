@@ -2,67 +2,94 @@
 
 namespace Modules\Reserve\Entities;
 
-use App\Models\User;
-use App\Traits\Presentable;
 use Carbon\Carbon;
+use Modules\User\Entities\User;
 use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Reserve\Presenter\ReservePresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reserve extends Model
 {
-    use SoftDeletes,
-        HasFactory,
-        Presentable;
+	use SoftDeletes,
+		HasFactory;
 
-    const RESERVED = "RE";
+	const RESERVED = "RE";
 
-    const CANCELED = "CA";
+	const CANCELED = "CA";
 
-    const PAID = "PA";
+	const PAID = "PA";
 
-    const CONCLUDED = "CO";
+	const CONCLUDED = "CO";
 
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = ReservePresenter::class;
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'reservations';
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'reservations';
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'flight_id',
+		'user_id',
+		'date_reserved',
+		'status'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'flight_id',
-        'user_id',
-        'date_reserved',
-        'status'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/*
+	|--------------------------------------------------------------------------
+	| Accessors
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos GET desta entidade.
+	| Estes métodos permitem formatar os atributos Eloquent obtidos do banco de dados.
+	|
+	*/
 
-    /*
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedStatusAttribute()
+	{
+		$data = [
+			self::RESERVED => 'Reservado',
+			self::CANCELED => 'Cancelado',
+			self::PAID => 'Pago',
+			self::CONCLUDED => 'Concluído'
+		];
+
+		return $data[$this->status];
+	}
+
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedDateReservedAttribute()
+	{
+		return Carbon::parse($this->date_reserved)->format('d/m/Y');
+	}
+
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -73,65 +100,27 @@ class Reserve extends Model
 	|
 	*/
 
-    /**
-     * Obtêm a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    /**
-     * Obtêm os voos
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function flight()
-    {
-        return $this->belongsTo(Flight::class)->withTrashed();
-    }
+	/**
+	 * Obtém o voo
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function flight()
+	{
+		return $this->belongsTo(Flight::class)->withTrashed();
+	}
 
-    /*
-	|--------------------------------------------------------------------------
-	| Accessors
-	|--------------------------------------------------------------------------
-	|
-	| Definição dos métodos GET desta entidade.
-	| Estes métodos permitem formatar os atributos Eloquent obtidos do banco de dados.
-	|
-	*/
-
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedStatusAttribute()
-    {
-        if ($this->status == self::RESERVED) {
-            return 'Reservado';
-        } elseif ($this->status == self::CANCELED) {
-            return 'Cancelado';
-        } elseif ($this->status == self::PAID) {
-            return 'Pago';
-        } elseif ($this->status == self::CONCLUDED) {
-            return 'Concluído';
-        }
-    }
-
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedDateReservedAttribute()
-    {
-        return Carbon::parse($this->date_reserved)->format('d/m/Y');
-    }
-
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -141,28 +130,39 @@ class Reserve extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Reserve\Database\factories\ReserveFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Reserve\Database\factories\ReserveFactory::new();
+	}
 
-    /**
-     * Reserva
-     *
-     * @return string
-     */
-    public function newReserve($flightId)
-    {
-        $this->user_id = auth()->user()->id;
-        $this->flight_id = $flightId;
-        $this->date_reserved = date('Y-m-d');
-        $this->status = self::RESERVED;
+	/**
+	 * Faz uma reserva
+	 *
+	 * @param int $flight_id
+	 * @return boolean
+	 */
+	public function newReserve($flight_id)
+	{
+		$this->user_id = auth()->user()->id;
+		$this->flight_id = $flight_id;
+		$this->date_reserved = date('Y-m-d');
+		$this->status = self::RESERVED;
 
-        return $this->save();
-    }
+		return $this->save();
+	}
+
+	/**
+	 * Data miníma
+	 *
+	 * @return string
+	 */
+	public function minDate()
+	{
+		return date('Y-m-d');
+	}
 }

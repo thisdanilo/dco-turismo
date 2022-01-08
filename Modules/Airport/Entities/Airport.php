@@ -2,62 +2,51 @@
 
 namespace Modules\Airport\Entities;
 
-use App\Traits\Presentable;
 use Modules\City\Entities\City;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Airport\Presenter\AirportPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Flight\Entities\Flight;
 
 class Airport extends Model
 {
-    use SoftDeletes,
-        HasFactory,
-        Presentable;
+	use SoftDeletes,
+		HasFactory;
 
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = AirportPresenter::class;
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'airports';
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'airports';
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'city_id',
+		'name',
+		'latitude',
+		'longitude',
+		'address',
+		'number',
+		'zip_code',
+		'complement'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'city_id',
-        'name',
-        'latitude',
-        'longitude',
-        'address',
-        'number',
-        'zip_code',
-        'complement'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
-
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -68,27 +57,17 @@ class Airport extends Model
 	|
 	*/
 
-    /**
-     * Obtém a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function city()
+	{
+		return $this->belongsTo(City::class);
+	}
 
-    /**
-     * Obtêm os voos
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function flights()
-    {
-        return $this->hasMany(Flight::class)->withTrashed();
-    }
-
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -98,13 +77,13 @@ class Airport extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Airport\Database\factories\AirportFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Airport\Database\factories\AirportFactory::new();
+	}
 }

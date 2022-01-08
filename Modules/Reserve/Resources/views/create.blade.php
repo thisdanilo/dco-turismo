@@ -3,6 +3,7 @@
 @section('page_title', 'Reservas')
 
 @section('content_header')
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
@@ -13,6 +14,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('content')
@@ -30,7 +32,6 @@
                     @csrf
 
                     <div class="card card-outline card-secondary">
-
                         <div class="card-header">
                             <h3 class="card-title">
                                 Dados da Reserva
@@ -68,7 +69,7 @@
 
                                              @foreach ($flights as $flight)
 
-                                                <option value="{{ $flight->id }}">{{ $flight->date }}</option>
+                                                <option value="{{ $flight->id }}">{{ $flight->formatted_date }}</option>
 
                                             @endforeach
 
@@ -80,7 +81,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data da Reserva:<span class="text-danger">*</span></label>
-                                        <input type="date" name="date_reserved" class="form-control" required>
+                                        <input type="date" name="date_reserved" id="date" min="{{ $min_date}}" class="form-control" required >
                                     </div>
                                 </div>
 
@@ -102,9 +103,7 @@
 
                             </div>
                         </div>
-
                         <div class="card-footer"></div>
-
                     </div>
 
                     {{-- Botão --}}

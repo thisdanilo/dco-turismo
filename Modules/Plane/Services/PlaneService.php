@@ -3,12 +3,11 @@
 namespace Modules\Plane\Services;
 
 use DB;
-use Modules\Bland\Entities\Bland;
 use Modules\Plane\Entities\Plane;
 
 class PlaneService
 {
-    /*--------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------
 	| Main Function
 	|--------------------------------------------------------------------------
 	|
@@ -17,28 +16,24 @@ class PlaneService
 	|
 	*/
 
-    /**
-     * Cadastra ou atualiza o registro
-     *
-     * @param array $request
-     * @param int|null $id
-     *
-     * @return \Modules\Plane\Entities\Plane $plane
-     */
+	/**
+	 * Cadastra ou atualiza o registro
+	 *
+	 * @param array $request
+	 * @param int|null $id
+	 *
+	 * @return void
+	 */
 	public function updateOrCreate($request, $id = null)
 	{
 		DB::beginTransaction();
 
 		try {
-			$plane = Plane::updateOrCreate([
+			Plane::updateOrCreate([
 				'id' => $id
 			], $request);
 
-            (new Bland)->updateOrCreate(['id' => $plane->bland->id ?? null]);
-
 			DB::commit();
-
-            return $plane;
 		} catch (\Exception $e) {
 			DB::rollBack();
 

@@ -3,15 +3,24 @@
 namespace Modules\Reserve\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
 
 class ReserveControllerTest extends TestCase
 {
+    protected $user;
+
+    protected function setup(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+    }
+
     public function test_route_index()
     {
-        $response = $this->get(route('reserve.index'));
+        $response = $this->actingAs($this->user)->get(route('reserve.index'));
 
         $response->assertSuccessful();
 
@@ -20,7 +29,7 @@ class ReserveControllerTest extends TestCase
 
     public function test_route_create()
     {
-        $response = $this->get(route('reserve.create'));
+        $response = $this->actingAs($this->user)->get(route('reserve.create'));
 
         $response->assertSuccessful();
 
@@ -29,18 +38,16 @@ class ReserveControllerTest extends TestCase
 
     public function test_route_store()
     {
-        $user = User::factory()->create();
-
         $flight = Flight::factory()->create();
 
         $data = [
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'flight_id' => $flight->id,
             'date_reserved' => '04/01/2022',
             'status' => Reserve::RESERVED
         ];
 
-        $response = $this->post(route('reserve.store'), $data);
+        $response = $this->actingAs($this->user)->post(route('reserve.store'), $data);
 
         $response->assertRedirect(route('reserve.index'));
 
@@ -62,7 +69,7 @@ class ReserveControllerTest extends TestCase
             'flight'
         ]);
 
-        $response = $this->get(route('reserve.show', [
+        $response = $this->actingAs($this->user)->get(route('reserve.show', [
             'id' => $reserve->id
         ]));
 
@@ -75,7 +82,7 @@ class ReserveControllerTest extends TestCase
     {
         $reserve = Reserve::factory()->create();
 
-        $response = $this->get(route('reserve.edit', [
+        $response = $this->actingAs($this->user)->get(route('reserve.edit', [
             'id' => $reserve->id
         ]));
 
@@ -88,7 +95,7 @@ class ReserveControllerTest extends TestCase
     {
         $reserve = Reserve::factory()->hasUser()->hasFlight()->create();
 
-        $user = User::factory()->create();
+        $this->user = User::factory()->create();
 
         $flight = Flight::factory()->create();
 
@@ -98,14 +105,14 @@ class ReserveControllerTest extends TestCase
         ]);
 
         $data = [
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'flight_id' => $flight->id,
             'date_reserved' => '04/01/2022',
             'status' => Reserve::RESERVED
         ];
 
 
-        $response = $this->put(route('reserve.update', $reserve->id), $data);
+        $response = $this->actingAs($this->user)->put(route('reserve.update', ['id' => $reserve->id]), $data);
 
         $response->assertRedirect(route('reserve.edit', $reserve->id));
 
@@ -125,7 +132,7 @@ class ReserveControllerTest extends TestCase
             'flight'
         ]);
 
-        $response = $this->get(route('reserve.confirm_delete', [
+        $response = $this->actingAs($this->user)->get(route('reserve.confirm_delete', [
             'id' => $reserve->id
         ]));
 
@@ -138,7 +145,7 @@ class ReserveControllerTest extends TestCase
     {
         $reserve = Reserve::factory()->create();
 
-        $response = $this->delete(route('reserve.delete', [
+        $response = $this->actingAs($this->user)->delete(route('reserve.delete', [
             'id' =>  $reserve->id
         ]));
 

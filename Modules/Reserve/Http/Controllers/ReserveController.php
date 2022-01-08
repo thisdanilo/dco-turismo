@@ -2,187 +2,195 @@
 
 namespace Modules\Reserve\Http\Controllers;
 
-use App\Models\User;
-use Yajra\DataTables\DataTables;
+use Modules\User\Entities\User;
 use Illuminate\Routing\Controller;
+use Modules\Reserve\Http\Requests;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
 use Modules\Reserve\Services\ReserveService;
-use Modules\Reserve\Http\Requests\ReserveRequest;
 
 class ReserveController extends Controller
 {
-    protected $reserve;
+	protected $reserve;
 
-    protected $reserve_service;
+	protected $reserve_service;
 
-    /**
-     * Método Construtor
-     *
-     * @param \Modules\Reserve\Entities\Reserve $reserve
-     * @param \Modules\Reserve\Services\ReserveService $reserve_service
-     * @return void
-     */
-    public function __construct(
-        Reserve $reserve,
-        ReserveService $reserve_service
-    ) {
-        $this->reserve = $reserve;
-        $this->reserve_service = $reserve_service;
-    }
+	/**
+	 * Método Construtor
+	 *
+	 * @param \Modules\Reserve\Entities\Reserve $reserve
+	 * @param \Modules\Reserve\Services\ReserveService $reserve_service
+	 * @return void
+	 */
+	public function __construct(
+		Reserve $reserve,
+		ReserveService $reserve_service
+	) {
+		$this->reserve = $reserve;
+		$this->reserve_service = $reserve_service;
+	}
 
-    /**
-     * Exibe a tela inicial com a listagem de dados.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        return view('reserve::index');
-    }
+	/**
+	 * Exibe a tela inicial com a listagem de dados.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function index()
+	{
+		return view('reserve::index');
+	}
 
-    /**
-     * Obtêm os dados para a tabela
-     *
-     * @codeCoverageIgnore
-     *
-     * @return string
-     */
-    public function dataTable()
-    {
-        $reserves = $this->reserve->with(['user', 'flight']);
+	/**
+	 * Obtêm os dados para a tabela
+	 *
+	 * @codeCoverageIgnore
+	 *
+	 * @return string
+	 */
+	public function dataTable()
+	{
+		$reserves = $this->reserve->with(['user', 'flight']);
 
-        return DataTables::of($reserves)
-            ->editColumn("date_reserved", function ($reserve) {
-                return $reserve->formatted_date_reserved;
-            })
-            ->editColumn("status", function ($reserve) {
-                return $reserve->formatted_status;
-            })
-            ->editColumn("user", function ($reserve) {
-                return $reserve->user->name;
-            })
-            ->editColumn("flight", function ($reserve) {
-                return $reserve->flight->formatted_date;
-            })
-            ->addColumn(
-                "action",
-                function ($reserve) {
-                    return $reserve->actionView();
-                }
-            )
-            ->rawColumns([
-                'action'
-            ])
-            ->make(true);
-    }
+		return dataTables($reserves)
+			->editColumn("date_reserved", function ($reserve) {
+				return $reserve->formatted_date_reserved;
+			})
+			->editColumn("status", function ($reserve) {
+				return $reserve->formatted_status;
+			})
+			->editColumn("user", function ($reserve) {
+				return $reserve->user->name;
+			})
+			->editColumn("flight", function ($reserve) {
+				return $reserve->flight->formatted_date;
+			})
+			->addColumn('action', function ($reserve) {
+				return view('reserve::partials.action', [
+					'reserve' => $reserve
+				])
+					->render();
+			})
+			->rawColumns([
+				'action'
+			])
+			->make(true);
+	}
 
-    /**
-     * Exibe a tela de cadastro
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        $users = User::orderBy('name', 'Asc')->get();
+	/**
+	 * Exibe a tela de cadastro
+	 *
+	 * @return Illuminate\View\View
+	 */
+	public function create()
+	{
+		$users = User::orderBy('name', 'Asc')->get();
 
-        $flights = Flight::all();
+		$flights = Flight::all();
 
-        return view('reserve::create', compact('users', 'flights'));
-    }
+		$min_date = $this->reserve->minDate();
 
-    /**
-     * Cadastra e retorna para a tela inicial
-     *
-     * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(ReserveRequest $request)
-    {
-        $this->reserve_service->updateOrCreate($request->all());
+		return view('reserve::create', compact('users', 'flights', 'min_date'));
+	}
 
-        return redirect()
-            ->route('reserve.index')
-            ->with('message', 'Cadastro realizado com sucesso.');
-    }
+	/**
+	 * Cadastra e retorna para a tela inicial
+	 *
+	 * @param Requests\ReserveRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function store(Requests\ReserveRequest $request)
+	{
+		$this->reserve_service->updateOrCreate($request->all());
 
-    /**
-     * Exibe os dados
-     *
-     * @param  int $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
+		return redirect()
+			->route('reserve.index')
+			->with('message', 'Cadastro realizado com sucesso.');
+	}
 
-        return view('reserve::show', compact('reserve'));
-    }
+	/**
+	 * Exibe os dados
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\View\View
+	 */
+	public function show($id)
+	{
+		$reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
 
-    /**
-     * Exibe os dados para edição
-     *
-     * @param  int $id
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
+		return view('reserve::show', compact('reserve'));
+	}
 
-        $users = User::orderBy('name', 'ASC')
-            ->where('id', '!=', $reserve->user->id ?? '')
-            ->get();
+	/**
+	 * Exibe os dados para edição
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\View\View
+	 */
+	public function edit($id)
+	{
+		$reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
 
-        $flights = Flight::where('id', '!=', $reserve->flight->id ?? '')->get();
+		$users = User::orderBy('name', 'ASC')
+			->where('id', '!=', $reserve->user->id ?? '')
+			->get();
 
-        return view('reserve::edit', compact('reserve', 'users', 'flights'));
-    }
+		$flights = Flight::where('id', '!=', $reserve->flight->id ?? '')->get();
 
-    /**
-     * Atualiza e retorna para a tela de edição
-     *
-     * @param  \Modules\Reserve\Http\Requests\ReserveRequest $request
-     * @param  int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(ReserveRequest $request, $id)
-    {
-        $reserve = $this->reserve->findOrFail($id);
+		$min_date = $this->reserve->minDate();
 
-        $this->reserve_service->updateOrCreate($request->all(), $reserve->id);
+		return view('reserve::edit', compact(
+			'reserve',
+			'users',
+			'flights',
+			'min_date'
+		));
+	}
 
-        return redirect()
-            ->route('reserve.edit', $reserve->id)
-            ->with('message', 'Atualização realizada com sucesso.');
-    }
+	/**
+	 * Atualiza e retorna para a tela de edição
+	 *
+	 * @param Requests\ReserveRequest $request
+	 * @param  int $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function update(Requests\ReserveRequest $request, $id)
+	{
+		$reserve = $this->reserve->findOrFail($id);
 
-    /**
-     * Exibe a tela para exclusão
-     *
-     * @param  int $id
-     * @return \Illuminate\View\View
-     */
-    public function confirmDelete($id)
-    {
-        $reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
+		$this->reserve_service->updateOrCreate($request->all(), $reserve->id);
 
-        return view('reserve::confirm-delete', compact('reserve'));
-    }
+		return redirect()
+			->route('reserve.edit', $reserve->id)
+			->with('message', 'Atualização realizada com sucesso.');
+	}
 
-    /**
-     * Exclui e retorna para a tela inicial
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete($id)
-    {
-        $reserve = $this->reserve->findOrFail($id);
+	/**
+	 * Exibe a tela para exclusão
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\View\View
+	 */
+	public function confirmDelete($id)
+	{
+		$reserve = $this->reserve->with(['user', 'flight'])->findOrFail($id);
 
-        $this->reserve_service->removeData($reserve);
+		return view('reserve::confirm-delete', compact('reserve'));
+	}
 
-        return redirect()
-            ->route('reserve.index')
-            ->with('message', 'Exclusão realizada com sucesso.');
-    }
+	/**
+	 * Exclui e retorna para a tela inicial
+	 *
+	 * @param  int $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function delete($id)
+	{
+		$reserve = $this->reserve->findOrFail($id);
+
+		$this->reserve_service->removeData($reserve);
+
+		return redirect()
+			->route('reserve.index')
+			->with('message', 'Exclusão realizada com sucesso.');
+	}
 }

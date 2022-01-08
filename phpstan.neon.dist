@@ -12,6 +12,7 @@ parameters:
     ignoreErrors:
         - '#Access to an undefined property#'
         - '#\$model#'
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given.#'
 
     parallel:
         processTimeout: 300.0

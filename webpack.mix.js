@@ -11,6 +11,9 @@ const mix = require("laravel-mix");
  |
  */
 
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .sourceMaps();
 
 //Geral
 mix.combine(
@@ -68,10 +71,14 @@ mix.combine(
 );
 
 // Marcas JS
-mix.scripts("Modules/Bland/Resources/assets/js/bland.js", "public/js/bland.js");
+mix.scripts("Modules/Bland/Resources/assets/js/bland.js",
+    "public/js/bland.js"
+);
 
 // Aviões JS
-mix.scripts("Modules/Plane/Resources/assets/js/plane.js", "public/js/plane.js");
+mix.scripts("Modules/Plane/Resources/assets/js/plane.js",
+    "public/js/plane.js"
+);
 
 // Aeroportos JS
 mix.scripts(
@@ -92,7 +99,11 @@ mix.scripts(
 );
 
 // Usuário JS
-mix.scripts(
-    "Modules/User/Resources/assets/js/user.js",
+mix.scripts("Modules/User/Resources/assets/js/user.js",
     "public/js/user.js"
+);
+
+// Usuário JS
+mix.scripts("Modules/Site/Resources/assets/js/site.js",
+    "public/js/site.js"
 );

@@ -3,14 +3,24 @@
 namespace Modules\Plane\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
+use Modules\User\Entities\User;
 use Modules\Bland\Entities\Bland;
 use Modules\Plane\Entities\Plane;
 
 class PlaneControllerTest extends TestCase
 {
+    protected $user;
+
+    protected function setup(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+    }
+
     public function test_route_index()
     {
-        $response = $this->get(route('plane.index'));
+        $response = $this->actingAs($this->user)->get(route('plane.index'));
 
         $response->assertSuccessful();
 
@@ -19,7 +29,7 @@ class PlaneControllerTest extends TestCase
 
     public function test_route_create()
     {
-        $response = $this->get(route('plane.create'));
+        $response = $this->actingAs($this->user)->get(route('plane.create'));
 
         $response->assertSuccessful();
 
@@ -36,7 +46,7 @@ class PlaneControllerTest extends TestCase
             'class' => Plane::ECONOMIC
         ];
 
-        $response = $this->post(route('plane.store'), $data);
+        $response = $this->actingAs($this->user)->post(route('plane.store'), $data);
 
         $response->assertRedirect(route('plane.index'));
 
@@ -53,7 +63,7 @@ class PlaneControllerTest extends TestCase
     {
         $plane = Plane::factory()->create();
 
-        $response = $this->get(route('plane.show', [
+        $response = $this->actingAs($this->user)->get(route('plane.show', [
             'id' => $plane->id
         ]));
 
@@ -66,7 +76,7 @@ class PlaneControllerTest extends TestCase
     {
         $plane = PLane::factory()->create();
 
-        $response = $this->get(route('plane.edit', [
+        $response = $this->actingAs($this->user)->get(route('plane.edit', [
             'id' => $plane->id
         ]));
 
@@ -87,7 +97,7 @@ class PlaneControllerTest extends TestCase
             'class' => Plane::ECONOMIC
         ];
 
-        $response = $this->put(route('plane.update', $plane->id), $data);
+        $response = $this->actingAs($this->user)->put(route('plane.update', ['id' => $plane->id]), $data);
 
         $response->assertRedirect(route('plane.edit', $plane->id));
 
@@ -102,7 +112,7 @@ class PlaneControllerTest extends TestCase
     {
         $plane = Plane::factory()->create();
 
-        $response = $this->get(route('plane.confirm_delete', [
+        $response = $this->actingAs($this->user)->get(route('plane.confirm_delete', [
             'id' => $plane->id
         ]));
 
@@ -115,7 +125,7 @@ class PlaneControllerTest extends TestCase
     {
         $plane = Plane::factory()->create();
 
-        $response = $this->delete(route('plane.delete', [
+        $response = $this->actingAs($this->user)->delete(route('plane.delete', [
             'id' =>  $plane->id
         ]));
 

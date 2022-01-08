@@ -2,60 +2,70 @@
 
 namespace Modules\Plane\Entities;
 
-use App\Traits\Presentable;
 use Modules\Bland\Entities\Bland;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Plane\Presenter\PlanePresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Plane extends Model
 {
-    use SoftDeletes,
-        HasFactory,
-        Presentable;
+	use SoftDeletes,
+		HasFactory;
 
-    const ECONOMIC = "EC";
+	const ECONOMIC = "EC";
 
-    const LUXURY = "LU";
+	const LUXURY = "LU";
 
-    /**
-     * Presenter
-     *
-     * @var string $presenter
-     */
-    protected $presenter = PlanePresenter::class;
+	/**
+	 * Tabela do banco de dados
+	 *
+	 * @var string $table
+	 */
+	protected $table = 'planes';
 
-    /**
-     * Tabela do banco de dados
-     *
-     * @var string $table
-     */
-    protected $table = 'planes';
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array<string> $fillable
+	 */
+	protected $fillable = [
+		'bland_id',
+		'total_passengers',
+		'class'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array<string> $fillable
-     */
-    protected $fillable = [
-        'bland_id',
-        'total_passengers',
-        'class'
-    ];
+	/**
+	 * Atributos da tabela do banco de dados
+	 *
+	 * @var array $dates
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
-    /**
-     * Atributos da tabela do banco de dados
-     *
-     * @var array $dates
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+	/*
+	|--------------------------------------------------------------------------
+	| Accessors
+	|--------------------------------------------------------------------------
+	|
+	| Definição dos métodos GET desta entidade.
+	| Estes métodos permitem formatar os atributos Eloquent obtidos do banco de dados.
+	|
+	*/
 
-    /*
+	/**
+	 * Formata o atributo
+	 *
+	 * @return string
+	 */
+	public function getFormattedClassAttribute()
+	{
+		return $this->class == 'EC' ? 'Econômico' : 'Luxo';
+	}
+
+	/*
 	|--------------------------------------------------------------------------
 	| Relationship
 	|--------------------------------------------------------------------------
@@ -66,47 +76,17 @@ class Plane extends Model
 	|
 	*/
 
-    /**
-     * Obtêm a marca
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function bland()
-    {
-        return $this->belongsTo(Bland::class)->withTrashed();
-    }
+	/**
+	 * Obtém a marca
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function bland()
+	{
+		return $this->belongsTo(Bland::class)->withTrashed();
+	}
 
-    /**
-     * Obtêm os voos
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function flights()
-    {
-        return $this->hasMany(Flight::class)->withTrashed();
-    }
-
-    /*
-	|--------------------------------------------------------------------------
-	| Accessors
-	|--------------------------------------------------------------------------
-	|
-	| Definição dos métodos GET desta entidade.
-	| Estes métodos permitem formatar os atributos Eloquent obtidos do banco de dados.
-	|
-	*/
-
-    /**
-     * Formata o atributo
-     *
-     * @return string
-     */
-    public function getFormattedClassAttribute()
-    {
-        return $this->class == 'EC' ? 'Econômico' : 'Luxo';
-    }
-
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Defining a Function
 	|--------------------------------------------------------------------------
@@ -116,13 +96,13 @@ class Plane extends Model
 	|
 	*/
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    protected static function newFactory()
-    {
-        return \Modules\Plane\Database\factories\PlaneFactory::new();
-    }
+	/**
+	 * Create a new factory instance for the model.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Factories\Factory
+	 */
+	protected static function newFactory()
+	{
+		return \Modules\Plane\Database\factories\PlaneFactory::new();
+	}
 }

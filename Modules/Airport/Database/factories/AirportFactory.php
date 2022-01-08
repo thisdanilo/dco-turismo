@@ -1,9 +1,9 @@
 <?php
 
 namespace Modules\Airport\Database\factories;
+use Modules\City\Entities\City;
 use Modules\Airport\Entities\Airport;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\City\Entities\City;
 
 class AirportFactory extends Factory
 {

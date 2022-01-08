@@ -48,4 +48,11 @@ class ReserveTest extends TestCase
             'expected_result' => 'Concluído'
         ];
     }
+
+    public function test_it_formats_date_reserved_attribute()
+    {
+        $this->reserve->date_reserved = '2022-01-10';
+
+        $this->assertEquals('10/01/2022', $this->reserve->formatted_date_reserved);
+    }
 }

@@ -14,8 +14,8 @@ class PlaneRequest extends FormRequest
 	public function rules()
 	{
 		return [
-            'total_passengers' => 'required', 'integer',
-            'class' => 'required'
+			'total_passengers' => 'required|integer',
+			'class' => 'required'
 		];
 	}
 

@@ -18,6 +18,8 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('flight_id');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('flight_id')->references('id')->on('flights');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->date('date_reserved');
             $table->enum('status', [
                 Reserve::RESERVED,
@@ -27,9 +29,6 @@ class CreateReservationsTable extends Migration
             ]);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('flight_id')->references('id')->on('flights');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
