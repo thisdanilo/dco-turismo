@@ -3,7 +3,7 @@
 namespace Modules\User\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 
 class UserControllerTest extends TestCase
 {

@@ -3,7 +3,7 @@
 namespace Modules\Reserve\Entities;
 
 use Carbon\Carbon;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Flight\Entities\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -156,13 +156,13 @@ class Reserve extends Model
 		return $this->save();
 	}
 
-    /**
-     * Data miníma
-     *
-     * @return string
-     */
-    public function minDate()
-    {
-        return date('Y-m-d');
-    }
+	/**
+	 * Data miníma
+	 *
+	 * @return string
+	 */
+	public function minDate()
+	{
+		return date('Y-m-d');
+	}
 }

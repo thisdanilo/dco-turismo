@@ -3,7 +3,7 @@
 namespace Modules\Airport\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\City\Entities\City;
 use Modules\Airport\Entities\Airport;
 

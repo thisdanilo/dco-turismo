@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\User\Entities;
 
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Reserve\Entities\Reserve;

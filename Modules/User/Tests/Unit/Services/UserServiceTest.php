@@ -3,7 +3,7 @@
 namespace Modules\User\Tests\Unit\Services;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\User\Services\UserService;
 
 class UserServiceTest extends TestCase

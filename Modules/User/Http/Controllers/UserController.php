@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Controllers;
 
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\User\Http\Requests;
 use Illuminate\Routing\Controller;
 use Modules\User\Services\UserService;
@@ -16,7 +16,7 @@ class UserController extends Controller
 	/**
 	 * Método Construtor
 	 *
-	 * @param \App\Models\User $user
+	 * @param \Modules\User\Entities\User $user
 	 * @param \Modules\User\Services\UserService $user_service
 	 * @return void
 	 */

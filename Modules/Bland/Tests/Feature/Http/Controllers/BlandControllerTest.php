@@ -3,7 +3,7 @@
 namespace Modules\Bland\Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Bland\Entities\Bland;
 
 class BlandControllerTest extends TestCase

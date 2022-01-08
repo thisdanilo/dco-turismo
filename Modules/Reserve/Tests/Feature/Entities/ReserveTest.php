@@ -3,7 +3,7 @@
 namespace Modules\Reserve\Tests\Feature\Entities;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Flight\Entities\Flight;
 use Modules\Reserve\Entities\Reserve;
 

@@ -2,7 +2,7 @@
 
 namespace Modules\User\Database\factories;
 
-use App\Models\User;
+use Modules\User\Entities\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory

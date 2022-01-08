@@ -2,7 +2,7 @@
 
 namespace Modules\Dashboard\Http\Controllers;
 
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Plane\Entities\Plane;
 use Illuminate\Routing\Controller;
 use Modules\Flight\Entities\Flight;

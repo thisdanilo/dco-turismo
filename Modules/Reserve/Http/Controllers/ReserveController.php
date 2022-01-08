@@ -2,7 +2,7 @@
 
 namespace Modules\Reserve\Http\Controllers;
 
-use App\Models\User;
+use Modules\User\Entities\User;
 use Illuminate\Routing\Controller;
 use Modules\Reserve\Http\Requests;
 use Modules\Flight\Entities\Flight;
@@ -87,7 +87,7 @@ class ReserveController extends Controller
 
 		$flights = Flight::all();
 
-        $min_date = $this->reserve->minDate();
+		$min_date = $this->reserve->minDate();
 
 		return view('reserve::create', compact('users', 'flights', 'min_date'));
 	}
@@ -136,14 +136,14 @@ class ReserveController extends Controller
 
 		$flights = Flight::where('id', '!=', $reserve->flight->id ?? '')->get();
 
-        $min_date = $this->reserve->minDate();
+		$min_date = $this->reserve->minDate();
 
 		return view('reserve::edit', compact(
-            'reserve',
-            'users',
-            'flights',
-            'min_date'
-        ));
+			'reserve',
+			'users',
+			'flights',
+			'min_date'
+		));
 	}
 
 	/**

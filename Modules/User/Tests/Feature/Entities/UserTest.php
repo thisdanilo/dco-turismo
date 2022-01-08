@@ -3,7 +3,7 @@
 namespace Modules\User\Tests\Feature\Entities;
 
 use Tests\TestCase;
-use App\Models\User;
+use Modules\User\Entities\User;
 use Modules\Reserve\Entities\Reserve;
 
 class UserTest extends TestCase
