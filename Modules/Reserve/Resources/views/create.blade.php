@@ -81,7 +81,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data da Reserva:<span class="text-danger">*</span></label>
-                                        <input type="date" name="date_reserved" class="form-control" required>
+                                        <input type="date" name="date_reserved" id="date" min="{{ $min_date}}" class="form-control" required >
                                     </div>
                                 </div>
 

@@ -32,7 +32,7 @@
                 </datalist>
             </div>
             <div class="form-group">
-                <input type="date" name="date" class="form-control" placeholder="Data" required>
+                <input type="date" name="date" class="form-control" placeholder="Data" min="<?php echo date('Y-m-d'); ?>" required>
             </div>
             <!--
                     <button class="btn" type="submit">
@@ -77,3 +77,4 @@
     </section>
     <!--Banner-->
 @endsection
+

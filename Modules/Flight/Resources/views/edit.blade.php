@@ -98,7 +98,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data:<span class="text-danger"> *</span></label>
-                                        <input type="date" name="date" class="form-control" required value="{{ $flight->date }}">
+                                        <input type="date" name="date" class="form-control" min="{{ $min_date }}" value="{{ $flight->date }}" required>
                                     </div>
                                 </div>
 

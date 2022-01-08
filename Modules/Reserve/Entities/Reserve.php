@@ -143,16 +143,26 @@ class Reserve extends Model
 	/**
 	 * Faz uma reserva
 	 *
-	 * @param int $flightId
+	 * @param int $flight_id
 	 * @return boolean
 	 */
-	public function newReserve($flightId)
+	public function newReserve($flight_id)
 	{
 		$this->user_id = auth()->user()->id;
-		$this->flight_id = $flightId;
+		$this->flight_id = $flight_id;
 		$this->date_reserved = date('Y-m-d');
 		$this->status = self::RESERVED;
 
 		return $this->save();
 	}
+
+    /**
+     * Data miníma
+     *
+     * @return string
+     */
+    public function minDate()
+    {
+        return date('Y-m-d');
+    }
 }

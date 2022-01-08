@@ -87,7 +87,9 @@ class ReserveController extends Controller
 
 		$flights = Flight::all();
 
-		return view('reserve::create', compact('users', 'flights'));
+        $min_date = $this->reserve->minDate();
+
+		return view('reserve::create', compact('users', 'flights', 'min_date'));
 	}
 
 	/**
@@ -134,7 +136,14 @@ class ReserveController extends Controller
 
 		$flights = Flight::where('id', '!=', $reserve->flight->id ?? '')->get();
 
-		return view('reserve::edit', compact('reserve', 'users', 'flights'));
+        $min_date = $this->reserve->minDate();
+
+		return view('reserve::edit', compact(
+            'reserve',
+            'users',
+            'flights',
+            'min_date'
+        ));
 	}
 
 	/**

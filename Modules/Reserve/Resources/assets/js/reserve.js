@@ -22,7 +22,8 @@ $(document).ready(function () {
                 return request.setRequestHeader("X-CSRF-Token", token);
             },
         },
-        columns: [{
+        columns: [
+            {
                 data: "date_reserved",
             },
             {
@@ -46,4 +47,21 @@ $(document).ready(function () {
             url: datatable_url,
         },
     });
+
+    //-----------------------------------------------------
+    // Defining a function
+    //-----------------------------------------------------
+
+    /*
+    /* Desabilita data
+     */
+    function disableDate(e) {
+        e.preventDefault();
+    }
+
+    //-----------------------------------------------------
+    // Defining a call function
+    //-----------------------------------------------------
+
+    $(document).delegate('[type="date"]', "keydown", disableDate);
 });

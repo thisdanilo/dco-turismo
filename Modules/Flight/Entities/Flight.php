@@ -257,4 +257,14 @@ class Flight extends Model
 			->with(['origin.city', 'destination.city'])
 			->get();
 	}
+
+    /**
+     * Data miníma
+     *
+     * @return string
+     */
+    public function minDate()
+    {
+        return now()->format('Y-m-d');
+    }
 }

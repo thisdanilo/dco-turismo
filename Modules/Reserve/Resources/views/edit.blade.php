@@ -80,7 +80,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data da Reserva:<span class="text-danger">*</span></label>
-                                        <input type="date" name="date_reserved" class="form-control" value="{{ $reserve->date_reserved }}" required>
+                                        <input type="date" name="date_reserved" class="form-control" min="{{ $min_date }}" value="{{ $reserve->date_reserved }}" required>
                                     </div>
                                 </div>
 

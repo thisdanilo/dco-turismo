@@ -9,5 +9,6 @@
     "/js/airport.js": "/js/airport.js",
     "/js/flight.js": "/js/flight.js",
     "/js/reserve.js": "/js/reserve.js",
-    "/js/user.js": "/js/user.js"
+    "/js/user.js": "/js/user.js",
+    "/js/site.js": "/js/site.js"
 }
